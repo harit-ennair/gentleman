@@ -221,19 +221,24 @@
                     <div class="group bg-luxury-bg border border-luxury-border/60 rounded-2xl overflow-hidden hover:border-luxury-gold/50 transition-all duration-500 flex flex-col h-full shadow-lg">
                         <!-- Image container -->
                         <div class="relative h-64 overflow-hidden bg-black/40">
-                            <!-- Image Fallbacks based on service name -->
+                            <!-- Image from database or Fallbacks based on service name -->
                             @php
-                                $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                if (str_contains(strtolower($service->name), 'haircut')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($service->name), 'beard')) {
+                                $imgUrl = ($service->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path)) 
+                                    ? asset('storage/' . $service->image_path) 
+                                    : null;
+                                if (!$imgUrl) {
                                     $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($service->name), 'shave')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($service->name), 'color')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1605497746444-17dbd873c988?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($service->name), 'beard') && str_contains(strtolower($service->name), 'hair')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80';
+                                    if (str_contains(strtolower($service->name), 'haircut')) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($service->name), 'beard')) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($service->name), 'shave')) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($service->name), 'color')) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1605497746444-17dbd873c988?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($service->name), 'beard') && str_contains(strtolower($service->name), 'hair')) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80';
+                                    }
                                 }
                             @endphp
                             <img src="{{ $imgUrl }}" 
@@ -410,15 +415,20 @@
                         <div class="relative h-64 overflow-hidden bg-black/30 flex items-center justify-center p-6">
                             <!-- Specific Fallback Images -->
                             @php
-                                $imgProd = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
-                                if (str_contains(strtolower($product->name), 'pomade')) {
+                                $imgProd = ($product->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path))
+                                    ? asset('storage/' . $product->image_path)
+                                    : null;
+                                if (!$imgProd) {
                                     $imgProd = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($product->name), 'oil')) {
-                                    $imgProd = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($product->name), 'clay')) {
-                                    $imgProd = 'https://images.unsplash.com/photo-1617897902633-82a170b6d214?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains(strtolower($product->name), 'cream')) {
-                                    $imgProd = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=600&q=80';
+                                    if (str_contains(strtolower($product->name), 'pomade')) {
+                                        $imgProd = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($product->name), 'oil')) {
+                                        $imgProd = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($product->name), 'clay')) {
+                                        $imgProd = 'https://images.unsplash.com/photo-1617897902633-82a170b6d214?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains(strtolower($product->name), 'cream')) {
+                                        $imgProd = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=600&q=80';
+                                    }
                                 }
                             @endphp
                             <img src="{{ $imgProd }}" 
@@ -631,11 +641,11 @@
                         <div class="space-y-6 text-luxury-secondary font-light text-sm md:text-base">
                             <p class="flex items-start gap-4">
                                 <span class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">ADDR:</span>
-                                <span>742 Luxury Avenue, Suite 100,<br>Beverly Hills, CA 90210</span>
+                                <span>Gentleman Barber Studio,<br>Casablanca, Morocco</span>
                             </p>
                             <p class="flex items-start gap-4">
                                 <span class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">TELE:</span>
-                                <a href="tel:+13105550190" class="hover:text-luxury-gold transition-colors duration-300">+1 (310) 555-0190</a>
+                                <a href="tel:+212522998877" class="hover:text-luxury-gold transition-colors duration-300">+212 (0) 522-998877</a>
                             </p>
                             <p class="flex items-start gap-4">
                                 <span class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">MAIL:</span>
@@ -665,11 +675,11 @@
                             <div class="h-10 w-10 bg-luxury-gold/15 rounded-full flex items-center justify-center border border-luxury-gold mb-4 animate-bounce">
                                 <span class="text-luxury-gold text-lg">✦</span>
                             </div>
-                            <h4 class="font-display font-bold uppercase text-white tracking-tight mb-2">Gentleman Grooming Studio</h4>
+                            <h4 class="font-display font-bold uppercase text-white tracking-tight mb-2">Gentleman Barber Studio</h4>
                             <p class="text-luxury-secondary text-xs max-w-sm mb-6 leading-relaxed">
-                                Located in the heart of Beverly Hills, luxury parking validation available.
+                                Located in Casablanca, Morocco. Premium grooming experience and private parking available.
                             </p>
-                            <a href="https://maps.google.com" target="_blank"
+                            <a href="https://maps.app.goo.gl/8mEX1Ks4xBsDTyFs8" target="_blank"
                                class="inline-block bg-luxury-surface hover:bg-luxury-gold border border-luxury-border hover:border-luxury-gold text-white hover:text-luxury-bg font-display text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-300">
                                 Open in Google Maps
                             </a>
