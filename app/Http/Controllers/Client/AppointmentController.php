@@ -6,6 +6,7 @@ use App\Enums\AppointmentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Service;
+use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,12 +17,29 @@ class AppointmentController extends Controller
 {
     public function index(Request $request): View
     {
+        $validated = $request->validate([
+            'month' => ['nullable', 'date_format:Y-m'],
+        ]);
+        $calendarMonth = CarbonImmutable::createFromFormat(
+            'Y-m-d',
+            ($validated['month'] ?? now()->format('Y-m')).'-01'
+        )->startOfMonth();
+
         $appointments = Appointment::with('service')
             ->whereBelongsTo($request->user())
-            ->latest('appointment_at')
-            ->paginate(10);
+            ->whereBetween('appointment_at', [$calendarMonth, $calendarMonth->endOfMonth()])
+            ->oldest('appointment_at')
+            ->get();
 
-        return view('client.appointments.index', compact('appointments'));
+        $upcomingAppointments = Appointment::with('service')
+            ->whereBelongsTo($request->user())
+            ->where('appointment_at', '>=', now())
+            ->whereNotIn('status', [AppointmentStatus::Cancelled, AppointmentStatus::Completed])
+            ->oldest('appointment_at')
+            ->limit(4)
+            ->get();
+
+        return view('client.appointments.index', compact('appointments', 'calendarMonth', 'upcomingAppointments'));
     }
 
     public function create(): View
