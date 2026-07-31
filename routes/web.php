@@ -72,6 +72,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::put('/users/{user}', [Admin\UserController::class, 'update'])->name('users.update');
     Route::post('/users/{user}/toggle-status', [Admin\UserController::class, 'toggleStatus'])->name('users.toggle-status');
     Route::get('/appointments', [Admin\AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('/appointments/day', [Admin\AppointmentController::class, 'day'])->name('appointments.day');
     Route::get('/appointments/{appointment}', [Admin\AppointmentController::class, 'show'])->name('appointments.show');
     Route::post('/appointments/{appointment}/confirm', [Admin\AppointmentController::class, 'confirm'])->name('appointments.confirm');
     Route::post('/appointments/{appointment}/complete', [Admin\AppointmentController::class, 'complete'])->name('appointments.complete');
