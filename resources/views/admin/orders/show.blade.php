@@ -1,0 +1,4 @@
+@extends('layouts.test')
+@section('content')
+<h1 class="text-2xl font-bold">{{ $order->order_number }}</h1><div class="rounded bg-white p-5 shadow">@foreach($order->orderItems as $item)<p>{{ $item->product->name }} × {{ $item->quantity }}</p>@endforeach<form method="POST" action="{{ route('admin.orders.status',$order) }}" class="flex flex-wrap gap-2">@csrf @method('PUT')<select class="border p-2" name="status">@foreach(App\Enums\OrderStatus::cases() as $status)<option value="{{ $status->value }}">{{ $status->value }}</option>@endforeach</select><select class="border p-2" name="payment_status">@foreach(App\Enums\PaymentStatus::cases() as $status)<option value="{{ $status->value }}">{{ $status->value }}</option>@endforeach</select><button class="bg-blue-600 p-2 text-white">Update</button></form></div>
+@endsection
