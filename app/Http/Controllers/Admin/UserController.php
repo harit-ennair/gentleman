@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -54,11 +55,27 @@ class UserController extends Controller
         return back()->with('success', 'Customer information updated.');
     }
 
-    public function toggleStatus(User $user): RedirectResponse
+    public function toggleStatus(User $user): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
-        abort_if($user->is(auth()->user()), 422, 'You cannot deactivate your own account.');
+
+        if ($user->is(auth()->user())) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                    'message' => 'You cannot deactivate your own account.',
+                ], 422);
+            }
+            abort(422, 'You cannot deactivate your own account.');
+        }
+
         $user->update(['is_active' => ! $user->is_active]);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'user' => $user,
+                'success' => 'Customer status updated.',
+            ]);
+        }
 
         return back()->with('success', 'Customer status updated.');
     }

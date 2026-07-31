@@ -7,6 +7,7 @@ use App\Enums\PaymentStatus;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -34,7 +35,7 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order'));
     }
 
-    public function updateStatus(Request $request, Order $order): RedirectResponse
+    public function updateStatus(Request $request, Order $order): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
         $validated = $request->validate([
@@ -43,14 +44,28 @@ class OrderController extends Controller
         ]);
         $order->update($validated);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'order' => $order,
+                'success' => 'Order status updated.',
+            ]);
+        }
+
         return back()->with('success', 'Order status updated.');
     }
 
-    public function cancel(Order $order): RedirectResponse
+    public function cancel(Order $order): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
         abort_if(in_array($order->status, [OrderStatus::Completed, OrderStatus::Cancelled], true), 422);
         $order->update(['status' => OrderStatus::Cancelled]);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'order' => $order,
+                'success' => 'Order cancelled.',
+            ]);
+        }
 
         return back()->with('success', 'Order cancelled.');
     }

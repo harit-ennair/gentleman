@@ -6,6 +6,7 @@ use App\Enums\AppointmentStatus;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -32,29 +33,50 @@ class AppointmentController extends Controller
         return view('admin.appointments.show', compact('appointment'));
     }
 
-    public function confirm(Appointment $appointment): RedirectResponse
+    public function confirm(Appointment $appointment): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
         abort_unless($appointment->status === AppointmentStatus::Pending, 422);
         $appointment->update(['status' => AppointmentStatus::Confirmed]);
 
+        if (request()->wantsJson()) {
+            return response()->json([
+                'appointment' => $appointment,
+                'success' => 'Appointment confirmed.',
+            ]);
+        }
+
         return back()->with('success', 'Appointment confirmed.');
     }
 
-    public function complete(Appointment $appointment): RedirectResponse
+    public function complete(Appointment $appointment): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
         abort_unless($appointment->status === AppointmentStatus::Confirmed, 422);
         $appointment->update(['status' => AppointmentStatus::Completed]);
 
+        if (request()->wantsJson()) {
+            return response()->json([
+                'appointment' => $appointment,
+                'success' => 'Appointment completed.',
+            ]);
+        }
+
         return back()->with('success', 'Appointment completed.');
     }
 
-    public function cancel(Appointment $appointment): RedirectResponse
+    public function cancel(Appointment $appointment): RedirectResponse|JsonResponse
     {
         $this->authorizeAdmin();
         abort_if(in_array($appointment->status, [AppointmentStatus::Completed, AppointmentStatus::Cancelled], true), 422);
         $appointment->update(['status' => AppointmentStatus::Cancelled]);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'appointment' => $appointment,
+                'success' => 'Appointment cancelled.',
+            ]);
+        }
 
         return back()->with('success', 'Appointment cancelled.');
     }

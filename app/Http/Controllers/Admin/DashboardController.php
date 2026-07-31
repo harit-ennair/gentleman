@@ -12,11 +12,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index(): View|JsonResponse
     {
         $this->authorizeAdmin();
 
@@ -27,6 +28,15 @@ class DashboardController extends Controller
             ->whereYear('order_date', now()->year)
             ->whereMonth('order_date', now()->month)
             ->sum('total');
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'clients_count' => User::where('role', Role::Customer)->count(),
+                'appointments_count' => Appointment::count(),
+                'orders_count' => Order::count(),
+                'revenues' => (float) Order::where('payment_status', PaymentStatus::Paid)->sum('total'),
+            ]);
+        }
 
         return view('admin.dashboard', [
             'clientsCount' => User::where('role', Role::Customer)->count(),
