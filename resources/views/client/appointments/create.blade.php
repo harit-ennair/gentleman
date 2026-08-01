@@ -3,7 +3,7 @@
 @section('title', 'Book Appointment')
 
 @section('content')
-    <div x-data="bookingWizard()" class="flex flex-col gap-8 animate-fade-up">
+    <div x-data="bookingWizard({{ Js::from($preselectedService ? ['id' => $preselectedService->id, 'name' => $preselectedService->name, 'description' => $preselectedService->description, 'price' => (float) $preselectedService->price, 'duration' => $preselectedService->duration] : null) }})" class="flex flex-col gap-8 animate-fade-up">
         {{-- ── Header ── --}}
         <header class="flex flex-col gap-2">
             <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">New booking</span>
@@ -42,7 +42,7 @@
                     :class="selectedService?.id === '{{ $service->id }}'
                         ? 'border-luxury-gold ring-1 ring-luxury-gold/40 bg-luxury-gold/[0.08]'
                         : 'border-white/10 bg-[#111113] hover:border-white/20 hover:bg-white/[0.04]'"
-                    class="group flex flex-col gap-3 rounded-2xl border p-5 text-left transition">
+                    class="group flex flex-col gap-3 rounded-2xl border p-5 text-left transition cursor-pointer">
                     <div class="flex items-start justify-between gap-3">
                         <h3 class="font-display text-base font-bold text-white group-hover:text-luxury-gold transition">{{ $service->name }}</h3>
                         <span class="shrink-0 font-display text-lg font-black text-luxury-gold">{{ number_format($service->price, 0) }} <span class="text-xs font-bold">DH</span></span>
@@ -70,9 +70,9 @@
                         <h2 class="mt-1 font-display text-xl font-bold text-white" x-text="calendarTitle"></h2>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button type="button" @click="prevMonth()" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">&larr;</button>
-                        <button type="button" @click="goToToday()" class="rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50">Today</button>
-                        <button type="button" @click="nextMonth()" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">&rarr;</button>
+                        <button type="button" @click="prevMonth()" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">&larr;</button>
+                        <button type="button" @click="goToToday()" class="rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50 cursor-pointer">Today</button>
+                        <button type="button" @click="nextMonth()" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">&rarr;</button>
                     </div>
                 </div>
 
@@ -92,7 +92,7 @@
                                 'bg-luxury-gold text-black': day.isToday && selectedDate !== day.date,
                                 'bg-black/20 text-zinc-600': !day.currentMonth,
                                 'text-zinc-600 cursor-not-allowed line-through': !day.selectable && day.currentMonth,
-                                'text-zinc-300 hover:bg-white/[0.05]': day.selectable && selectedDate !== day.date && !day.isToday,
+                                'text-zinc-300 hover:bg-white/[0.05] cursor-pointer': day.selectable && selectedDate !== day.date && !day.isToday,
                             }"
                             class="flex min-h-14 items-center justify-center border-b border-r border-white/[0.07] p-2 font-display text-sm font-semibold transition">
                             <span x-text="day.day"
@@ -115,7 +115,7 @@
                     </div>
                 </div>
 
-                <button type="button" @click="step = 0" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">
+                <button type="button" @click="step = 0" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
                     &larr; Change service
                 </button>
             </div>
@@ -153,7 +153,7 @@
                                 :class="slot.available
                                     ? (selectedSlot === slot.time
                                         ? 'border-luxury-gold bg-luxury-gold/20 text-luxury-gold ring-1 ring-luxury-gold/40'
-                                        : 'border-white/10 bg-white/[0.03] text-white hover:border-luxury-gold/40 hover:bg-luxury-gold/[0.06] hover:text-luxury-gold')
+                                        : 'border-white/10 bg-white/[0.03] text-white hover:border-luxury-gold/40 hover:bg-luxury-gold/[0.06] hover:text-luxury-gold cursor-pointer')
                                     : 'border-white/[0.05] bg-white/[0.01] text-zinc-600 line-through cursor-not-allowed'"
                                 class="rounded-xl border px-3 py-3 font-display text-sm font-bold transition">
                                 <span x-text="slot.time"></span>
@@ -214,7 +214,7 @@
                     </form>
                 </div>
 
-                <button type="button" @click="step = 1; selectedSlot = null" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">
+                <button type="button" @click="step = 1; selectedSlot = null" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
                     &larr; Change date
                 </button>
             </div>
@@ -222,16 +222,15 @@
     </div>
 
     <script>
-        function bookingWizard() {
+        function bookingWizard(preselectedService = null) {
             const today = new Date();
-            // Format date as YYYY-MM-DD using LOCAL timezone (not UTC)
             const pad = (n) => String(n).padStart(2, '0');
             const toLocalDateStr = (dt) => `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`;
             const todayStr = toLocalDateStr(today);
 
             return {
-                step: 0,
-                selectedService: null,
+                step: preselectedService ? 1 : 0,
+                selectedService: preselectedService,
                 selectedDate: null,
                 selectedSlot: null,
                 notes: '',

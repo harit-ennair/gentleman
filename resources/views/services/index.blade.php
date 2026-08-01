@@ -51,12 +51,14 @@
                             {{ number_format($service->price, 2) }} <span class="text-xs font-bold text-white/70">DH</span>
                         </span>
 
-                        <a href="{{ route('services.show', $service) }}" class="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase tracking-wider text-white transition-colors group-hover:text-luxury-gold">
-                            Details
-                            <svg class="size-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('services.show', $service) }}" class="inline-flex items-center gap-1 text-xs font-display font-bold uppercase tracking-wider text-luxury-secondary transition-colors hover:text-white">
+                                Details
+                            </a>
+                            <a href="{{ route('appointments.create', ['service_id' => $service->id]) }}" class="inline-flex items-center gap-1 rounded-full bg-luxury-gold px-4 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-sm">
+                                Book &rarr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             @endforeach

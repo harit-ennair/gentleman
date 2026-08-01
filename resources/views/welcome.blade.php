@@ -273,10 +273,10 @@
                                     {{ $service->duration }} Mins
                                 </span>
 
-                                <button @click="bookingOpen = true; selectedService = '{{ $service->name }}'" 
-                                        class="text-xs uppercase tracking-widest font-display text-white group-hover:text-luxury-gold transition-colors duration-300 font-bold flex items-center gap-1">
+                                <a href="{{ route('appointments.create', ['service_id' => $service->id]) }}" 
+                                   class="text-xs uppercase tracking-widest font-display text-white group-hover:text-luxury-gold transition-colors duration-300 font-bold flex items-center gap-1">
                                     Book Now <span>→</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -47,11 +47,17 @@ class AppointmentController extends Controller
         return view('client.appointments.index', compact('appointments', 'calendarMonth', 'upcomingAppointments'));
     }
 
-    public function create(): View
+    public function create(Request $request): View
     {
         $services = Service::where('is_active', true)->orderBy('name')->get();
 
-        return view('client.appointments.create', compact('services'));
+        $preselectedService = null;
+        if ($request->filled('service_id') || $request->filled('service')) {
+            $serviceId = $request->input('service_id') ?? $request->input('service');
+            $preselectedService = $services->firstWhere('id', $serviceId);
+        }
+
+        return view('client.appointments.create', compact('services', 'preselectedService'));
     }
 
     public function store(Request $request): RedirectResponse

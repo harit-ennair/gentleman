@@ -59,8 +59,8 @@
 
             <div class="border-t border-white/10 pt-6 relative z-10 flex justify-end">
                 @auth
-                    <a href="{{ route('appointments.create') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
-                        Book This Service
+                    <a href="{{ route('appointments.create', ['service_id' => $service->id]) }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
+                        Book This Service &rarr;
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
