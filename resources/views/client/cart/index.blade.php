@@ -64,9 +64,22 @@
                                             @csrf
                                             @method('PUT')
                                             <input type="hidden" name="product_id" value="{{ $item['product']->id }}">
-                                            <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" 
-                                                   class="w-16 rounded-xl border border-white/10 bg-[#161618] px-2.5 py-1.5 text-xs font-bold text-white text-center focus:border-luxury-gold focus:outline-none">
-                                            <button type="submit" class="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-bold text-luxury-secondary uppercase tracking-wider hover:text-white hover:border-luxury-gold/50 cursor-pointer">
+                                            
+                                            <!-- Custom Stepper -->
+                                            <div class="flex items-center rounded-xl border border-white/10 bg-[#161618] p-1 shadow-inner">
+                                                <button type="button" onclick="const input = this.parentNode.querySelector('input'); if(parseInt(input.value) > 1) input.stepDown();" 
+                                                        class="size-7 rounded-lg bg-white/5 text-white hover:bg-luxury-gold hover:text-black flex items-center justify-center text-xs font-bold transition-all cursor-pointer">
+                                                    -
+                                                </button>
+                                                <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" 
+                                                       class="w-8 text-center bg-transparent text-xs font-bold text-white focus:outline-none">
+                                                <button type="button" onclick="const input = this.parentNode.querySelector('input'); input.stepUp();" 
+                                                        class="size-7 rounded-lg bg-white/5 text-white hover:bg-luxury-gold hover:text-black flex items-center justify-center text-xs font-bold transition-all cursor-pointer">
+                                                    +
+                                                </button>
+                                            </div>
+
+                                            <button type="submit" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold text-luxury-secondary uppercase tracking-wider hover:text-white hover:border-luxury-gold/50 cursor-pointer">
                                                 Update
                                             </button>
                                         </form>
