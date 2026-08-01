@@ -184,7 +184,11 @@
                     <h2 id="admin-day-modal-title" class="mt-1 font-display text-lg font-bold text-white">Loading schedule...</h2>
                     <p id="admin-day-modal-count" class="mt-1 text-xs text-luxury-secondary"></p>
                 </div>
-                <button type="button" data-close-day-modal aria-label="Close day calendar" class="grid size-10 place-items-center rounded-full border border-white/10 text-xl text-luxury-secondary transition hover:border-luxury-gold hover:text-luxury-gold">&times;</button>
+                <button type="button" data-close-day-modal aria-label="Close day calendar" class="flex size-10 items-center justify-center rounded-full border border-white/10 text-luxury-secondary transition hover:border-luxury-gold hover:text-luxury-gold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
             <div id="admin-day-modal-content" class="grow overflow-y-auto"></div>
         </div>
