@@ -104,7 +104,7 @@ class AppointmentController extends Controller
     public function show(Request $request, Appointment $appointment): View
     {
         $this->authorizeOwner($request, $appointment);
-        $appointment->load('service');
+        $appointment->load(['service', 'user']);
 
         return view('client.appointments.show', compact('appointment'));
     }
