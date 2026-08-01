@@ -71,6 +71,10 @@ class AppointmentController extends Controller
         $service = Service::findOrFail($validated['service_id']);
         $appointmentAt = CarbonImmutable::parse($validated['appointment_at']);
 
+        if ($appointmentAt->isPast()) {
+            return back()->withErrors(['appointment_at' => 'Cannot book an appointment in the past.'])->withInput();
+        }
+
         // Enforce business hours (09:00–21:00, 7 days a week)
         $startMinutes = $appointmentAt->hour * 60 + $appointmentAt->minute;
         $endMinutes = $startMinutes + $service->duration;
@@ -174,8 +178,11 @@ class AppointmentController extends Controller
         // Deduplicate and sort
         $candidateMinutes = $candidateMinutes->unique()->sort()->values();
 
+        $now = now();
+        $currentMinutes = $now->hour * 60 + $now->minute;
+
         $slots = $candidateMinutes
-            ->map(function (int $minutes) use ($existingBookings, $service, $dateCarbon): array {
+            ->map(function (int $minutes) use ($existingBookings, $service, $dateCarbon, $now, $currentMinutes): array {
                 $slotEnd = $minutes + $service->duration;
 
                 // Check overlap with any existing booking
@@ -183,8 +190,12 @@ class AppointmentController extends Controller
                     fn (array $booking): bool => $minutes < $booking['end'] && $slotEnd > $booking['start']
                 );
 
-                // If today, reject past slots
-                $isPast = $dateCarbon->isToday() && $minutes <= now()->hour * 60 + now()->minute;
+                // If date is today (or in past), reject slots starting at or before current time
+                $isToday = $dateCarbon->isSameDay($now);
+                $isPastDate = $dateCarbon->lt($now->startOfDay());
+                $isPastTime = $isToday && ($minutes <= $currentMinutes);
+
+                $isPast = $isPastDate || $isPastTime;
 
                 $h = intdiv($minutes, 60);
                 $m = $minutes % 60;

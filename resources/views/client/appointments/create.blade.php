@@ -370,7 +370,20 @@
                         });
                         if (!res.ok) throw new Error('Failed to load slots');
                         const data = await res.json();
-                        this.slots = data.slots;
+
+                        const now = new Date();
+                        const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+                        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+                        this.slots = data.slots.map(slot => {
+                            if (this.selectedDate === todayStr) {
+                                const [h, m] = slot.time.split(':').map(Number);
+                                if ((h * 60 + m) <= currentMinutes) {
+                                    return { ...slot, available: false };
+                                }
+                            }
+                            return slot;
+                        });
                     } catch (e) {
                         console.error(e);
                         this.slots = [];
