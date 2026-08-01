@@ -25,7 +25,8 @@ html:not(.dark) {
   color-scheme: light;
 }
 
-html:not(.dark) body {
+html:not(.dark) body,
+html:not(.dark) html {
   background-color: #F8FAFC !important;
   color: #0F172A !important;
 }
@@ -35,39 +36,40 @@ html:not(.dark) nav {
   border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) .bg-luxury-bg,
-html:not(.dark) .bg-\[\#0B0B0B\],
-html:not(.dark) .bg-black {
+html:not(.dark) .bg-luxury-bg {
   background-color: #F8FAFC !important;
 }
 
-html:not(.dark) .bg-luxury-surface,
+/* Sub-containers & nested items (e.g. recent appointments/orders, low stock items) with opacity variants */
+html:not(.dark) [class*="bg-luxury-bg/"],
+html:not(.dark) [class*="bg-white/"],
+html:not(.dark) .bg-\[\#161618\] {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) [class*="bg-luxury-surface"],
 html:not(.dark) .bg-\[\#111111\],
 html:not(.dark) .bg-\[\#111113\] {
   background-color: #FFFFFF !important;
 }
 
-html:not(.dark) .bg-\[\#161618\],
-html:not(.dark) .bg-white\/5,
-html:not(.dark) .bg-white\/10 {
-  background-color: #F1F5F9 !important;
-}
-
-html:not(.dark) .text-luxury-primary,
-html:not(.dark) .text-white {
+html:not(.dark) [class*="text-luxury-primary"],
+html:not(.dark) [class*="text-white"] {
   color: #0F172A !important;
 }
 
 html:not(.dark) .text-luxury-secondary,
-html:not(.dark) .text-zinc-400,
-html:not(.dark) .text-zinc-300 {
+html:not(.dark) [class*="text-luxury-secondary"],
+html:not(.dark) [class*="text-zinc-300"],
+html:not(.dark) [class*="text-zinc-400"],
+html:not(.dark) [class*="text-zinc-500"] {
   color: #475569 !important;
 }
 
 html:not(.dark) .border-luxury-border,
-html:not(.dark) .border-white\/10,
-html:not(.dark) .border-white\/\[0\.07\],
-html:not(.dark) .border-white\/20 {
+html:not(.dark) [class*="border-luxury-border"],
+html:not(.dark) [class*="border-white/"] {
   border-color: #E2E8F0 !important;
 }
 
@@ -92,33 +94,46 @@ html:not(.dark) textarea::placeholder {
   color: #94A3B8 !important;
 }
 
-/* Badge status contrast overrides in Light Mode */
-html:not(.dark) .text-amber-200 { color: #92400E !important; }
-html:not(.dark) .bg-amber-400\/10 { background-color: #FEF3C7 !important; border-color: #FCD34D !important; }
+/* Badge status & alert contrast overrides in Light Mode */
+html:not(.dark) [class*="text-amber-"] { color: #92400E !important; font-weight: 700; }
+html:not(.dark) [class*="bg-amber-"] { background-color: #FEF3C7 !important; border-color: #FCD34D !important; }
+html:not(.dark) [class*="border-amber-"] { border-color: #FCD34D !important; }
 
-html:not(.dark) .text-violet-200,
-html:not(.dark) .text-violet-300 { color: #5B21B6 !important; font-weight: 700; }
+html:not(.dark) [class*="text-yellow-"] { color: #854D0E !important; font-weight: 700; }
+html:not(.dark) [class*="bg-yellow-"] { background-color: #FEF9C3 !important; border-color: #FDE047 !important; }
+html:not(.dark) [class*="border-yellow-"] { border-color: #FDE047 !important; }
 
-html:not(.dark) .bg-violet-400\/15,
-html:not(.dark) .bg-violet-500\/15 { background-color: #EDE9FE !important; border-color: #DDD6FE !important; }
+html:not(.dark) [class*="text-emerald-"] { color: #065F46 !important; font-weight: 700; }
+html:not(.dark) [class*="bg-emerald-"] { background-color: #D1FAE5 !important; border-color: #A7F3D0 !important; }
+html:not(.dark) [class*="border-emerald-"] { border-color: #A7F3D0 !important; }
 
-html:not(.dark) .text-emerald-200,
-html:not(.dark) .text-emerald-300 { color: #065F46 !important; font-weight: 700; }
-html:not(.dark) .bg-emerald-400\/10 { background-color: #D1FAE5 !important; border-color: #A7F3D0 !important; }
+html:not(.dark) [class*="text-green-"] { color: #166534 !important; font-weight: 700; }
+html:not(.dark) [class*="bg-green-"] { background-color: #DCFCE7 !important; border-color: #86EFAC !important; }
+html:not(.dark) [class*="border-green-"] { border-color: #86EFAC !important; }
 
-html:not(.dark) .text-rose-200,
-html:not(.dark) .text-rose-300 { color: #9F1239 !important; font-weight: 700; }
-html:not(.dark) .bg-rose-400\/10 { background-color: #FFE4E6 !important; border-color: #FECDD3 !important; }
+html:not(.dark) [class*="text-sky-"] { color: #0369A1 !important; font-weight: 700; }
+html:not(.dark) [class*="bg-sky-"] { background-color: #E0F2FE !important; border-color: #BAE6FD !important; }
+html:not(.dark) [class*="border-sky-"] { border-color: #BAE6FD !important; }
 
-html:not(.dark) .text-zinc-300 { color: #27272A !important; }
-html:not(.dark) .bg-zinc-500\/10 { background-color: #F4F4F5 !important; border-color: #E4E4E7 !important; }
+html:not(.dark) [class*="text-blue-"] { color: #1E40AF !important; font-weight: 700; }
+html:not(.dark) [class*="bg-blue-"] { background-color: #DBEAFE !important; border-color: #93C5FD !important; }
+html:not(.dark) [class*="border-blue-"] { border-color: #93C5FD !important; }
 
-/* Red danger/logout button overrides in Light Mode */
-html:not(.dark) .text-red-400 { color: #DC2626 !important; }
-html:not(.dark) .bg-red-950\/30,
-html:not(.dark) .bg-red-950\/20,
-html:not(.dark) .bg-red-950\/40,
-html:not(.dark) .bg-red-950 { background-color: #FEF2F2 !important; border-color: #FCA5A5 !important; }
+html:not(.dark) [class*="text-violet-"] { color: #5B21B6 !important; font-weight: 700; }
+html:not(.dark) [class*="bg-violet-"] { background-color: #EDE9FE !important; border-color: #DDD6FE !important; }
+html:not(.dark) [class*="border-violet-"] { border-color: #DDD6FE !important; }
+
+html:not(.dark) [class*="text-rose-"] { color: #9F1239 !important; font-weight: 700; }
+html:not(.dark) [class*="bg-rose-"] { background-color: #FFE4E6 !important; border-color: #FECDD3 !important; }
+html:not(.dark) [class*="border-rose-"] { border-color: #FECDD3 !important; }
+
+html:not(.dark) [class*="text-red-"] { color: #991B1B !important; font-weight: 700; }
+html:not(.dark) [class*="bg-red-"] { background-color: #FEE2E2 !important; border-color: #FCA5A5 !important; }
+html:not(.dark) [class*="border-red-"] { border-color: #FCA5A5 !important; }
+
+html:not(.dark) [class*="bg-zinc-500"],
+html:not(.dark) [class*="bg-zinc-800"],
+html:not(.dark) [class*="bg-zinc-900"] { background-color: #F4F4F5 !important; border-color: #E4E4E7 !important; }
 
 /* Hide number input spinners globally */
 input[type="number"]::-webkit-inner-spin-button,
