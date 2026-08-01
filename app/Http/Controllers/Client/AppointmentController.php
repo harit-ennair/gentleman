@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Service;
 use Carbon\CarbonImmutable;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -150,28 +149,42 @@ class AppointmentController extends Controller
         // Last bookable slot: close_hour minus service duration
         $lastSlotMinutes = (self::CLOSE_HOUR * 60) - $service->duration;
 
-        $slots = collect(
-            CarbonPeriod::create("{$date} 09:00", '30 minutes', $dateCarbon->setTime(self::CLOSE_HOUR, 0)->subMinute())
-        )
-            ->map(fn ($slot) => [
-                'time' => $slot->format('H:i'),
-                'minutes' => $slot->hour * 60 + $slot->minute,
-            ])
-            ->filter(fn (array $slot): bool => $slot['minutes'] <= $lastSlotMinutes)
-            ->map(function (array $slot) use ($existingBookings, $service, $dateCarbon): array {
-                $slotStart = $slot['minutes'];
-                $slotEnd = $slotStart + $service->duration;
+        // Build a set of candidate slot times (in minutes from midnight)
+        // Start with standard 30-minute grid
+        $candidateMinutes = collect();
+        for ($m = self::OPEN_HOUR * 60; $m <= $lastSlotMinutes; $m += 30) {
+            $candidateMinutes->push($m);
+        }
+
+        // Add dynamic catch-up slots: right after each booking ends
+        // (rounded up to the next 5-minute mark for clean scheduling)
+        foreach ($existingBookings as $booking) {
+            $endRounded = (int) (ceil($booking['end'] / 5) * 5);
+            if ($endRounded >= self::OPEN_HOUR * 60 && $endRounded <= $lastSlotMinutes) {
+                $candidateMinutes->push($endRounded);
+            }
+        }
+
+        // Deduplicate and sort
+        $candidateMinutes = $candidateMinutes->unique()->sort()->values();
+
+        $slots = $candidateMinutes
+            ->map(function (int $minutes) use ($existingBookings, $service, $dateCarbon): array {
+                $slotEnd = $minutes + $service->duration;
 
                 // Check overlap with any existing booking
                 $isBooked = $existingBookings->contains(
-                    fn (array $booking): bool => $slotStart < $booking['end'] && $slotEnd > $booking['start']
+                    fn (array $booking): bool => $minutes < $booking['end'] && $slotEnd > $booking['start']
                 );
 
                 // If today, reject past slots
-                $isPast = $dateCarbon->isToday() && $slotStart <= now()->hour * 60 + now()->minute;
+                $isPast = $dateCarbon->isToday() && $minutes <= now()->hour * 60 + now()->minute;
+
+                $h = intdiv($minutes, 60);
+                $m = $minutes % 60;
 
                 return [
-                    'time' => $slot['time'],
+                    'time' => sprintf('%02d:%02d', $h, $m),
                     'available' => ! $isBooked && ! $isPast,
                 ];
             })
