@@ -1,8 +1,22 @@
-
-
 import Alpine from 'alpinejs';
+import {
+    DEFAULT_PIXELS_PER_MINUTE,
+    calculateTop,
+    calculateHeight,
+    detectOverlappingAppointments,
+    calculateAppointmentWidth,
+    calculateAppointmentLeft,
+} from './calendar';
 
 window.Alpine = Alpine;
+window.CalendarLayout = {
+    DEFAULT_PIXELS_PER_MINUTE,
+    calculateTop,
+    calculateHeight,
+    detectOverlappingAppointments,
+    calculateAppointmentWidth,
+    calculateAppointmentLeft,
+};
 
 Alpine.start();
 
@@ -20,8 +34,8 @@ if (dayModal) {
         no_show: 'border-zinc-500/30 bg-zinc-500/10 text-zinc-300',
     };
 
-    const HOUR_HEIGHT = 80;
-    const PIXELS_PER_MINUTE = HOUR_HEIGHT / 60;
+    // Configurable scale factor: 2 pixels per minute (120px per hour)
+    const PIXELS_PER_MINUTE = DEFAULT_PIXELS_PER_MINUTE;
     const LABEL_WIDTH_CLASS = 'w-[4.5rem] sm:w-24';
 
     const closeModal = () => {
@@ -30,61 +44,14 @@ if (dayModal) {
         document.body.classList.remove('overflow-hidden');
     };
 
-    /**
-     * Detect overlapping groups among appointments so we can lay them
-     * out side-by-side. Returns an array of { appointment, column, totalColumns }.
-     */
-    const resolveOverlaps = (appointments) => {
-        const items = appointments.map((a) => {
-            const startMin = parseInt(a.hour, 10) * 60 + a.minute;
-            const endMin = startMin + (a.duration || 30);
-            return { ...a, startMin, endMin, column: 0, totalColumns: 1 };
-        });
-
-        // Sort by start time, then by duration descending for stable layout
-        items.sort((a, b) => a.startMin - b.startMin || b.endMin - a.endMin);
-
-        // Greedy column assignment
-        const columns = []; // each column stores the latest endMin
-        for (const item of items) {
-            let placed = false;
-            for (let col = 0; col < columns.length; col++) {
-                if (item.startMin >= columns[col]) {
-                    item.column = col;
-                    columns[col] = item.endMin;
-                    placed = true;
-                    break;
-                }
-            }
-            if (!placed) {
-                item.column = columns.length;
-                columns.push(item.endMin);
-            }
-        }
-
-        // Back-fill totalColumns for each overlapping cluster
-        for (let i = 0; i < items.length; i++) {
-            // Find all items that overlap with this item
-            let maxCol = items[i].column;
-            for (let j = 0; j < items.length; j++) {
-                if (i !== j && items[i].startMin < items[j].endMin && items[j].startMin < items[i].endMin) {
-                    maxCol = Math.max(maxCol, items[j].column);
-                }
-            }
-            items[i].totalColumns = maxCol + 1;
-        }
-
-        return items;
-    };
-
-    const createAppointmentCard = (item) => {
+    const createAppointmentCard = (item, pixelsPerMinute = PIXELS_PER_MINUTE) => {
         const durationMin = item.duration || 30;
-        const height = Math.max(durationMin * PIXELS_PER_MINUTE, 28);
-        const top = item.startMin * PIXELS_PER_MINUTE;
+        const height = calculateHeight(durationMin, pixelsPerMinute);
+        const top = calculateTop(item.startMin, pixelsPerMinute);
         const isCompact = durationMin <= 30;
 
-        const widthPercent = 100 / item.totalColumns;
-        const leftPercent = item.column * widthPercent;
+        const widthPercent = calculateAppointmentWidth(item.totalColumns);
+        const leftPercent = calculateAppointmentLeft(item.column, widthPercent);
 
         const link = document.createElement('a');
         link.href = item.details_url;
@@ -166,9 +133,10 @@ if (dayModal) {
         return link;
     };
 
-    const renderSchedule = (appointments) => {
+    const renderSchedule = (appointments, pixelsPerMinute = PIXELS_PER_MINUTE) => {
         modalContent.replaceChildren();
 
+        const hourHeight = calculateHeight(60, pixelsPerMinute);
         const wrapper = document.createElement('div');
         wrapper.className = 'flex';
 
@@ -179,8 +147,8 @@ if (dayModal) {
         for (let hour = 0; hour < 24; hour++) {
             const label = document.createElement('div');
             label.className = 'text-right pr-3 font-display text-xs font-bold text-luxury-secondary';
-            label.style.height = `${HOUR_HEIGHT}px`;
-            label.style.lineHeight = `${HOUR_HEIGHT}px`;
+            label.style.height = `${hourHeight}px`;
+            label.style.lineHeight = `${hourHeight}px`;
             label.textContent = `${String(hour).padStart(2, '0')}:00`;
             labelsCol.append(label);
         }
@@ -188,40 +156,39 @@ if (dayModal) {
         // --- Timeline column ---
         const timelineCol = document.createElement('div');
         timelineCol.className = 'relative grow';
-        timelineCol.style.height = `${24 * HOUR_HEIGHT}px`;
+        timelineCol.style.height = `${calculateHeight(24 * 60, pixelsPerMinute)}px`;
 
         // Draw hour and half-hour guide lines
         for (let hour = 0; hour < 24; hour++) {
             const hourLine = document.createElement('div');
             hourLine.className = 'absolute left-0 right-0 border-b border-white/[0.07]';
-            hourLine.style.top = `${hour * HOUR_HEIGHT}px`;
+            hourLine.style.top = `${calculateTop(hour * 60, pixelsPerMinute)}px`;
             timelineCol.append(hourLine);
 
             const halfLine = document.createElement('div');
             halfLine.className = 'absolute left-0 right-0 border-b border-dashed border-white/[0.03]';
-            halfLine.style.top = `${hour * HOUR_HEIGHT + HOUR_HEIGHT / 2}px`;
+            halfLine.style.top = `${calculateTop(hour * 60 + 30, pixelsPerMinute)}px`;
             timelineCol.append(halfLine);
         }
         // Final bottom line
         const bottomLine = document.createElement('div');
         bottomLine.className = 'absolute left-0 right-0 border-b border-white/[0.07]';
-        bottomLine.style.top = `${24 * HOUR_HEIGHT}px`;
+        bottomLine.style.top = `${calculateTop(24 * 60, pixelsPerMinute)}px`;
         timelineCol.append(bottomLine);
 
-        // Place appointment cards
-        const items = resolveOverlaps(appointments);
+        // Detect overlaps and position cards dynamically
+        const items = detectOverlappingAppointments(appointments);
         for (const item of items) {
-            timelineCol.append(createAppointmentCard(item));
+            timelineCol.append(createAppointmentCard(item, pixelsPerMinute));
         }
 
         wrapper.append(labelsCol, timelineCol);
         modalContent.append(wrapper);
 
         // Auto-scroll to 1 hour before the first appointment, or 08:00
-        let scrollTarget = 8 * HOUR_HEIGHT;
-        if (appointments.length > 0) {
-            const firstStart = parseInt(appointments[0].hour, 10) * 60 + (appointments[0].minute || 0);
-            scrollTarget = Math.max(0, (firstStart - 60) * PIXELS_PER_MINUTE);
+        let scrollTarget = calculateTop(8 * 60, pixelsPerMinute);
+        if (items.length > 0) {
+            scrollTarget = Math.max(0, calculateTop(items[0].startMin - 60, pixelsPerMinute));
         }
         modalContent.scrollTop = scrollTarget;
     };
@@ -269,4 +236,3 @@ if (dayModal) {
         }
     });
 }
-
