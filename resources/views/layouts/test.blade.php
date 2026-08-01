@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'GENTLEMAN') | Luxury Barbershop & Grooming</title>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-luxury-bg text-luxury-primary font-body antialiased selection:bg-luxury-gold selection:text-luxury-bg min-h-screen flex flex-col">
@@ -29,10 +36,41 @@
             <a href="{{ route('admin.dashboard') }}" class="hover:text-luxury-gold transition-colors duration-300 font-semibold">Admin</a>
         </div>
 
-        <!-- Auth Actions -->
+        <!-- Auth & Theme Actions -->
         <div class="flex items-center gap-4 text-xs font-display uppercase tracking-widest text-luxury-secondary">
+            <!-- Theme Toggle Button -->
+            <div x-data="{ 
+                darkMode: document.documentElement.classList.contains('dark'),
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    if (this.darkMode) {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    }
+                }
+            }">
+                <button @click="toggleTheme()" 
+                        type="button"
+                        class="flex items-center justify-center w-9 h-9 rounded-full border border-luxury-border bg-luxury-surface text-luxury-primary hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 shadow-sm cursor-pointer"
+                        :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                    <template x-if="darkMode">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </template>
+                    <template x-if="!darkMode">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </template>
+                </button>
+            </div>
+
             @auth
-                <span class="text-white font-light lowercase text-xs">{{ auth()->user()->email }}</span>
+                <span class="text-luxury-primary font-light lowercase text-xs">{{ auth()->user()->email }}</span>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button class="bg-red-950/30 border border-red-900/40 hover:bg-red-900 hover:text-white text-red-400 px-4 py-2 rounded-full text-[10px] font-display font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer">

@@ -12,6 +12,13 @@
     <meta name="keywords" content="barber, luxury barber, grooming, haircut, beard trim, royal shave, gentleman">
 
     <!-- Styles / Scripts -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Alpine.js (via Laravel mix/vite) -->
@@ -51,8 +58,39 @@
                 <a href="#contact" class="hover:text-luxury-gold transition-colors duration-300">Contact</a>
             </div>
 
-            <!-- CTA Buttons -->
+            <!-- CTA Buttons & Theme Toggle -->
             <div class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <div x-data="{ 
+                    darkMode: document.documentElement.classList.contains('dark'),
+                    toggleTheme() {
+                        this.darkMode = !this.darkMode;
+                        if (this.darkMode) {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('theme', 'dark');
+                        } else {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('theme', 'light');
+                        }
+                    }
+                }">
+                    <button @click="toggleTheme()" 
+                            type="button"
+                            class="flex items-center justify-center w-9 h-9 rounded-full border border-luxury-border bg-luxury-surface/80 text-luxury-primary hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 shadow-sm cursor-pointer"
+                            :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                        <template x-if="darkMode">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </template>
+                        <template x-if="!darkMode">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </template>
+                    </button>
+                </div>
+
                 <!-- Cart Status Indicator -->
                 <div class="relative cursor-pointer hover:text-luxury-gold transition-colors duration-300 mr-2" 
                      x-show="cartCount > 0"
