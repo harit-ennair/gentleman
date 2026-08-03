@@ -1,707 +1,820 @@
 @extends('layouts.test')
 
 @section('content')
-<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8" x-data="{ activeTab: 'overview' }">
-    <!-- Left Sidebar Column (3 cols) -->
-    <div class="lg:col-span-3">
-        <div class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 lg:sticky lg:top-28 space-y-6">
-            <!-- Sidebar Header -->
-            <div>
-                <span class="text-luxury-gold uppercase tracking-[0.2em] text-[10px] font-display block mb-1">Navigation</span>
-                <h3 class="font-display font-black text-lg uppercase tracking-tight text-white flex items-center gap-2">
-                    <span class="text-luxury-gold">◆</span> Admin Menu
-                </h3>
-            </div>
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8" x-data="{ activeTab: 'overview' }">
+        <!-- Left Sidebar Column (3 cols) -->
+        <div class="lg:col-span-3">
+            <div class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 lg:sticky lg:top-28 space-y-6">
+                <!-- Sidebar Header -->
+                <div>
+                    <span
+                        class="text-luxury-gold uppercase tracking-[0.2em] text-[10px] font-display block mb-1">Navigation</span>
+                    <h3 class="font-display font-black text-lg uppercase tracking-tight text-white flex items-center gap-2">
+                        <span class="text-luxury-gold">◆</span> Admin Menu
+                    </h3>
+                </div>
 
-            <!-- Navigation Links -->
-            <nav class="flex flex-col gap-2">
-                <!-- Overview Tab Link -->
-                <button @click="activeTab = 'overview'" 
+                <!-- Navigation Links -->
+                <nav class="flex flex-col gap-2">
+                    <!-- Overview Tab Link -->
+                    <button @click="activeTab = 'overview'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'overview' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm"></span> Overview
-                </button>
+                        <span class="text-sm"></span> Overview
+                    </button>
 
-                <!-- Categories Tab Link -->
-                <button @click="activeTab = 'categories'" 
+                    <!-- Categories Tab Link -->
+                    <button @click="activeTab = 'categories'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'categories' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm"></span> Categories
-                </button>
+                        <span class="text-sm"></span> Categories
+                    </button>
 
-                <!-- Services Tab Link -->
-                <button @click="activeTab = 'services'" 
+                    <!-- Services Tab Link -->
+                    <button @click="activeTab = 'services'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'services' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm"></span> Services
-                </button>
+                        <span class="text-sm"></span> Services
+                    </button>
 
-                <!-- Products Tab Link -->
-                <button @click="activeTab = 'products'" 
+                    <!-- Products Tab Link -->
+                    <button @click="activeTab = 'products'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'products' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm"></span> Products
-                </button>
-            </nav>
+                        <span class="text-sm"></span> Products
+                    </button>
+                </nav>
 
-            <!-- Separator -->
-            <div class="h-px bg-luxury-border/60"></div>
+                <!-- Separator -->
+                <div class="h-px bg-luxury-border/60"></div>
 
-            <!-- External Pages Links -->
-            <div class="space-y-3">
-                <span class="text-luxury-secondary/50 uppercase tracking-[0.2em] text-[9px] font-display block px-1">Manage Resources</span>
-                <div class="flex flex-col gap-1">
-                    <a href="{{ route('admin.users.index') }}" 
-                       class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm"></span> Users
-                    </a>
-                    <a href="{{ route('admin.appointments.index') }}" 
-                       class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm"></span> Appointments
-                    </a>
-                    <a href="{{ route('admin.orders.index') }}" 
-                       class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm"></span> Orders
-                    </a>
+                <!-- External Pages Links -->
+                <div class="space-y-3">
+                    <span
+                        class="text-luxury-secondary/50 uppercase tracking-[0.2em] text-[9px] font-display block px-1">Manage
+                        Resources</span>
+                    <div class="flex flex-col gap-1">
+                        <a href="{{ route('admin.users.index') }}"
+                            class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
+                            <span class="text-sm"></span> Users
+                        </a>
+                        <a href="{{ route('admin.appointments.index') }}"
+                            class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
+                            <span class="text-sm"></span> Appointments
+                        </a>
+                        <a href="{{ route('admin.orders.index') }}"
+                            class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
+                            <span class="text-sm"></span> Orders
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Right Content Column (9 cols) -->
-    <div class="lg:col-span-9 space-y-8">
-        <!-- Page Title Banner (Dynamic title based on tab) -->
-        <div class="border-b border-luxury-border/60 pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-                <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-2 block">Control Panel</span>
-                <h1 class="font-display font-black text-4xl md:text-5xl uppercase tracking-tighter text-white">
-                    <span x-show="activeTab === 'overview'">Dashboard Overview</span>
-                    <span x-show="activeTab === 'categories'" style="display: none;">Categories Manager</span>
-                    <span x-show="activeTab === 'services'" style="display: none;">Services Manager</span>
-                    <span x-show="activeTab === 'products'" style="display: none;">Products Manager</span>
-                </h1>
-            </div>
-            <!-- Quick Actions -->
-            <div class="flex items-center gap-2 text-xs">
-                <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span class="text-luxury-secondary font-display uppercase tracking-widest text-[10px]">Admin Active</span>
-            </div>
-        </div>
-
-        <!-- TAB CONTENT: OVERVIEW -->
-        <div x-show="activeTab === 'overview'" x-transition:enter="transition ease-out duration-300" class="w-full space-y-8">
-            <!-- Stats Cards Grid -->
-            <div class="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-                @foreach([
-                    'Clients' => ['value' => $clientsCount],
-                    'Appointments' => ['value' => $appointmentsCount],
-                    'Orders' => ['value' => $ordersCount],
-                    'Today Revenue' => ['value' => number_format($todayRevenue, 0) . ' DH'],
-                    'Month Revenue' => ['value' => number_format($monthlyRevenue, 0) . ' DH']
-                ] as $label => $data)
-                    <div class="group bg-luxury-surface border border-luxury-border/60 hover:border-luxury-gold/40 rounded-2xl p-5 transition-all duration-500 shadow-xl flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-luxury-secondary text-[10px] uppercase tracking-wider font-display">{{ $label }}</span>
-                        </div>
-                        <p class="text-2xl font-display font-bold text-white tracking-tight group-hover:text-luxury-gold transition-colors duration-300">
-                            {{ $data['value'] }}
-                        </p>
-                    </div>
-                @endforeach
+        <!-- Right Content Column (9 cols) -->
+        <div class="lg:col-span-9 space-y-8">
+            <!-- Page Title Banner (Dynamic title based on tab) -->
+            <div class="border-b border-luxury-border/60 pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-2 block">Control
+                        Panel</span>
+                    <h1 class="font-display font-black text-4xl md:text-5xl uppercase tracking-tighter text-white">
+                        <span x-show="activeTab === 'overview'">Dashboard Overview</span>
+                        <span x-show="activeTab === 'categories'" style="display: none;">Categories Manager</span>
+                        <span x-show="activeTab === 'services'" style="display: none;">Services Manager</span>
+                        <span x-show="activeTab === 'products'" style="display: none;">Products Manager</span>
+                    </h1>
+                </div>
+                <!-- Quick Actions -->
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-luxury-secondary font-display uppercase tracking-widest text-[10px]">Admin
+                        Active</span>
+                </div>
             </div>
 
-            <!-- Recent Activity Sections -->
-            <div class="w-full grid gap-8 grid-cols-1 lg:grid-cols-2">
-                <!-- Recent Appointments -->
-                <div class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
-                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
-                        <span class="text-luxury-gold">◆</span> Recent Appointments
-                    </h3>
-                    <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
-                        @forelse($latestAppointments as $appointment)
-                            <div class="p-3 bg-luxury-bg/40 border border-luxury-border/50 rounded-xl flex items-center justify-between text-xs transition-colors duration-300 hover:border-luxury-gold/20">
-                                <div>
-                                    <p class="font-semibold text-white">{{ $appointment->user->full_name }}</p>
-                                    <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $appointment->service->name }} • {{ $appointment->appointment_at->format('M d, H:i') }}</p>
-                                </div>
-                                <span class="px-2 py-0.5 rounded text-[8px] font-display font-bold uppercase 
-                                    @if($appointment->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
-                                    @elseif($appointment->status->value === 'confirmed') bg-green-950/40 text-green-400 border border-green-800/30
-                                    @elseif($appointment->status->value === 'completed') bg-blue-950/40 text-blue-400 border border-blue-800/30
-                                    @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
-                                    {{ $appointment->status->value }}
-                                </span>
+            <!-- TAB CONTENT: OVERVIEW -->
+            <div x-show="activeTab === 'overview'" x-transition:enter="transition ease-out duration-300"
+                class="w-full space-y-8">
+                <!-- Stats Cards Grid -->
+                <div class="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    @foreach([
+                            'Clients' => ['value' => $clientsCount],
+                            'Appointments' => ['value' => $appointmentsCount],
+                            'Orders' => ['value' => $ordersCount],
+                            'Today Revenue' => ['value' => number_format($todayRevenue, 0) . ' DH'],
+                            'Month Revenue' => ['value' => number_format($monthlyRevenue, 0) . ' DH']
+                        ] as $label => $data)
+                        <div
+                            class="group bg-luxury-surface border border-luxury-border/60 hover:border-luxury-gold/40 rounded-2xl p-5 transition-all duration-500 shadow-xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-3">
+                                <span
+                                    class="text-luxury-secondary text-[10px] uppercase tracking-wider font-display">{{ $label }}</span>
                             </div>
-                        @empty
-                            <p class="text-luxury-secondary text-xs italic text-center py-8">No appointments found.</p>
-                        @endforelse
-                    </div>
+                            <p
+                                class="text-2xl font-display font-bold text-white tracking-tight group-hover:text-luxury-gold transition-colors duration-300">
+                                {{ $data['value'] }}
+                            </p>
+                        </div>
+                    @endforeach
                 </div>
 
-                <!-- Recent Orders -->
-                <div class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
-                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
-                        <span class="text-luxury-gold">◆</span> Recent Orders
-                    </h3>
-                    <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
-                        @forelse($latestOrders as $order)
-                            <div class="p-3 bg-luxury-bg/40 border border-luxury-border/50 rounded-xl flex items-center justify-between text-xs transition-colors duration-300 hover:border-luxury-gold/20">
-                                <div>
-                                    <p class="font-semibold text-white">{{ $order->order_number }}</p>
-                                    <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $order->user->full_name }} • {{ $order->order_date->format('M d') }}</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-luxury-gold">{{ number_format($order->total, 2) }} DH</p>
-                                    <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[8px] font-display font-bold uppercase 
-                                        @if($order->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
-                                        @elseif($order->status->value === 'completed' || $order->status->value === 'delivered') bg-green-950/40 text-green-400 border border-green-800/30
-                                        @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
-                                        {{ $order->status->value }}
+                <!-- Recent Activity Sections -->
+                <div class="w-full grid gap-8 grid-cols-1 lg:grid-cols-2">
+                    <!-- Recent Appointments -->
+                    <div
+                        class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
+                        <h3
+                            class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
+                            <span class="text-luxury-gold">◆</span> Recent Appointments
+                        </h3>
+                        <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
+                            @forelse($latestAppointments as $appointment)
+                                <div
+                                    class="p-3 bg-luxury-bg/40 border border-luxury-border/50 rounded-xl flex items-center justify-between text-xs transition-colors duration-300 hover:border-luxury-gold/20">
+                                    <div>
+                                        <p class="font-semibold text-white">{{ $appointment->user->full_name }}</p>
+                                        <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $appointment->service->name }} •
+                                            {{ $appointment->appointment_at->format('M d, H:i') }}</p>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded text-[8px] font-display font-bold uppercase 
+                                            @if($appointment->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
+                                            @elseif($appointment->status->value === 'confirmed') bg-green-950/40 text-green-400 border border-green-800/30
+                                            @elseif($appointment->status->value === 'completed') bg-blue-950/40 text-blue-400 border border-blue-800/30
+                                            @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
+                                        {{ $appointment->status->value }}
                                     </span>
                                 </div>
+                            @empty
+                                <p class="text-luxury-secondary text-xs italic text-center py-8">No appointments found.</p>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders -->
+                    <div
+                        class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
+                        <h3
+                            class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
+                            <span class="text-luxury-gold">◆</span> Recent Orders
+                        </h3>
+                        <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
+                            @forelse($latestOrders as $order)
+                                <div
+                                    class="p-3 bg-luxury-bg/40 border border-luxury-border/50 rounded-xl flex items-center justify-between text-xs transition-colors duration-300 hover:border-luxury-gold/20">
+                                    <div>
+                                        <p class="font-semibold text-white">{{ $order->order_number }}</p>
+                                        <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $order->user->full_name }} •
+                                            {{ $order->order_date->format('M d') }}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-luxury-gold">{{ number_format($order->total, 2) }} DH</p>
+                                        <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[8px] font-display font-bold uppercase 
+                                                @if($order->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
+                                                @elseif($order->status->value === 'completed' || $order->status->value === 'delivered') bg-green-950/40 text-green-400 border border-green-800/30
+                                                @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
+                                            {{ $order->status->value }}
+                                        </span>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-luxury-secondary text-xs italic text-center py-8">No orders found.</p>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Low Stock Alert Panel -->
+                @if($lowStockProducts->isNotEmpty())
+                    <div class="bg-red-950/10 border border-red-900/30 rounded-2xl p-6 shadow-xl">
+                        <h3
+                            class="font-display font-bold text-base uppercase tracking-tight text-red-400 mb-4 flex items-center gap-2 pb-2 border-b border-red-900/20">
+                            <span>⚠</span> Low Stock Alert
+                        </h3>
+                        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            @foreach($lowStockProducts as $product)
+                                <div
+                                    class="p-3.5 bg-luxury-bg/50 border border-red-900/20 rounded-xl flex items-center justify-between text-xs">
+                                    <div>
+                                        <p class="font-semibold text-white">{{ $product->name }}</p>
+                                        <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $product->category->name }}</p>
+                                    </div>
+                                    <span
+                                        class="bg-red-950 text-red-400 px-2.5 py-1 rounded-lg text-[10px] font-bold font-display border border-red-900/40">
+                                        {{ $product->stock_quantity }} Left
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <!-- TAB CONTENT: CATEGORIES -->
+            <div x-show="activeTab === 'categories'" x-transition:enter="transition ease-out duration-300"
+                class="grid gap-8 lg:grid-cols-12" style="display: none;">
+                <!-- Add Category (Left) -->
+                <div class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl h-fit">
+                    <form method="POST" action="{{ route('admin.categories.store') }}" class="flex flex-col gap-4">
+                        @csrf
+                        <h2
+                            class="font-display font-bold text-lg uppercase tracking-tight text-white flex items-center gap-2 pb-3 border-b border-luxury-border/40">
+                            <span class="text-luxury-gold">◆</span> Add Category
+                        </h2>
+                        <div class="space-y-3">
+                            <input
+                                class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40"
+                                name="name" placeholder="Category Name" required>
+                            <textarea
+                                class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40 h-32 resize-none"
+                                name="description" placeholder="Category Description" required></textarea>
+                        </div>
+                        <button
+                            class="w-full bg-luxury-gold hover:bg-white text-luxury-bg hover:text-luxury-bg py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer">
+                            Save Category
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Manage Categories (Right) -->
+                <div
+                    class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[550px]">
+                    <h2
+                        class="font-display font-bold text-lg uppercase tracking-tight text-white mb-6 flex items-center gap-2 pb-3 border-b border-luxury-border/40">
+                        <span class="text-luxury-gold">◆</span> Manage Categories
+                    </h2>
+                    <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
+                        @forelse($categories as $category)
+                            <div
+                                class="p-4 bg-luxury-bg/50 border border-luxury-border/60 hover:border-luxury-gold/30 rounded-xl transition-all duration-300 space-y-3">
+                                <form id="update-category-{{ $category->id }}" method="POST"
+                                    action="{{ route('admin.categories.update', $category) }}" class="flex flex-col gap-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <input
+                                        class="w-full bg-luxury-bg border border-luxury-border text-white px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300"
+                                        name="name" value="{{ $category->name }}" placeholder="Name">
+                                    <textarea
+                                        class="w-full bg-luxury-bg border border-luxury-border text-luxury-secondary px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300 h-16 resize-none"
+                                        name="description" placeholder="Description">{{ $category->description }}</textarea>
+                                </form>
+                                <div class="flex justify-between items-center pt-2 border-t border-luxury-border/40">
+                                    <button type="submit" form="update-category-{{ $category->id }}"
+                                        class="bg-luxury-gold/10 hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                                        Update
+                                    </button>
+                                    <form method="POST" action="{{ route('admin.categories.destroy', $category) }}"
+                                        class="inline"
+                                        onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="bg-red-950/20 hover:bg-red-900 border border-red-900/40 text-red-400 hover:text-white px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         @empty
-                            <p class="text-luxury-secondary text-xs italic text-center py-8">No orders found.</p>
+                            <p class="text-luxury-secondary text-xs italic text-center py-8">No categories registered.</p>
                         @endforelse
                     </div>
                 </div>
             </div>
 
-            <!-- Low Stock Alert Panel -->
-            @if($lowStockProducts->isNotEmpty())
-                <div class="bg-red-950/10 border border-red-900/30 rounded-2xl p-6 shadow-xl">
-                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-red-400 mb-4 flex items-center gap-2 pb-2 border-b border-red-900/20">
-                        <span>⚠</span> Low Stock Alert
-                    </h3>
-                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        @foreach($lowStockProducts as $product)
-                            <div class="p-3.5 bg-luxury-bg/50 border border-red-900/20 rounded-xl flex items-center justify-between text-xs">
-                                <div>
-                                    <p class="font-semibold text-white">{{ $product->name }}</p>
-                                    <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $product->category->name }}</p>
-                                </div>
-                                <span class="bg-red-950 text-red-400 px-2.5 py-1 rounded-lg text-[10px] font-bold font-display border border-red-900/40">
-                                    {{ $product->stock_quantity }} Left
-                                </span>
+            <!-- TAB CONTENT: SERVICES -->
+            <div x-show="activeTab === 'services'" x-transition:enter="transition ease-out duration-300"
+                class="grid gap-8 lg:grid-cols-12" style="display: none;">
+                <!-- Add Service (Left Column 4) -->
+                <div
+                    class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl h-fit">
+                    <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data"
+                        class="flex flex-col gap-5">
+                        @csrf
+                        <div class="flex items-center gap-3 border-b border-luxury-border/40 pb-4">
+                            <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
                             </div>
-                        @endforeach
-                    </div>
+                            <div>
+                                <h2 class="font-display text-base font-bold text-white">Add New Service</h2>
+                                <p class="text-xs text-luxury-secondary">Expand your barbershop menu</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service
+                                    Title</label>
+                                <input
+                                    class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40"
+                                    name="name" placeholder="e.g. Executive Haircut & Beard Styling" required>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col gap-1.5">
+                                    <label
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
+                                        ($ / DH)</label>
+                                    <input type="number" step="0.01"
+                                        class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
+                                        name="price" placeholder="30.00" required>
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Duration
+                                        (Min)</label>
+                                    <input type="number"
+                                        class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
+                                        name="duration" placeholder="45" required>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label
+                                    class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Description</label>
+                                <textarea
+                                    class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed"
+                                    name="description"
+                                    placeholder="Provide a compelling description of the service procedures and benefits..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service
+                                    Image / Cover</label>
+                                <div
+                                    class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
+                                    <input type="file" name="image" id="new-service-image"
+                                        class="absolute inset-0 size-full opacity-0 cursor-pointer">
+                                    <div class="flex flex-col items-center gap-1.5 text-center">
+                                        <svg class="size-6 text-luxury-gold" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        <span class="text-xs font-bold text-white">Click or upload service photo</span>
+                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
+                            + Save Service
+                        </button>
+                    </form>
                 </div>
-            @endif
-        </div>
 
-        <!-- TAB CONTENT: CATEGORIES -->
-        <div x-show="activeTab === 'categories'" x-transition:enter="transition ease-out duration-300" class="grid gap-8 lg:grid-cols-12" style="display: none;">
-            <!-- Add Category (Left) -->
-            <div class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl h-fit">
-                <form method="POST" action="{{ route('admin.categories.store') }}" class="flex flex-col gap-4">
-                    @csrf
-                    <h2 class="font-display font-bold text-lg uppercase tracking-tight text-white flex items-center gap-2 pb-3 border-b border-luxury-border/40">
-                        <span class="text-luxury-gold">◆</span> Add Category
-                    </h2>
-                    <div class="space-y-3">
-                        <input class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40" 
-                               name="name" 
-                               placeholder="Category Name" 
-                               required>
-                        <textarea class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40 h-32 resize-none" 
-                                  name="description" 
-                                  placeholder="Category Description" 
-                                  required></textarea>
+                <!-- Manage Services (Right Column 8) -->
+                <div
+                    class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col min-h-[640px]">
+                    <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="font-display text-base font-bold text-white">Manage Active Menu Services</h2>
+                                <p class="text-xs text-luxury-secondary">Update titles, prices, durations & photos</p>
+                            </div>
+                        </div>
+                        <span
+                            class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold">
+                            {{ $services->count() }} Services
+                        </span>
                     </div>
-                    <button class="w-full bg-luxury-gold hover:bg-white text-luxury-bg hover:text-luxury-bg py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer">
-                        Save Category
-                    </button>
-                </form>
-            </div>
 
-            <!-- Manage Categories (Right) -->
-            <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[550px]">
-                <h2 class="font-display font-bold text-lg uppercase tracking-tight text-white mb-6 flex items-center gap-2 pb-3 border-b border-luxury-border/40">
-                    <span class="text-luxury-gold">◆</span> Manage Categories
-                </h2>
-                <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
-                    @forelse($categories as $category)
-                        <div class="p-4 bg-luxury-bg/50 border border-luxury-border/60 hover:border-luxury-gold/30 rounded-xl transition-all duration-300 space-y-3">
-                            <form id="update-category-{{ $category->id }}" method="POST" action="{{ route('admin.categories.update',$category) }}" class="flex flex-col gap-2">
-                                @csrf 
-                                @method('PUT')
-                                <input class="w-full bg-luxury-bg border border-luxury-border text-white px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300" 
-                                       name="name" 
-                                       value="{{ $category->name }}" 
-                                       placeholder="Name">
-                                <textarea class="w-full bg-luxury-bg border border-luxury-border text-luxury-secondary px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300 h-16 resize-none" 
-                                          name="description" 
-                                          placeholder="Description">{{ $category->description }}</textarea>
-                            </form>
-                            <div class="flex justify-between items-center pt-2 border-t border-luxury-border/40">
-                                <button type="submit" form="update-category-{{ $category->id }}" class="bg-luxury-gold/10 hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                    Update
-                                </button>
-                                <form method="POST" action="{{ route('admin.categories.destroy',$category) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                    @csrf 
-                                    @method('DELETE')
-                                    <button class="bg-red-950/20 hover:bg-red-900 border border-red-900/40 text-red-400 hover:text-white px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                        Delete
-                                    </button>
+                    <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
+                        @forelse($services as $service)
+                            @php
+                                $srvImg = null;
+                                if ($service->image_path) {
+                                    if (str_starts_with($service->image_path, 'http://') || str_starts_with($service->image_path, 'https://')) {
+                                        $srvImg = $service->image_path;
+                                    } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path)) {
+                                        $srvImg = asset('storage/' . $service->image_path);
+                                    }
+                                }
+                                if (!$srvImg) {
+                                    $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
+                                    $lowerName = strtolower($service->name);
+                                    if (str_contains($lowerName, 'haircut') || str_contains($lowerName, 'hair')) {
+                                        $srvImg = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains($lowerName, 'beard') || str_contains($lowerName, 'trim')) {
+                                        $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
+                                    } elseif (str_contains($lowerName, 'shave') || str_contains($lowerName, 'facial')) {
+                                        $srvImg = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
+                                    }
+                                }
+                            @endphp
+
+                            <div
+                                class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
+                                <form id="update-service-{{ $service->id }}" method="POST"
+                                    action="{{ route('admin.services.update', $service) }}" enctype="multipart/form-data"
+                                    class="flex flex-col sm:flex-row gap-5">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <!-- Service Image Preview & Change Overlay -->
+                                    <div
+                                        class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
+                                        <img src="{{ $srvImg }}" alt="{{ $service->name }}"
+                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+
+                                        <!-- Status Badge Overlay -->
+                                        <span
+                                            class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $service->is_active ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
+                                            {{ $service->is_active ? 'Active' : 'Inactive' }}
+                                        </span>
+
+                                        <!-- Change Photo File Input Overlay -->
+                                        <label
+                                            class="absolute inset-0 flex flex-col items-center justify-center bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer text-white text-[10px] font-bold uppercase tracking-wider text-center p-1">
+                                            <svg class="size-5 mb-1 text-luxury-gold" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                            </svg>
+                                            Change Photo
+                                            <input type="file" name="image" class="hidden"
+                                                onchange="document.getElementById('update-service-{{ $service->id }}').submit()">
+                                        </label>
+                                    </div>
+
+                                    <!-- Service Details Form Fields -->
+                                    <div class="flex flex-col grow gap-3">
+                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                            <div class="grow">
+                                                <label
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Service
+                                                    Title</label>
+                                                <input type="text" name="name" value="{{ $service->name }}" required
+                                                    class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                            </div>
+                                            <div class="flex items-center gap-2 shrink-0">
+                                                <div class="w-24">
+                                                    <label
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
+                                                        ($ / DH)</label>
+                                                    <input type="number" step="0.01" name="price" value="{{ $service->price }}"
+                                                        required
+                                                        class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                                </div>
+                                                <div class="w-24">
+                                                    <label
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Duration
+                                                        (Min)</label>
+                                                    <input type="number" name="duration" value="{{ $service->duration }}"
+                                                        required
+                                                        class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Description</label>
+                                            <textarea name="description" rows="2"
+                                                class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300 resize-none leading-relaxed">{{ $service->description }}</textarea>
+                                        </div>
+
+                                        <!-- Card Actions -->
+                                        <div
+                                            class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-luxury-border/40 mt-1">
+                                            <div class="flex items-center gap-2">
+                                                <button type="submit"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl bg-luxury-gold px-4 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white cursor-pointer shadow-md">
+                                                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Save Changes
+                                                </button>
+                                                <a href="{{ route('admin.services.appointments', $service) }}"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
+                                                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                    Bookings ({{ $service->appointments()->count() }})
+                                                </a>
+                                            </div>
+
+                                            <form method="POST" action="{{ route('admin.services.toggle-status', $service) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $service->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
+                                                    {{ $service->is_active ? 'Disable Service' : 'Activate Service' }}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
-                        </div>
-                    @empty
-                        <p class="text-luxury-secondary text-xs italic text-center py-8">No categories registered.</p>
-                    @endforelse
+                        @empty
+                            <div class="py-12 text-center flex flex-col items-center gap-2">
+                                <span class="text-xs text-luxury-secondary italic">No services registered yet.</span>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- TAB CONTENT: SERVICES -->
-        <div x-show="activeTab === 'services'" x-transition:enter="transition ease-out duration-300" class="grid gap-8 lg:grid-cols-12" style="display: none;">
-            <!-- Add Service (Left Column 4) -->
-            <div class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl h-fit">
-                <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data" class="flex flex-col gap-5">
-                    @csrf
-                    <div class="flex items-center gap-3 border-b border-luxury-border/40 pb-4">
-                        <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
-                            <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="font-display text-base font-bold text-white">Add New Service</h2>
-                            <p class="text-xs text-luxury-secondary">Expand your barbershop menu</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service Title</label>
-                            <input class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40" 
-                                   name="name" 
-                                   placeholder="e.g. Executive Haircut & Beard Styling" 
-                                   required>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price ($ / DH)</label>
-                                <input type="number" step="0.01" class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40" 
-                                       name="price" 
-                                       placeholder="30.00" 
-                                       required>
+            <!-- TAB CONTENT: PRODUCTS -->
+            <div x-show="activeTab === 'products'" x-transition:enter="transition ease-out duration-300"
+                class="grid gap-8 lg:grid-cols-12" style="display: none;">
+                <!-- Add Product (Left Column 4) -->
+                <div
+                    class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl h-fit">
+                    <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data"
+                        class="flex flex-col gap-5">
+                        @csrf
+                        <div class="flex items-center gap-3 border-b border-luxury-border/40 pb-4">
+                            <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z" />
+                                </svg>
                             </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Duration (Min)</label>
-                                <input type="number" class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40" 
-                                       name="duration" 
-                                       placeholder="45" 
-                                       required>
+                            <div>
+                                <h2 class="font-display text-base font-bold text-white">Add New Product</h2>
+                                <p class="text-xs text-luxury-secondary">Expand your shop inventory</p>
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Description</label>
-                            <textarea class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed" 
-                                      name="description" 
-                                      placeholder="Provide a compelling description of the service procedures and benefits..." 
-                                      required></textarea>
-                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
+                                    Category</label>
+                                <select
+                                    class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 font-body"
+                                    name="category_id" required>
+                                    <option value="" disabled selected>Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" class="bg-luxury-surface text-white">
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service Image / Cover</label>
-                            <div class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
-                                <input type="file" 
-                                       name="image" 
-                                       id="new-service-image"
-                                       class="absolute inset-0 size-full opacity-0 cursor-pointer">
-                                <div class="flex flex-col items-center gap-1.5 text-center">
-                                    <svg class="size-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                    <span class="text-xs font-bold text-white">Click or upload service photo</span>
-                                    <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
+                                    Title</label>
+                                <input
+                                    class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40"
+                                    name="name" placeholder="e.g. Matte Clay Styling Pomade" required>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col gap-1.5">
+                                    <label
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
+                                        ($ / DH)</label>
+                                    <input type="number" step="0.01"
+                                        class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
+                                        name="price" placeholder="28.00" required>
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Stock
+                                        Quantity</label>
+                                    <input type="number"
+                                        class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
+                                        name="stock_quantity" placeholder="50" required>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <button type="submit" class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
-                        + Save Service
-                    </button>
-                </form>
-            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label
+                                    class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Description</label>
+                                <textarea
+                                    class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed"
+                                    name="description"
+                                    placeholder="Detailed product features, ingredients, and usage guidelines..."
+                                    required></textarea>
+                            </div>
 
-            <!-- Manage Services (Right Column 8) -->
-            <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col min-h-[640px]">
-                <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-6">
-                    <div class="flex items-center gap-3">
-                        <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
-                            <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="font-display text-base font-bold text-white">Manage Active Menu Services</h2>
-                            <p class="text-xs text-luxury-secondary">Update titles, prices, durations & photos</p>
-                        </div>
-                    </div>
-                    <span class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold">
-                        {{ $services->count() }} Services
-                    </span>
-                </div>
-
-                <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
-                    @forelse($services as $service)
-                        @php
-                            $srvImg = null;
-                            if ($service->image_path) {
-                                if (str_starts_with($service->image_path, 'http://') || str_starts_with($service->image_path, 'https://')) {
-                                    $srvImg = $service->image_path;
-                                } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path)) {
-                                    $srvImg = asset('storage/' . $service->image_path);
-                                }
-                            }
-                            if (!$srvImg) {
-                                $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                $lowerName = strtolower($service->name);
-                                if (str_contains($lowerName, 'haircut') || str_contains($lowerName, 'hair')) {
-                                    $srvImg = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($lowerName, 'beard') || str_contains($lowerName, 'trim')) {
-                                    $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($lowerName, 'shave') || str_contains($lowerName, 'facial')) {
-                                    $srvImg = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
-                                }
-                            }
-                        @endphp
-
-                        <div class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
-                            <form id="update-service-{{ $service->id }}" method="POST" action="{{ route('admin.services.update', $service) }}" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-5">
-                                @csrf
-                                @method('PUT')
-
-                                <!-- Service Image Preview & Change Overlay -->
-                                <div class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
-                                    <img src="{{ $srvImg }}" alt="{{ $service->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                                    
-                                    <!-- Status Badge Overlay -->
-                                    <span class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $service->is_active ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
-                                        {{ $service->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
-
-                                    <!-- Change Photo File Input Overlay -->
-                                    <label class="absolute inset-0 flex flex-col items-center justify-center bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer text-white text-[10px] font-bold uppercase tracking-wider text-center p-1">
-                                        <svg class="size-5 mb-1 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
+                                    Image</label>
+                                <div
+                                    class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
+                                    <input type="file" name="image" id="new-product-image"
+                                        class="absolute inset-0 size-full opacity-0 cursor-pointer">
+                                    <div class="flex flex-col items-center gap-1.5 text-center">
+                                        <svg class="size-6 text-luxury-gold" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        Change Photo
-                                        <input type="file" name="image" class="hidden" onchange="document.getElementById('update-service-{{ $service->id }}').submit()">
-                                    </label>
-                                </div>
-
-                                <!-- Service Details Form Fields -->
-                                <div class="flex flex-col grow gap-3">
-                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                        <div class="grow">
-                                            <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Service Title</label>
-                                            <input type="text" name="name" value="{{ $service->name }}" required
-                                                   class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                        </div>
-                                        <div class="flex items-center gap-2 shrink-0">
-                                            <div class="w-24">
-                                                <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price ($ / DH)</label>
-                                                <input type="number" step="0.01" name="price" value="{{ $service->price }}" required
-                                                       class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                            </div>
-                                            <div class="w-24">
-                                                <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Duration (Min)</label>
-                                                <input type="number" name="duration" value="{{ $service->duration }}" required
-                                                       class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Description</label>
-                                        <textarea name="description" rows="2" 
-                                                  class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300 resize-none leading-relaxed">{{ $service->description }}</textarea>
-                                    </div>
-
-                                    <!-- Card Actions -->
-                                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-luxury-border/40 mt-1">
-                                        <div class="flex items-center gap-2">
-                                            <button type="submit" class="inline-flex items-center gap-1.5 rounded-xl bg-luxury-gold px-4 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white cursor-pointer shadow-md">
-                                                <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                                </svg>
-                                                Save Changes
-                                            </button>
-                                            <a href="{{ route('admin.services.appointments', $service) }}" 
-                                               class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
-                                                <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                                </svg>
-                                                Bookings ({{ $service->appointments()->count() }})
-                                            </a>
-                                        </div>
-
-                                        <form method="POST" action="{{ route('admin.services.toggle-status', $service) }}" class="inline">
-                                            @csrf
-                                            <button type="submit" class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $service->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
-                                                {{ $service->is_active ? 'Disable Service' : 'Activate Service' }}
-                                            </button>
-                                        </form>
+                                        <span class="text-xs font-bold text-white">Click or upload product photo</span>
+                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    @empty
-                        <div class="py-12 text-center flex flex-col items-center gap-2">
-                            <span class="text-xs text-luxury-secondary italic">No services registered yet.</span>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB CONTENT: PRODUCTS -->
-        <div x-show="activeTab === 'products'" x-transition:enter="transition ease-out duration-300" class="grid gap-8 lg:grid-cols-12" style="display: none;">
-            <!-- Add Product (Left Column 4) -->
-            <div class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl h-fit">
-                <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data" class="flex flex-col gap-5">
-                    @csrf
-                    <div class="flex items-center gap-3 border-b border-luxury-border/40 pb-4">
-                        <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
-                            <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="font-display text-base font-bold text-white">Add New Product</h2>
-                            <p class="text-xs text-luxury-secondary">Expand your shop inventory</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product Category</label>
-                            <select class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 font-body" 
-                                    name="category_id" 
-                                    required>
-                                <option value="" disabled selected>Select Category</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" class="bg-luxury-surface text-white">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product Title</label>
-                            <input class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40" 
-                                   name="name" 
-                                   placeholder="e.g. Matte Clay Styling Pomade" 
-                                   required>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price ($ / DH)</label>
-                                <input type="number" step="0.01" class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40" 
-                                       name="price" 
-                                       placeholder="28.00" 
-                                       required>
-                            </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Stock Quantity</label>
-                                <input type="number" class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40" 
-                                       name="stock_quantity" 
-                                       placeholder="50" 
-                                       required>
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Description</label>
-                            <textarea class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed" 
-                                      name="description" 
-                                      placeholder="Detailed product features, ingredients, and usage guidelines..." 
-                                      required></textarea>
-                        </div>
-
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product Image</label>
-                            <div class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
-                                <input type="file" 
-                                       name="image" 
-                                       id="new-product-image"
-                                       class="absolute inset-0 size-full opacity-0 cursor-pointer">
-                                <div class="flex flex-col items-center gap-1.5 text-center">
-                                    <svg class="size-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                    <span class="text-xs font-bold text-white">Click or upload product photo</span>
-                                    <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
-                        + Save Product
-                    </button>
-                </form>
-            </div>
-
-            <!-- Manage Products (Right Column 8) -->
-            <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col min-h-[640px]">
-                <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-6">
-                    <div class="flex items-center gap-3">
-                        <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
-                            <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="font-display text-base font-bold text-white">Manage Store Inventory Products</h2>
-                            <p class="text-xs text-luxury-secondary">Update titles, prices, stock quantities & product photos</p>
-                        </div>
-                    </div>
-                    <span class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold">
-                        {{ $products->count() }} Products
-                    </span>
+                        <button type="submit"
+                            class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
+                            + Save Product
+                        </button>
+                    </form>
                 </div>
 
-                <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
-                    @forelse($products as $product)
-                        @php
-                            $imgUrl = null;
-                            if ($product->image_path) {
-                                if (str_starts_with($product->image_path, 'http://') || str_starts_with($product->image_path, 'https://')) {
-                                    $imgUrl = $product->image_path;
-                                } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path)) {
-                                    $imgUrl = asset('storage/' . $product->image_path);
+                <!-- Manage Products (Right Column 8) -->
+                <div
+                    class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col min-h-[640px]">
+                    <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="font-display text-base font-bold text-white">Manage Store Inventory Products</h2>
+                                <p class="text-xs text-luxury-secondary">Update titles, prices, stock quantities & product
+                                    photos</p>
+                            </div>
+                        </div>
+                        <span
+                            class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold">
+                            {{ $products->count() }} Products
+                        </span>
+                    </div>
+
+                    <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
+                        @forelse($products as $product)
+                            @php
+                                $imgUrl = null;
+                                if ($product->image_path) {
+                                    if (str_starts_with($product->image_path, 'http://') || str_starts_with($product->image_path, 'https://')) {
+                                        $imgUrl = $product->image_path;
+                                    } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path)) {
+                                        $imgUrl = asset('storage/' . $product->image_path);
+                                    }
                                 }
-                            }
-                            if (!$imgUrl) {
-                                $imgUrl = 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80';
-                            }
-                        @endphp
+                                if (!$imgUrl) {
+                                    $imgUrl = 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80';
+                                }
+                            @endphp
 
-                        <div class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
-                            <form id="update-product-{{ $product->id }}" method="POST" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-5">
-                                @csrf
-                                @method('PUT')
+                            <div
+                                class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
+                                <form id="update-product-{{ $product->id }}" method="POST"
+                                    action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data"
+                                    class="flex flex-col sm:flex-row gap-5">
+                                    @csrf
+                                    @method('PUT')
 
-                                <!-- Product Image Preview & Change Overlay -->
-                                <div class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
-                                    <img src="{{ $imgUrl }}" alt="{{ $product->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                                    
-                                    <!-- Stock Status Badge Overlay -->
-                                    <span class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $product->stock_quantity > 0 ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
-                                        {{ $product->stock_quantity > 0 ? 'In Stock (' . $product->stock_quantity . ')' : 'Out of Stock' }}
-                                    </span>
+                                    <!-- Product Image Preview & Change Overlay -->
+                                    <div
+                                        class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
+                                        <img src="{{ $imgUrl }}" alt="{{ $product->name }}"
+                                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                                    <!-- Change Photo File Input Overlay -->
-                                    <label class="absolute inset-0 flex flex-col items-center justify-center bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer text-white text-[10px] font-bold uppercase tracking-wider text-center p-1">
-                                        <svg class="size-5 mb-1 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                        </svg>
-                                        Change Photo
-                                        <input type="file" name="image" class="hidden" onchange="document.getElementById('update-product-{{ $product->id }}').submit()">
-                                    </label>
-                                </div>
+                                        <!-- Stock Status Badge Overlay -->
+                                        <span
+                                            class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $product->stock_quantity > 0 ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
+                                            {{ $product->stock_quantity > 0 ? 'In Stock (' . $product->stock_quantity . ')' : 'Out of Stock' }}
+                                        </span>
 
-                                <!-- Product Details Form Fields -->
-                                <div class="flex flex-col grow gap-3">
-                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                        <div class="grow">
-                                            <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Product Title</label>
-                                            <input type="text" name="name" value="{{ $product->name }}" required
-                                                   class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                        </div>
-                                        <div class="flex items-center gap-2 shrink-0">
-                                            <div class="w-24">
-                                                <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price ($ / DH)</label>
-                                                <input type="number" step="0.01" name="price" value="{{ $product->price }}" required
-                                                       class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                        <!-- Change Photo File Input Overlay -->
+                                        <label
+                                            class="absolute inset-0 flex flex-col items-center justify-center bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer text-white text-[10px] font-bold uppercase tracking-wider text-center p-1">
+                                            <svg class="size-5 mb-1 text-luxury-gold" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                            </svg>
+                                            Change Photo
+                                            <input type="file" name="image" class="hidden"
+                                                onchange="document.getElementById('update-product-{{ $product->id }}').submit()">
+                                        </label>
+                                    </div>
+
+                                    <!-- Product Details Form Fields -->
+                                    <div class="flex flex-col grow gap-3">
+                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                            <div class="grow">
+                                                <label
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Product
+                                                    Title</label>
+                                                <input type="text" name="name" value="{{ $product->name }}" required
+                                                    class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                                             </div>
-                                            <div class="w-24">
-                                                <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Stock</label>
-                                                <input type="number" name="stock_quantity" value="{{ $product->stock_quantity }}" required
-                                                       class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                            <div class="flex items-center gap-2 shrink-0">
+                                                <div class="w-24">
+                                                    <label
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
+                                                        ($ / DH)</label>
+                                                    <input type="number" step="0.01" name="price" value="{{ $product->price }}"
+                                                        required
+                                                        class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                                </div>
+                                                <div class="w-24">
+                                                    <label
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Stock</label>
+                                                    <input type="number" name="stock_quantity"
+                                                        value="{{ $product->stock_quantity }}" required
+                                                        class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                                        <div class="sm:col-span-5">
-                                            <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Category</label>
-                                            <select name="category_id" class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}" @selected($category->is($product->category)) class="bg-luxury-surface text-white">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="sm:col-span-7">
-                                            <label class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Description</label>
-                                            <input type="text" name="description" value="{{ $product->description }}"
-                                                   class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                                        </div>
-                                    </div>
-
-                                    <!-- Card Actions -->
-                                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-luxury-border/40 mt-1">
-                                        <div class="flex items-center gap-2">
-                                            <button type="submit" class="inline-flex items-center gap-1.5 rounded-xl bg-luxury-gold px-4 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white cursor-pointer shadow-md">
-                                                <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                                </svg>
-                                                Save Changes
-                                            </button>
-                                            <a href="{{ route('products.show', $product) }}" target="_blank"
-                                               class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
-                                                <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                                </svg>
-                                                View Product Page
-                                            </a>
+                                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                                            <div class="sm:col-span-5">
+                                                <label
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Category</label>
+                                                <select name="category_id"
+                                                    class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}"
+                                                            @selected($category->is($product->category))
+                                                            class="bg-luxury-surface text-white">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="sm:col-span-7">
+                                                <label
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Description</label>
+                                                <input type="text" name="description" value="{{ $product->description }}"
+                                                    class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
+                                            </div>
                                         </div>
 
-                                        <form method="POST" action="{{ route('admin.products.toggle-status', $product) }}" class="inline">
-                                            @csrf
-                                            <button type="submit" class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $product->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
-                                                {{ $product->is_active ? 'Disable Product' : 'Activate Product' }}
-                                            </button>
-                                        </form>
+                                        <!-- Card Actions -->
+                                        <div
+                                            class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-luxury-border/40 mt-1">
+                                            <div class="flex items-center gap-2">
+                                                <button type="submit"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl bg-luxury-gold px-4 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white cursor-pointer shadow-md">
+                                                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Save Changes
+                                                </button>
+                                                <a href="{{ route('products.show', $product) }}" target="_blank"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
+                                                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                    View Product Page
+                                                </a>
+                                            </div>
+
+                                            <form method="POST" action="{{ route('admin.products.toggle-status', $product) }}"
+                                                class="inline">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $product->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
+                                                    {{ $product->is_active ? 'Disable Product' : 'Activate Product' }}
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    @empty
-                        <div class="py-12 text-center flex flex-col items-center gap-2">
-                            <span class="text-xs text-luxury-secondary italic">No products registered yet.</span>
-                        </div>
-                    @endforelse
+                                </form>
+                            </div>
+                        @empty
+                            <div class="py-12 text-center flex flex-col items-center gap-2">
+                                <span class="text-xs text-luxury-secondary italic">No products registered yet.</span>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-/* Custom scrollbar for lists */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-luxury-border, #27272A);
-  border-radius: 9999px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-luxury-gold, #C8A46A);
-}
-</style>
+    <style>
+        /* Custom scrollbar for lists */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--color-luxury-border, #27272A);
+            border-radius: 9999px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--color-luxury-gold, #C8A46A);
+        }
+    </style>
 @endsection
-
-
