@@ -36,24 +36,34 @@ html:not(.dark) nav {
   border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) .bg-luxury-bg {
+/* Page Backgrounds in Light Mode */
+html:not(.dark) .bg-luxury-bg,
+html:not(.dark) [class*="bg-[#0B0B0B]"],
+html:not(.dark) [class*="bg-[#0b0b0b]"],
+html:not(.dark) .bg-black {
   background-color: #F8FAFC !important;
 }
 
-/* Sub-containers & nested items (e.g. recent appointments/orders, low stock items) with opacity variants */
-html:not(.dark) [class*="bg-luxury-bg/"],
-html:not(.dark) [class*="bg-white/"],
-html:not(.dark) .bg-\[\#161618\] {
-  background-color: #F1F5F9 !important;
+/* Main Surface Cards in Light Mode */
+html:not(.dark) .bg-luxury-surface,
+html:not(.dark) [class*="bg-[#111111]"],
+html:not(.dark) [class*="bg-[#111113]"],
+html:not(.dark) [class*="bg-[#111115]"] {
+  background-color: #FFFFFF !important;
   border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) [class*="bg-luxury-surface"],
-html:not(.dark) .bg-\[\#111111\],
-html:not(.dark) .bg-\[\#111113\] {
-  background-color: #FFFFFF !important;
+/* Nested Items & Sub-containers in Light Mode */
+html:not(.dark) [class*="bg-[#161618]"],
+html:not(.dark) [class*="bg-[#1a1a1a]"],
+html:not(.dark) [class*="bg-luxury-bg/"],
+html:not(.dark) [class*="bg-black/"],
+html:not(.dark) [class*="bg-white/"] {
+  background-color: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
 }
 
+/* Text Colors in Light Mode */
 html:not(.dark) [class*="text-luxury-primary"],
 html:not(.dark) [class*="text-white"] {
   color: #0F172A !important;
@@ -63,7 +73,9 @@ html:not(.dark) .text-luxury-secondary,
 html:not(.dark) [class*="text-luxury-secondary"],
 html:not(.dark) [class*="text-zinc-300"],
 html:not(.dark) [class*="text-zinc-400"],
-html:not(.dark) [class*="text-zinc-500"] {
+html:not(.dark) [class*="text-zinc-500"],
+html:not(.dark) [class*="text-gray-400"],
+html:not(.dark) [class*="text-slate-400"] {
   color: #475569 !important;
 }
 
@@ -73,6 +85,7 @@ html:not(.dark) [class*="border-white/"] {
   border-color: #E2E8F0 !important;
 }
 
+/* Form Controls in Light Mode */
 html:not(.dark) input:not([class*="bg-transparent"]),
 html:not(.dark) select:not([class*="bg-transparent"]),
 html:not(.dark) textarea:not([class*="bg-transparent"]) {

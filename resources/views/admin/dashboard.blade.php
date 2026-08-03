@@ -19,28 +19,28 @@
                 <button @click="activeTab = 'overview'" 
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'overview' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm">📊</span> Overview
+                    <span class="text-sm"></span> Overview
                 </button>
 
                 <!-- Categories Tab Link -->
                 <button @click="activeTab = 'categories'" 
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'categories' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm">📁</span> Categories
+                    <span class="text-sm"></span> Categories
                 </button>
 
                 <!-- Services Tab Link -->
                 <button @click="activeTab = 'services'" 
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'services' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm">💇</span> Services
+                    <span class="text-sm"></span> Services
                 </button>
 
                 <!-- Products Tab Link -->
                 <button @click="activeTab = 'products'" 
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'products' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                    <span class="text-sm">🧴</span> Products
+                    <span class="text-sm"></span> Products
                 </button>
             </nav>
 
@@ -53,15 +53,15 @@
                 <div class="flex flex-col gap-1">
                     <a href="{{ route('admin.users.index') }}" 
                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm">👥</span> Users
+                        <span class="text-sm"></span> Users
                     </a>
                     <a href="{{ route('admin.appointments.index') }}" 
                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm">📅</span> Appointments
+                        <span class="text-sm"></span> Appointments
                     </a>
                     <a href="{{ route('admin.orders.index') }}" 
                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                        <span class="text-sm">📦</span> Orders
+                        <span class="text-sm"></span> Orders
                     </a>
                 </div>
             </div>
