@@ -122,8 +122,8 @@
                 <!-- Interactive Analytics & Performance Charts Grid -->
                 <div class="w-full grid gap-8 grid-cols-1 lg:grid-cols-12">
                     <!-- Monthly Revenue & Sales Growth Chart (8 cols) -->
-                    <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
-                        <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-5">
+                    <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between" x-data="{ timeframe: 'year' }">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-luxury-border/40 pb-4 mb-5">
                             <div class="flex items-center gap-3">
                                 <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
                                     <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,12 +132,28 @@
                                 </div>
                                 <div>
                                     <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Revenue & Sales Growth</h3>
-                                    <p class="text-xs text-luxury-secondary">Monthly sales performance (DH) for {{ now()->year }}</p>
+                                    <p id="revenueChartSubtitle" class="text-xs text-luxury-secondary">Monthly sales performance (DH) for {{ now()->year }}</p>
                                 </div>
                             </div>
-                            <span class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold font-display">
-                                Annual Trend
-                            </span>
+
+                            <!-- Timeframe Selector Tabs (Week / Month / Year) -->
+                            <div class="flex items-center gap-1 rounded-2xl border border-luxury-border bg-luxury-bg/50 p-1.5 shadow-inner self-start sm:self-auto">
+                                <button type="button" @click="timeframe = 'week'; updateRevenueChart('week')"
+                                        :class="timeframe === 'week' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
+                                        class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                                    Week
+                                </button>
+                                <button type="button" @click="timeframe = 'month'; updateRevenueChart('month')"
+                                        :class="timeframe === 'month' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
+                                        class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                                    Month
+                                </button>
+                                <button type="button" @click="timeframe = 'year'; updateRevenueChart('year')"
+                                        :class="timeframe === 'year' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
+                                        class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                                    Year
+                                </button>
+                            </div>
                         </div>
 
                         <div class="relative h-64 sm:h-72 w-full">
@@ -366,7 +382,7 @@
                                 <div class="flex flex-col gap-1.5">
                                     <label
                                         class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
-                                        ($ / DH)</label>
+                                        (DH)</label>
                                     <input type="number" step="0.01"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="price" placeholder="30.00" required>
@@ -512,7 +528,7 @@
                                                 <div class="w-24">
                                                     <label
                                                         class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
-                                                        ($ / DH)</label>
+                                                        (DH)</label>
                                                     <input type="number" step="0.01" name="price" value="{{ $service->price }}"
                                                         required
                                                         class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
@@ -627,7 +643,7 @@
                                 <div class="flex flex-col gap-1.5">
                                     <label
                                         class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
-                                        ($ / DH)</label>
+                                        (DH)</label>
                                     <input type="number" step="0.01"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="price" placeholder="28.00" required>
@@ -766,7 +782,7 @@
                                                 <div class="w-24">
                                                     <label
                                                         class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
-                                                        ($ / DH)</label>
+                                                        (DH)</label>
                                                     <input type="number" step="0.01" name="price" value="{{ $product->price }}"
                                                         required
                                                         class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
@@ -869,6 +885,39 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        let revenueChartInstance = null;
+
+        const chartDataSets = {
+            week: {
+                labels: @json($chartWeekLabels),
+                data: @json($chartWeekData),
+                subtitle: 'Daily sales performance for this week'
+            },
+            month: {
+                labels: @json($chartMonthLabels),
+                data: @json($chartMonthData),
+                subtitle: 'Daily sales performance for {{ now()->format("F Y") }}'
+            },
+            year: {
+                labels: @json($chartYearLabels),
+                data: @json($chartYearData),
+                subtitle: 'Monthly sales performance for {{ now()->year }}'
+            }
+        };
+
+        window.updateRevenueChart = function(timeframe) {
+            if (!revenueChartInstance) return;
+            const ds = chartDataSets[timeframe];
+            if (!ds) return;
+
+            revenueChartInstance.data.labels = ds.labels;
+            revenueChartInstance.data.datasets[0].data = ds.data;
+            revenueChartInstance.update();
+
+            const subtitleEl = document.getElementById('revenueChartSubtitle');
+            if (subtitleEl) subtitleEl.textContent = ds.subtitle;
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = isDark ? '#94A3B8' : '#475569';
@@ -881,13 +930,13 @@
                 revGradient.addColorStop(0, 'rgba(200, 164, 106, 0.35)');
                 revGradient.addColorStop(1, 'rgba(200, 164, 106, 0.0)');
 
-                new Chart(revCtx, {
+                revenueChartInstance = new Chart(revCtx, {
                     type: 'line',
                     data: {
-                        labels: @json($chartMonths),
+                        labels: chartDataSets.year.labels,
                         datasets: [{
                             label: 'Revenue (DH)',
-                            data: @json($chartRevenueData),
+                            data: chartDataSets.year.data,
                             borderColor: '#C8A46A',
                             borderWidth: 3,
                             backgroundColor: revGradient,

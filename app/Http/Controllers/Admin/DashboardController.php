@@ -59,8 +59,64 @@ class DashboardController extends Controller
 
         $monthlyRevenue = $monthlyOrderRevenue + $monthlyApptRevenue;
 
-        // 3. Compute Monthly Revenue Trend Chart Data for Current Year (Jan..Dec)
-        $chartMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        // 3. Compute Chart Data for 3 Timeframes (Week, Month, Year)
+
+        // --- A. Weekly Trend (7 Days of Current Week) ---
+        $startOfWeek = now()->startOfWeek(); // Monday
+        $chartWeekLabels = [];
+        $chartWeekData = [];
+
+        for ($i = 0; $i < 7; $i++) {
+            $date = $startOfWeek->copy()->addDays($i);
+            $chartWeekLabels[] = $date->format('D (M d)');
+
+            $orderSum = (float) Order::where(function ($q) {
+                $q->where('payment_status', PaymentStatus::Paid)
+                    ->orWhere('status', OrderStatus::Completed);
+            })
+                ->whereDate('created_at', $date->toDateString())
+                ->sum('total');
+
+            $apptSum = (float) Appointment::join('services', 'appointments.service_id', '=', 'services.id')
+                ->where('appointments.status', AppointmentStatus::Completed)
+                ->whereDate('appointments.appointment_at', $date->toDateString())
+                ->sum('services.price');
+
+            $chartWeekData[] = $orderSum + $apptSum;
+        }
+
+        // --- B. Monthly Trend (Days of Current Month) ---
+        $daysInMonth = now()->daysInMonth;
+        $chartMonthLabels = [];
+        $chartMonthData = [];
+
+        $salesByDay = Order::where(function ($q) {
+            $q->where('payment_status', PaymentStatus::Paid)
+                ->orWhere('status', OrderStatus::Completed);
+        })
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->selectRaw('DAY(created_at) as day, SUM(total) as total')
+            ->groupBy('day')
+            ->pluck('total', 'day')
+            ->toArray();
+
+        $apptsByDay = Appointment::join('services', 'appointments.service_id', '=', 'services.id')
+            ->where('appointments.status', AppointmentStatus::Completed)
+            ->whereYear('appointments.appointment_at', now()->year)
+            ->whereMonth('appointments.appointment_at', now()->month)
+            ->selectRaw('DAY(appointments.appointment_at) as day, SUM(services.price) as total')
+            ->groupBy('day')
+            ->pluck('total', 'day')
+            ->toArray();
+
+        for ($d = 1; $d <= $daysInMonth; $d++) {
+            $chartMonthLabels[] = now()->format('M').' '.$d;
+            $chartMonthData[] = (float) ($salesByDay[$d] ?? 0) + (float) ($apptsByDay[$d] ?? 0);
+        }
+
+        // --- C. Yearly Trend (12 Months of Current Year) ---
+        $chartYearLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         $salesByMonth = Order::where(function ($q) {
             $q->where('payment_status', PaymentStatus::Paid)
@@ -80,11 +136,9 @@ class DashboardController extends Controller
             ->pluck('total', 'month')
             ->toArray();
 
-        $chartRevenueData = [];
+        $chartYearData = [];
         for ($m = 1; $m <= 12; $m++) {
-            $orderSum = (float) ($salesByMonth[$m] ?? 0);
-            $apptSum = (float) ($apptsByMonth[$m] ?? 0);
-            $chartRevenueData[] = $orderSum + $apptSum;
+            $chartYearData[] = (float) ($salesByMonth[$m] ?? 0) + (float) ($apptsByMonth[$m] ?? 0);
         }
 
         // 4. Compute Appointment Status Distribution Data
@@ -117,8 +171,12 @@ class DashboardController extends Controller
             'categories' => Category::orderBy('name')->get(),
             'products' => Product::with('category')->latest()->get(),
             'services' => Service::orderBy('name')->get(),
-            'chartMonths' => $chartMonths,
-            'chartRevenueData' => $chartRevenueData,
+            'chartWeekLabels' => $chartWeekLabels,
+            'chartWeekData' => $chartWeekData,
+            'chartMonthLabels' => $chartMonthLabels,
+            'chartMonthData' => $chartMonthData,
+            'chartYearLabels' => $chartYearLabels,
+            'chartYearData' => $chartYearData,
             'appointmentStatusesChart' => $appointmentStatusesChart,
         ]);
     }
