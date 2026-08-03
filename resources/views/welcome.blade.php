@@ -296,7 +296,7 @@
                                 <h3 class="font-display font-bold text-xl text-white group-hover:text-luxury-gold transition-colors duration-300 uppercase tracking-tight">
                                     {{ $service->name }}
                                 </h3>
-                                <span class="text-xl font-display font-semibold text-luxury-gold">${{ number_format($service->price, 0) }}</span>
+                                <span class="text-xl font-display font-semibold text-luxury-gold">DH {{ number_format($service->price, 0) }}</span>
                             </div>
 
                             <p class="text-luxury-secondary text-sm font-light leading-relaxed mb-6 flex-grow">
@@ -477,7 +477,7 @@
                             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
                                 <button @click="cartCount++; cartMessage = 'Added ' + '{{ $product->name }}' + ' to cart'; setTimeout(() => cartMessage = '', 3000)" 
                                         class="bg-luxury-gold text-luxury-bg hover:bg-white hover:text-luxury-bg px-6 py-3 rounded-full text-xs font-display font-bold uppercase tracking-wider transition-all duration-300">
-                                    Quick Add • ${{ number_format($product->price, 0) }}
+                                    Quick Add • {{ number_format($product->price, 0) }} DH
                                 </button>
                             </div>
 
@@ -496,7 +496,7 @@
                             </p>
 
                             <div class="flex items-center justify-between pt-4 border-t border-luxury-border/30">
-                                <span class="text-base font-display font-bold text-luxury-gold">${{ number_format($product->price, 0) }}</span>
+                                <span class="text-base font-display font-bold text-luxury-gold">{{ number_format($product->price, 0) }} DH</span>
                                 <button @click="cartCount++; cartMessage = 'Added ' + '{{ $product->name }}' + ' to cart'; setTimeout(() => cartMessage = '', 3000)"
                                         class="text-xs uppercase tracking-widest font-display text-white hover:text-luxury-gold transition-colors duration-300 font-bold flex items-center gap-1">
                                     Add to Cart <span>+</span>
@@ -797,7 +797,7 @@
                                 class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 appearance-none cursor-pointer">
                             <option value="">Choose a treatment...</option>
                             @foreach ($services as $service)
-                                <option value="{{ $service->name }}">{{ $service->name }} — ${{ number_format($service->price, 0) }}</option>
+                                <option value="{{ $service->name }}">{{ $service->name }} — {{ number_format($service->price, 0) }} DH</option>
                             @endforeach
                         </select>
                     </div>

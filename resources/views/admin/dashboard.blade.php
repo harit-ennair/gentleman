@@ -93,16 +93,15 @@
             <!-- Stats Cards Grid -->
             <div class="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                 @foreach([
-                    'Clients' => ['value' => $clientsCount, 'icon' => '👥'],
-                    'Appointments' => ['value' => $appointmentsCount, 'icon' => '📅'],
-                    'Orders' => ['value' => $ordersCount, 'icon' => '📦'],
-                    'Today Revenue' => ['value' => '$' . number_format($todayRevenue, 0), 'icon' => '💵'],
-                    'Month Revenue' => ['value' => '$' . number_format($monthlyRevenue, 0), 'icon' => '📈']
+                    'Clients' => ['value' => $clientsCount],
+                    'Appointments' => ['value' => $appointmentsCount],
+                    'Orders' => ['value' => $ordersCount],
+                    'Today Revenue' => ['value' => number_format($todayRevenue, 0) . ' DH'],
+                    'Month Revenue' => ['value' => number_format($monthlyRevenue, 0) . ' DH']
                 ] as $label => $data)
                     <div class="group bg-luxury-surface border border-luxury-border/60 hover:border-luxury-gold/40 rounded-2xl p-5 transition-all duration-500 shadow-xl flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-3">
                             <span class="text-luxury-secondary text-[10px] uppercase tracking-wider font-display">{{ $label }}</span>
-                            <span class="text-base opacity-80 group-hover:scale-110 transition-transform duration-300">{{ $data['icon'] }}</span>
                         </div>
                         <p class="text-2xl font-display font-bold text-white tracking-tight group-hover:text-luxury-gold transition-colors duration-300">
                             {{ $data['value'] }}
@@ -152,7 +151,7 @@
                                     <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $order->user->full_name }} • {{ $order->order_date->format('M d') }}</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="font-bold text-luxury-gold">${{ number_format($order->total, 2) }}</p>
+                                    <p class="font-bold text-luxury-gold">{{ number_format($order->total, 2) }} DH</p>
                                     <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[8px] font-display font-bold uppercase 
                                         @if($order->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
                                         @elseif($order->status->value === 'completed' || $order->status->value === 'delivered') bg-green-950/40 text-green-400 border border-green-800/30
