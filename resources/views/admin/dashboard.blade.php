@@ -119,6 +119,55 @@
                     @endforeach
                 </div>
 
+                <!-- Interactive Analytics & Performance Charts Grid -->
+                <div class="w-full grid gap-8 grid-cols-1 lg:grid-cols-12">
+                    <!-- Monthly Revenue & Sales Growth Chart (8 cols) -->
+                    <div class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                    <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Revenue & Sales Growth</h3>
+                                    <p class="text-xs text-luxury-secondary">Monthly sales performance (DH) for {{ now()->year }}</p>
+                                </div>
+                            </div>
+                            <span class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold font-display">
+                                Annual Trend
+                            </span>
+                        </div>
+
+                        <div class="relative h-64 sm:h-72 w-full">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Appointments Status Breakdown Donut Chart (4 cols) -->
+                    <div class="lg:col-span-4 bg-luxury-surface border border-luxury-border/60 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b border-luxury-border/40 pb-4 mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="grid size-9 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
+                                    <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Appointments</h3>
+                                    <p class="text-xs text-luxury-secondary">Status distribution</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative h-56 sm:h-60 w-full flex items-center justify-center">
+                            <canvas id="appointmentsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Recent Activity Sections -->
                 <div class="w-full grid gap-8 grid-cols-1 lg:grid-cols-2">
                     <!-- Recent Appointments -->
@@ -817,4 +866,110 @@
             background: var(--color-luxury-gold, #C8A46A);
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94A3B8' : '#475569';
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
+
+            // 1. Revenue Line/Area Chart
+            const revCtx = document.getElementById('revenueChart');
+            if (revCtx) {
+                const revGradient = revCtx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+                revGradient.addColorStop(0, 'rgba(200, 164, 106, 0.35)');
+                revGradient.addColorStop(1, 'rgba(200, 164, 106, 0.0)');
+
+                new Chart(revCtx, {
+                    type: 'line',
+                    data: {
+                        labels: @json($chartMonths),
+                        datasets: [{
+                            label: 'Revenue (DH)',
+                            data: @json($chartRevenueData),
+                            borderColor: '#C8A46A',
+                            borderWidth: 3,
+                            backgroundColor: revGradient,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#C8A46A',
+                            pointBorderColor: '#FFFFFF',
+                            pointHoverRadius: 6,
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y.toLocaleString() + ' DH';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: gridColor },
+                                ticks: { color: textColor, font: { family: 'Plus Jakarta Sans', size: 11 } }
+                            },
+                            y: {
+                                grid: { color: gridColor },
+                                ticks: {
+                                    color: textColor,
+                                    font: { family: 'Plus Jakarta Sans', size: 11 },
+                                    callback: function(value) { return value + ' DH'; }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Appointments Status Doughnut Chart
+            const appCtx = document.getElementById('appointmentsChart');
+            if (appCtx) {
+                const appData = @json(array_values($appointmentStatusesChart));
+                const appLabels = @json(array_keys($appointmentStatusesChart));
+
+                new Chart(appCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: appLabels,
+                        datasets: [{
+                            data: appData,
+                            backgroundColor: [
+                                '#10B981', // Confirmed (Emerald)
+                                '#F59E0B', // Pending (Amber)
+                                '#3B82F6', // Completed (Blue)
+                                '#EF4444'  // Cancelled (Red)
+                            ],
+                            borderWidth: 2,
+                            borderColor: isDark ? '#111111' : '#FFFFFF'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: textColor,
+                                    font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+                                    padding: 15,
+                                    usePointStyle: true
+                                }
+                            }
+                        },
+                        cutout: '68%'
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
