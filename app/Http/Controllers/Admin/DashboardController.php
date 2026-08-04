@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\AppointmentStatus;
-use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
@@ -22,11 +21,8 @@ class DashboardController extends Controller
     {
         $this->authorizeAdmin();
 
-        // 1. Calculate Today Revenue (Completed/Paid Orders + Completed Appointments ONLY)
-        $todayOrderRevenue = (float) Order::where(function ($q) {
-            $q->where('payment_status', PaymentStatus::Paid)
-                ->orWhere('status', OrderStatus::Completed);
-        })
+        // 1. Calculate Today Revenue (Paid Orders ONLY + Completed Appointments ONLY)
+        $todayOrderRevenue = (float) Order::where('payment_status', PaymentStatus::Paid)
             ->where(function ($q) {
                 $q->whereDate('created_at', today())
                     ->orWhereDate('order_date', today());
@@ -40,15 +36,13 @@ class DashboardController extends Controller
 
         $todayRevenue = $todayOrderRevenue + $todayApptRevenue;
 
-        // 2. Calculate Current Month Revenue (Completed/Paid Orders + Completed Appointments ONLY)
-        $monthlyOrderRevenue = (float) Order::where(function ($q) {
-            $q->where('payment_status', PaymentStatus::Paid)
-                ->orWhere('status', OrderStatus::Completed);
-        })
+        // 2. Calculate Current Month Revenue (Paid Orders ONLY + Completed Appointments ONLY)
+        $monthlyOrderRevenue = (float) Order::where('payment_status', PaymentStatus::Paid)
             ->where(function ($q) {
                 $q->whereMonth('created_at', now()->month)
                     ->orWhereMonth('order_date', now()->month);
             })
+            ->whereYear('created_at', now()->year)
             ->sum('total');
 
         $monthlyApptRevenue = (float) Appointment::join('services', 'appointments.service_id', '=', 'services.id')
@@ -70,10 +64,7 @@ class DashboardController extends Controller
             $date = $startOfWeek->copy()->addDays($i);
             $chartWeekLabels[] = $date->format('D (M d)');
 
-            $orderSum = (float) Order::where(function ($q) {
-                $q->where('payment_status', PaymentStatus::Paid)
-                    ->orWhere('status', OrderStatus::Completed);
-            })
+            $orderSum = (float) Order::where('payment_status', PaymentStatus::Paid)
                 ->whereDate('created_at', $date->toDateString())
                 ->sum('total');
 
@@ -90,10 +81,7 @@ class DashboardController extends Controller
         $chartMonthLabels = [];
         $chartMonthData = [];
 
-        $salesByDay = Order::where(function ($q) {
-            $q->where('payment_status', PaymentStatus::Paid)
-                ->orWhere('status', OrderStatus::Completed);
-        })
+        $salesByDay = Order::where('payment_status', PaymentStatus::Paid)
             ->whereYear('created_at', now()->year)
             ->whereMonth('created_at', now()->month)
             ->selectRaw('DAY(created_at) as day, SUM(total) as total')
@@ -118,10 +106,7 @@ class DashboardController extends Controller
         // --- C. Yearly Trend (12 Months of Current Year) ---
         $chartYearLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        $salesByMonth = Order::where(function ($q) {
-            $q->where('payment_status', PaymentStatus::Paid)
-                ->orWhere('status', OrderStatus::Completed);
-        })
+        $salesByMonth = Order::where('payment_status', PaymentStatus::Paid)
             ->whereYear('created_at', now()->year)
             ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
             ->groupBy('month')

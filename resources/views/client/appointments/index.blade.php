@@ -38,9 +38,17 @@
                         <h2 class="mt-1 font-display text-xl font-bold text-white">{{ $calendarMonth->format('F Y') }}</h2>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="{{ route('appointments.index', ['month' => $calendarMonth->subMonth()->format('Y-m')]) }}" aria-label="Previous month" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">&larr;</a>
-                        <a href="{{ route('appointments.index') }}" class="rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50">Today</a>
-                        <a href="{{ route('appointments.index', ['month' => $calendarMonth->addMonth()->format('Y-m')]) }}" aria-label="Next month" class="grid size-10 place-items-center rounded-full border border-white/10 text-lg text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">&rarr;</a>
+                        <a href="{{ route('appointments.index', ['month' => $calendarMonth->subMonth()->format('Y-m')]) }}" aria-label="Previous month" class="inline-flex size-10 items-center justify-center rounded-full border border-white/10 text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">
+                            <svg class="size-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('appointments.index') }}" class="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50">Today</a>
+                        <a href="{{ route('appointments.index', ['month' => $calendarMonth->addMonth()->format('Y-m')]) }}" aria-label="Next month" class="inline-flex size-10 items-center justify-center rounded-full border border-white/10 text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold">
+                            <svg class="size-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
 
