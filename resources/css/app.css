@@ -38,6 +38,7 @@ html:not(.dark) nav {
 
 /* Page Backgrounds in Light Mode */
 html:not(.dark) .bg-luxury-bg,
+html:not(.dark) [class*="bg-luxury-bg"],
 html:not(.dark) [class*="bg-[#0B0B0B]"],
 html:not(.dark) [class*="bg-[#0b0b0b]"],
 html:not(.dark) .bg-black {
@@ -46,11 +47,13 @@ html:not(.dark) .bg-black {
 
 /* Main Surface Cards in Light Mode */
 html:not(.dark) .bg-luxury-surface,
+html:not(.dark) [class*="bg-luxury-surface"],
 html:not(.dark) [class*="bg-[#111111]"],
 html:not(.dark) [class*="bg-[#111113]"],
 html:not(.dark) [class*="bg-[#111115]"] {
   background-color: #FFFFFF !important;
   border-color: #E2E8F0 !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.02) !important;
 }
 
 /* Nested Items & Sub-containers in Light Mode */
@@ -67,6 +70,11 @@ html:not(.dark) [class*="bg-white/"] {
 html:not(.dark) [class*="text-luxury-primary"],
 html:not(.dark) [class*="text-white"] {
   color: #0F172A !important;
+}
+
+html:not(.dark) .text-luxury-gold,
+html:not(.dark) [class*="text-luxury-gold"] {
+  color: #B48844 !important;
 }
 
 html:not(.dark) .text-luxury-secondary,
@@ -89,7 +97,7 @@ html:not(.dark) [class*="border-white/"] {
 html:not(.dark) input:not([class*="bg-transparent"]),
 html:not(.dark) select:not([class*="bg-transparent"]),
 html:not(.dark) textarea:not([class*="bg-transparent"]) {
-  background-color: #FFFFFF !important;
+  background-color: #F8FAFC !important;
   color: #0F172A !important;
   border-color: #CBD5E1 !important;
 }
