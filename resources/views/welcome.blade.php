@@ -125,13 +125,21 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
-        <!-- Cinematic Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1950&q=80" 
-                 class="w-full h-full object-cover brightness-30 scale-105 transition-all duration-[10000ms] ease-out animate-pulse" 
-                 style="animation-duration: 15s"
-                 alt="Luxury Barber Shop">
-            <div class="absolute inset-0 bg-gradient-to-t from-luxury-bg via-transparent to-black/50"></div>
+        <!-- Cinematic Background Video -->
+        <div id="hero-video-bg" class="absolute inset-0 z-0">
+            <video class="w-full h-full object-cover" 
+                   autoplay 
+                   loop 
+                   muted 
+                   playsinline
+                   preload="auto"
+                   poster="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1950&q=80">
+                <source src="/videos/hero-bg.mp4" type="video/mp4">
+            </video>
+            <!-- Dark overlay for text readability (50%) -->
+            <div class="absolute inset-0" style="background-color: rgba(0,0,0,0.5)"></div>
+            <!-- Gradient overlay for depth -->
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #0B0B0B, transparent 60%, rgba(0,0,0,0.3))"></div>
         </div>
 
         <!-- Hero Content -->

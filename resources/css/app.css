@@ -31,9 +31,46 @@ html:not(.dark) html {
   color: #0F172A !important;
 }
 
-html:not(.dark) nav {
+html:not(.dark) nav:not(.bg-transparent) {
   background-color: rgba(255, 255, 255, 0.95) !important;
   border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) nav.bg-transparent {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Nav text must stay light when transparent over hero video in light mode */
+html:not(.dark) nav.bg-transparent [class*="text-luxury-secondary"],
+html:not(.dark) nav.bg-transparent a:not([class*="bg-luxury"]) {
+  color: #E2E8F0 !important;
+}
+
+html:not(.dark) nav.bg-transparent a:hover {
+  color: #C8A46A !important;
+}
+
+html:not(.dark) nav.bg-transparent [class*="text-luxury-primary"] {
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) nav.bg-transparent button[class*="bg-luxury-primary"] {
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Theme toggle button when nav is transparent in light mode */
+html:not(.dark) nav.bg-transparent button[class*="bg-luxury-surface"] {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(8px);
+}
+
+html:not(.dark) nav.bg-transparent button[class*="bg-luxury-primary"] {
+  background-color: #FFFFFF !important;
+  color: #0B0B0B !important;
 }
 
 /* Page Backgrounds in Light Mode */
@@ -216,4 +253,32 @@ html:not(.dark) ::-webkit-scrollbar-thumb {
 
 .animate-fade-in {
   animation: fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hero section must always look dark (video background) regardless of theme */
+html:not(.dark) #hero [class*="text-white"],
+html:not(.dark) #hero [class*="text-luxury-primary"] {
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) #hero [class*="text-luxury-secondary"] {
+  color: #A1A1AA !important;
+}
+
+html:not(.dark) #hero [class*="text-luxury-gold"] {
+  color: #C8A46A !important;
+}
+
+html:not(.dark) #hero [class*="border-luxury-border"] {
+  border-color: #27272A !important;
+}
+
+html:not(.dark) #hero [class*="bg-luxury-gold"] {
+  background-color: #C8A46A !important;
+  color: #0B0B0B !important;
+}
+
+html:not(.dark) #hero-video-bg,
+html:not(.dark) #hero-video-bg * {
+  background-color: unset !important;
 }
