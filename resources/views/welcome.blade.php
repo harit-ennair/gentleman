@@ -27,9 +27,9 @@
 </head>
 
 <body class="bg-luxury-bg text-luxury-primary font-body antialiased selection:bg-luxury-gold selection:text-luxury-bg"
-    x-data="{ 
-          scrolled: false, 
-          bookingOpen: false, 
+    x-data="{
+          scrolled: false,
+          bookingOpen: false,
           selectedService: '',
           selectedDate: '',
           selectedTime: '',
@@ -66,7 +66,7 @@
             <!-- CTA Buttons & Theme Toggle -->
             <div class="flex items-center gap-4">
                 <!-- Theme Toggle Button -->
-                <div x-data="{ 
+                <div x-data="{
                     darkMode: document.documentElement.classList.contains('dark'),
                     toggleTheme() {
                         this.darkMode = !this.darkMode;
@@ -112,10 +112,25 @@
                         x-text="cartCount"></span>
                 </div>
 
-                <button @click="bookingOpen = true"
-                    class="bg-luxury-primary text-luxury-bg hover:bg-luxury-gold hover:text-luxury-bg px-6 py-2.5 rounded-full text-xs font-display font-bold uppercase tracking-wider transition-all duration-500 shadow-md">
-                    Book Appointment
-                </button>
+                <!-- Login / Account Button -->
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="inline-flex items-center gap-2 bg-luxury-gold text-luxury-bg hover:bg-white hover:text-luxury-bg px-5 py-2.5 rounded-full text-xs font-display font-bold uppercase tracking-wider transition-all duration-300 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="inline-flex items-center gap-2 border border-luxury-gold/60 text-luxury-gold hover:bg-luxury-gold hover:text-luxury-bg px-5 py-2.5 rounded-full text-xs font-display font-bold uppercase tracking-wider transition-all duration-300 shadow-sm backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        Login
+                    </a>
+                @endauth
+
             </div>
         </div>
     </nav>
@@ -174,10 +189,6 @@
             <!-- Dual CTAs -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up"
                 style="animation-delay: 300ms">
-                <button @click="bookingOpen = true"
-                    class="bg-luxury-gold text-luxury-bg hover:bg-luxury-primary hover:text-luxury-bg px-8 py-4 rounded-full text-xs font-display font-bold uppercase tracking-widest transition-all duration-500 w-full sm:w-auto">
-                    Book Appointment
-                </button>
                 <a href="#services"
                     class="border border-luxury-border hover:border-luxury-gold px-8 py-4 rounded-full text-xs font-display font-bold uppercase tracking-widest text-luxury-primary transition-all duration-500 w-full sm:w-auto text-center backdrop-blur-sm">
                     Explore Services
@@ -754,10 +765,7 @@
             <p class="text-luxury-secondary text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto mb-10">
                 Experience premium grooming with our master barbers. Secure your preferred slot now.
             </p>
-            <button @click="bookingOpen = true"
-                class="bg-luxury-primary text-luxury-bg hover:bg-luxury-gold hover:text-luxury-bg px-10 py-5 rounded-full text-xs font-display font-bold uppercase tracking-widest transition-all duration-500 shadow-2xl">
-                Book Appointment
-            </button>
+
         </div>
     </section>
 
@@ -877,136 +885,6 @@
     <div class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 md:p-6" x-show="bookingOpen"
         x-transition style="display: none;">
 
-        <!-- Modal Card Container -->
-        <div class="bg-luxury-surface border border-luxury-gold/30 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative transition-all transform scale-100"
-            @click.away="bookingOpen = false; bookingSuccess = false">
-
-            <!-- Close Button -->
-            <button @click="bookingOpen = false; bookingSuccess = false"
-                class="absolute top-4 right-4 text-luxury-secondary hover:text-white transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <!-- Modal Content Grid -->
-            <div class="p-8">
-                <!-- Header -->
-                <div class="text-center mb-8" x-show="!bookingSuccess">
-                    <span
-                        class="text-luxury-gold uppercase tracking-[0.2em] text-[10px] font-display mb-1 block">RESERVATION</span>
-                    <h3 class="font-display font-bold text-2xl uppercase text-white tracking-tight">BOOK A SESSION</h3>
-                    <p class="text-luxury-secondary text-xs font-light mt-1">Select your treatment, date and time below.
-                    </p>
-                </div>
-
-                <!-- Form Section -->
-                <form @submit.prevent="bookingSuccess = true" x-show="!bookingSuccess" class="space-y-6">
-                    <!-- Service Select -->
-                    <div>
-                        <label
-                            class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">Select
-                            Service</label>
-                        <select x-model="selectedService" required
-                            class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 appearance-none cursor-pointer">
-                            <option value="">Choose a treatment...</option>
-                            @foreach ($services as $service)
-                                <option value="{{ $service->name }}">{{ $service->name }} —
-                                    {{ number_format($service->price, 0) }} DH</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Grid: Date and Time -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label
-                                class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">Date</label>
-                            <input type="date" x-model="selectedDate" required min="{{ date('Y-m-d') }}"
-                                class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300">
-                        </div>
-                        <div>
-                            <label
-                                class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">Time
-                                Slot</label>
-                            <select x-model="selectedTime" required
-                                class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 appearance-none cursor-pointer">
-                                <option value="">Select time...</option>
-                                <option value="09:00 AM">09:00 AM</option>
-                                <option value="10:30 AM">10:30 AM</option>
-                                <option value="12:00 PM">12:00 PM</option>
-                                <option value="01:30 PM">01:30 PM</option>
-                                <option value="03:00 PM">03:00 PM</option>
-                                <option value="04:30 PM">04:30 PM</option>
-                                <option value="06:00 PM">06:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Personal Information -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label
-                                class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">First
-                                Name</label>
-                            <input type="text" placeholder="e.g. John" required
-                                class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 placeholder:text-luxury-secondary/40">
-                        </div>
-                        <div>
-                            <label
-                                class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">Last
-                                Name</label>
-                            <input type="text" placeholder="e.g. Doe" required
-                                class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 placeholder:text-luxury-secondary/40">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label
-                            class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display font-semibold mb-2">Email
-                            Address</label>
-                        <input type="email" placeholder="john.doe@example.com" required
-                            class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-luxury-gold transition-colors duration-300 placeholder:text-luxury-secondary/40">
-                    </div>
-
-                    <!-- Submit -->
-                    <button type="submit"
-                        class="w-full bg-luxury-gold text-luxury-bg hover:bg-white hover:text-luxury-bg font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl transition-all duration-300 shadow-lg mt-4">
-                        Confirm Appointment
-                    </button>
-                </form>
-
-                <!-- Success Screen -->
-                <div class="text-center py-12 space-y-6" x-show="bookingSuccess" style="display: none;">
-                    <div
-                        class="h-16 w-16 bg-luxury-gold/15 rounded-full flex items-center justify-center border border-luxury-gold mx-auto mb-4">
-                        <span class="text-luxury-gold text-2xl">✔</span>
-                    </div>
-                    <h3 class="font-display font-bold text-2xl uppercase text-white tracking-tight">RESERVATION
-                        CONFIRMED</h3>
-                    <div
-                        class="bg-luxury-bg border border-luxury-border p-6 rounded-2xl text-left space-y-3 text-xs max-w-sm mx-auto">
-                        <div class="flex justify-between"><span class="text-luxury-secondary">Treatment:</span><span
-                                class="text-white font-bold" x-text="selectedService"></span></div>
-                        <div class="flex justify-between"><span class="text-luxury-secondary">Date:</span><span
-                                class="text-white font-bold" x-text="selectedDate"></span></div>
-                        <div class="flex justify-between"><span class="text-luxury-secondary">Time Slot:</span><span
-                                class="text-white font-bold" x-text="selectedTime"></span></div>
-                        <div class="flex justify-between"><span class="text-luxury-secondary">Location:</span><span
-                                class="text-luxury-gold font-bold">Beverly Hills Parlor</span></div>
-                    </div>
-                    <p class="text-luxury-secondary text-xs max-w-xs mx-auto leading-relaxed">
-                        A verification email and calendar invite has been sent to your email. We look forward to your
-                        session.
-                    </p>
-                    <button @click="bookingOpen = false; bookingSuccess = false"
-                        class="bg-luxury-gold text-luxury-bg hover:bg-white hover:text-luxury-bg font-display text-xs font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all duration-300">
-                        Return to Site
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 
 </body>
