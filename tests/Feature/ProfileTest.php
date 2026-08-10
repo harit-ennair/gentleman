@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -62,6 +63,33 @@ class ProfileTest extends TestCase
             ->assertRedirect('/profile');
 
         $this->assertNotNull($user->refresh()->email_verified_at);
+    }
+
+    public function test_profile_and_password_can_be_updated_in_single_form(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->patch('/profile', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john@example.com',
+                'current_password' => 'password',
+                'password' => 'new-secure-password',
+                'password_confirmation' => 'new-secure-password',
+            ]);
+
+        $response
+            ->assertSessionHasNoErrors()
+            ->assertRedirect('/profile');
+
+        $user->refresh();
+
+        $this->assertSame('John', $user->first_name);
+        $this->assertSame('Doe', $user->last_name);
+        $this->assertSame('john@example.com', $user->email);
+        $this->assertTrue(Hash::check('new-secure-password', $user->password));
     }
 
     public function test_user_can_delete_their_account(): void

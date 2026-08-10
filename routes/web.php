@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ Route::get('/services/{service}', [ServiceController::class, 'show'])->name('ser
 // Client profile
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // Client appointments

@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -19,24 +21,41 @@ class ProfileController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $user = $request->user();
-        $validated = $request->validate([
+
+        $rules = [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($user)],
             'phone' => ['nullable', 'string', 'max:30'],
-        ]);
-        $user->fill($validated);
+        ];
+
+        if ($request->filled('password') || $request->filled('current_password')) {
+            $rules['current_password'] = ['required', 'current_password'];
+            $rules['password'] = ['required', Password::defaults(), 'confirmed'];
+        }
+
+        $validated = $request->validate($rules);
+
+        $user->fill($request->only(['first_name', 'last_name', 'email', 'phone']));
+
+        if (! empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
+
         $user->save();
 
-        return back()->with('success', 'Profile updated.');
+        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
     }
 
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validate(['password' => ['required', 'current_password']]);
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
         $user = $request->user();
         Auth::logout();
         $user->delete();
