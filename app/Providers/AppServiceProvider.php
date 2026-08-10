@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Enums\Role;
+use App\Models\User;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,8 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \Illuminate\Support\Facades\Gate::define('admin', function (\App\Models\User $user) {
-            return $user->role === \App\Enums\Role::Admin;
+        Paginator::useTailwind();
+
+        Gate::define('admin', function (User $user) {
+            return $user->role === Role::Admin;
         });
     }
 }
