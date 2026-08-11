@@ -20,44 +20,44 @@ class ProductCategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Hair Wax',
-                'description' => 'Premium hair waxes for styling, texturizing, and shaping. From matte clays to high-shine pomades.',
+                'name' => 'Cire Capillaire',
+                'description' => 'Cires capillaires haut de gamme pour coiffer, texturer et sculpter. De l\'argile mate aux pommades brillantes.',
             ],
             [
-                'name' => 'Shampoo',
-                'description' => 'Professional-grade shampoos for deep cleansing, moisturizing, and scalp detoxification.',
+                'name' => 'Shampoing',
+                'description' => 'Shampoings de qualité professionnelle pour un nettoyage en profondeur, une hydratation et une détoxification du cuir chevelu.',
             ],
             [
-                'name' => 'Conditioner',
-                'description' => 'Nourishing conditioners to hydrate, soften, and strengthen hair after every wash.',
+                'name' => 'Après-shampoing',
+                'description' => 'Après-shampoings nourrissants pour hydrater, adoucir et renforcer les cheveux après chaque lavage.',
             ],
             [
-                'name' => 'Hair Treatment',
-                'description' => 'Intensive hair treatment products including masks and detanglers for damaged or dry hair.',
+                'name' => 'Soin Capillaire',
+                'description' => 'Produits de soins capillaires intensifs incluant masques et démêlants pour cheveux abîmés ou secs.',
             ],
             [
-                'name' => 'Beard Care',
-                'description' => 'Beard oils, serums, and balms to nourish, soften, and maintain a healthy beard.',
+                'name' => 'Entretien de la Barbe',
+                'description' => 'Huiles, sérums et baumes à barbe pour nourrir, adoucir et entretenir une barbe saine.',
             ],
             [
-                'name' => 'Shaving',
-                'description' => 'Precision shaving gels, creams, and aftershave products for a smooth, irritation-free shave.',
+                'name' => 'Rasage',
+                'description' => 'Gels de rasage de précision, crèmes et soins après-rasage pour un rasage doux et sans irritation.',
             ],
             [
-                'name' => 'Hair Color',
-                'description' => 'Temporary and semi-permanent hair coloring products in a variety of vibrant shades.',
+                'name' => 'Coloration Capillaire',
+                'description' => 'Produits de coloration temporaire et semi-permanente dans une variété de teintes éclatantes.',
             ],
             [
-                'name' => 'Hair Styling',
-                'description' => 'Sprays, creams, and gels for everyday hair styling, hold, and finishing.',
+                'name' => 'Coiffage',
+                'description' => 'Sprays, crèmes et gels pour le coiffage quotidien, la fixation et la finition des cheveux.',
             ],
             [
-                'name' => 'Body Care',
-                'description' => 'Body washes, deodorants, and skincare essentials for daily grooming and freshness.',
+                'name' => 'Soins du Corps',
+                'description' => 'Gels douche, déodorants et soins essentiels du corps pour l\'hygiène et la fraîcheur quotidiennes.',
             ],
             [
-                'name' => 'Hair Mask',
-                'description' => 'Deep-conditioning hair masks for intensive repair, hydration, and shine restoration.',
+                'name' => 'Masque Capillaire',
+                'description' => 'Masques capillaires ultra-nourrissants pour une réparation intensive, une hydratation et un éclat restauré.',
             ],
         ];
 

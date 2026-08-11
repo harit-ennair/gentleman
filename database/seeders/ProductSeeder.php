@@ -20,202 +20,202 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // ── Hair Wax Products ─────────────────────────────────────
-        $hairWax = Category::where('name', 'Hair Wax')->firstOrFail();
+        // ── Cire Capillaire Products ──────────────────────────────
+        $hairWax = Category::where('name', 'Cire Capillaire')->firstOrFail();
 
         $hairWaxProducts = [
             [
-                'name' => 'Mate Clay',
-                'description' => 'Matte finish clay with strong hold for textured, natural-looking hairstyles.',
+                'name' => 'Argile Mate',
+                'description' => 'Argile à effet mat avec tenue forte pour des coiffures texturées au rendu naturel.',
                 'price' => 120.00,
             ],
             [
-                'name' => 'Fiber',
-                'description' => 'Flexible fiber wax that adds texture and movement with a natural finish.',
+                'name' => 'Cire Fibrée',
+                'description' => 'Cire fibrée souple qui apporte texture et mouvement avec un fini naturel.',
                 'price' => 110.00,
             ],
             [
-                'name' => 'Pomade',
-                'description' => 'Classic pomade with high shine and medium hold for slick, polished styles.',
+                'name' => 'Pommade Coiffante',
+                'description' => 'Pommade classique à forte brillance et tenue moyenne pour des styles lisses et soignés.',
                 'price' => 100.00,
             ],
             [
-                'name' => 'Defining Paste',
-                'description' => 'Light hold paste for defining and separating hair with a matte finish.',
+                'name' => 'Pâte Sculptante',
+                'description' => 'Pâte à tenue légère pour définir et séparer les cheveux avec un fini mat.',
                 'price' => 115.00,
             ],
             [
-                'name' => 'Molding Clay',
-                'description' => 'Pliable molding clay for reshaping hair throughout the day with a natural look.',
+                'name' => 'Argile Modelante',
+                'description' => 'Argile modelante malléable pour recoiffer les cheveux tout au long de la journée.',
                 'price' => 125.00,
             ],
             [
-                'name' => 'Heavy Hold Pomade',
-                'description' => 'Maximum hold pomade for styles that need to last all day with a glossy finish.',
+                'name' => 'Pommade Forte Tenue',
+                'description' => 'Pommade tenue maximale pour des coiffures qui durent toute la journée avec un fini brillant.',
                 'price' => 130.00,
             ],
             [
-                'name' => 'Forming Cream',
-                'description' => 'Versatile forming cream with medium hold and a natural, lightweight finish.',
+                'name' => 'Crème Modelante',
+                'description' => 'Crème modelante polyvalente avec tenue moyenne et un fini naturel et léger.',
                 'price' => 105.00,
             ],
             [
-                'name' => 'Grooming Cream',
-                'description' => 'All-purpose grooming cream for everyday styling with added moisture and control.',
+                'name' => 'Crème Coiffante',
+                'description' => 'Crème coiffante multi-usages pour le coiffage quotidien apportant hydratation et contrôle.',
                 'price' => 95.00,
             ],
             [
-                'name' => 'Sada Wax',
-                'description' => 'Traditional-style hair wax with firm hold and a subtle, non-greasy shine.',
+                'name' => 'Cire Sada',
+                'description' => 'Cire capillaire de style traditionnel avec tenue ferme et une brillance subtile non grasse.',
                 'price' => 90.00,
             ],
         ];
 
         $this->seedProducts($hairWax->id, $hairWaxProducts);
 
-        // ── Shampoo Products ──────────────────────────────────────
-        $shampoo = Category::where('name', 'Shampoo')->firstOrFail();
+        // ── Shampoing Products ────────────────────────────────────
+        $shampoo = Category::where('name', 'Shampoing')->firstOrFail();
 
         $shampooProducts = [
             [
-                'name' => 'Daily Deep Moist Shampoo',
-                'description' => 'Deeply moisturizing daily shampoo that hydrates and strengthens hair from root to tip.',
+                'name' => 'Shampoing Hydratation Intense',
+                'description' => 'Shampoing quotidien hydratant en profondeur qui fortifie les cheveux de la racine aux pointes.',
                 'price' => 85.00,
             ],
             [
-                'name' => 'Detox Shampoo',
-                'description' => 'Purifying detox shampoo that removes product buildup and environmental impurities.',
+                'name' => 'Shampoing Détox',
+                'description' => 'Shampoing détox purifiant qui élimine les résidus de produits et les impuretés.',
                 'price' => 95.00,
             ],
             [
-                'name' => 'Daily Silver Shampoo',
-                'description' => 'Purple-toned shampoo that neutralizes yellow tones in grey, silver, or blonde hair.',
+                'name' => 'Shampoing Silver',
+                'description' => 'Shampoing aux pigments violets qui neutralise les reflets jaunes des cheveux gris, argentés ou blonds.',
                 'price' => 100.00,
             ],
             [
-                'name' => 'Shampo Macadamia',
-                'description' => 'Macadamia oil-infused shampoo for deep nourishment, shine, and frizz control.',
+                'name' => 'Shampoing Macadamia',
+                'description' => 'Shampoing infusé à l\'huile de macadamia pour une nutrition intense, de la brillance et un contrôle des frisottis.',
                 'price' => 110.00,
             ],
         ];
 
         $this->seedProducts($shampoo->id, $shampooProducts);
 
-        // ── Conditioner Products ──────────────────────────────────
-        $conditioner = Category::where('name', 'Conditioner')->firstOrFail();
+        // ── Après-shampoing Products ──────────────────────────────
+        $conditioner = Category::where('name', 'Après-shampoing')->firstOrFail();
 
         $conditionerProducts = [
             [
-                'name' => 'Daily Conditioner 1000ML',
-                'description' => 'Professional-size daily conditioner for salon use, providing deep hydration and detangling.',
+                'name' => 'Après-shampoing Quotidien 1000ML',
+                'description' => 'Après-shampoing quotidien format professionnel pour salon, offrant une hydratation profonde et un démêlage facile.',
                 'price' => 180.00,
             ],
             [
-                'name' => 'Daily Conditioner 450ML',
-                'description' => 'Everyday conditioner that smooths, softens, and protects hair against damage.',
+                'name' => 'Après-shampoing Quotidien 450ML',
+                'description' => 'Après-shampoing quotidien qui lisse, adoucit et protège les cheveux contre les agressions.',
                 'price' => 95.00,
             ],
         ];
 
         $this->seedProducts($conditioner->id, $conditionerProducts);
 
-        // ── Hair Treatment Products ───────────────────────────────
-        $hairTreatment = Category::where('name', 'Hair Treatment')->firstOrFail();
+        // ── Soin Capillaire Products ──────────────────────────────
+        $hairTreatment = Category::where('name', 'Soin Capillaire')->firstOrFail();
 
         $hairTreatmentProducts = [
             [
                 'name' => 'Masque Macadamia',
-                'description' => 'Intensive macadamia oil hair mask for deep repair, hydration, and restored vitality.',
+                'description' => 'Masque capillaire intensif à l\'huile de macadamia pour une réparation profonde et une vitalité retrouvée.',
                 'price' => 150.00,
             ],
             [
-                'name' => 'Démêleur Macadamia',
-                'description' => 'Macadamia-infused detangling spray that smooths knots and adds lightweight shine.',
+                'name' => 'Démêlant Macadamia',
+                'description' => 'Spray démêlant infusé à la macadamia qui élimine les nœuds et apporte une brillance légère.',
                 'price' => 120.00,
             ],
         ];
 
         $this->seedProducts($hairTreatment->id, $hairTreatmentProducts);
 
-        // ── Beard Care Products ───────────────────────────────────
-        $beardCare = Category::where('name', 'Beard Care')->firstOrFail();
+        // ── Entretien de la Barbe Products ────────────────────────
+        $beardCare = Category::where('name', 'Entretien de la Barbe')->firstOrFail();
 
         $beardCareProducts = [
             [
-                'name' => 'Beard Serum',
-                'description' => 'Lightweight beard serum with argan and jojoba oils to soften, condition, and add shine.',
+                'name' => 'Sérum à Barbe',
+                'description' => 'Sérum léger pour la barbe aux huiles d\'argan et de jojoba pour adoucir, revitaliser et faire briller.',
                 'price' => 140.00,
             ],
         ];
 
         $this->seedProducts($beardCare->id, $beardCareProducts);
 
-        // ── Shaving Products ──────────────────────────────────────
-        $shaving = Category::where('name', 'Shaving')->firstOrFail();
+        // ── Rasage Products ───────────────────────────────────────
+        $shaving = Category::where('name', 'Rasage')->firstOrFail();
 
         $shavingProducts = [
             [
-                'name' => 'Precision Shave Gel 150ML',
-                'description' => 'Transparent shave gel for precision grooming around beard lines and edges.',
+                'name' => 'Gel de Rasage de Précision 150ML',
+                'description' => 'Gel de rasage transparent pour un traçage de précision des contours de la barbe.',
                 'price' => 75.00,
             ],
             [
-                'name' => 'Precision Shave Gel 450ML',
-                'description' => 'Professional-size precision shave gel for salon use, providing a smooth, irritation-free shave.',
+                'name' => 'Gel de Rasage de Précision 450ML',
+                'description' => 'Gel de rasage de précision format professionnel pour un rasage fluide et sans irritation.',
                 'price' => 160.00,
             ],
         ];
 
         $this->seedProducts($shaving->id, $shavingProducts);
 
-        // ── Hair Color Products ───────────────────────────────────
-        $hairColor = Category::where('name', 'Hair Color')->firstOrFail();
+        // ── Coloration Capillaire Products ────────────────────────
+        $hairColor = Category::where('name', 'Coloration Capillaire')->firstOrFail();
 
         $hairColorProducts = [
             [
-                'name' => 'Redone Flash Green',
-                'description' => 'Vibrant green temporary hair color wax for bold, expressive styling.',
+                'name' => 'Redone Flash Vert',
+                'description' => 'Cire de coloration temporaire verte éclatante pour un style audacieux et expressif.',
                 'price' => 85.00,
             ],
             [
-                'name' => 'Redone Flash Yellow',
-                'description' => 'Bright yellow temporary hair color wax for a standout, trendy look.',
+                'name' => 'Redone Flash Jaune',
+                'description' => 'Cire de coloration temporaire jaune vif pour un look tendance et original.',
                 'price' => 85.00,
             ],
             [
-                'name' => 'Redone Flash Violetto',
-                'description' => 'Rich violet temporary hair color wax for a sophisticated, eye-catching style.',
+                'name' => 'Redone Flash Violet',
+                'description' => 'Cire de coloration temporaire violet intense pour un style élégant et remarquable.',
                 'price' => 85.00,
             ],
         ];
 
         $this->seedProducts($hairColor->id, $hairColorProducts);
 
-        // ── Hair Styling Products ─────────────────────────────────
-        $hairStyling = Category::where('name', 'Hair Styling')->firstOrFail();
+        // ── Coiffage Products ─────────────────────────────────────
+        $hairStyling = Category::where('name', 'Coiffage')->firstOrFail();
 
         $hairStylingProducts = [
             [
-                'name' => 'Spray Elegance',
-                'description' => 'Finishing hairspray with flexible hold that locks in style without stiffness.',
+                'name' => 'Laque Élégance',
+                'description' => 'Laque de finition avec tenue souple qui fixe la coiffure sans cartonner.',
                 'price' => 70.00,
             ],
             [
                 'name' => 'Nelly Crème Bouclage',
-                'description' => 'Curl-defining cream that enhances natural curls and waves with frizz control.',
+                'description' => 'Crème définissante pour boucles qui sublime les boucles naturelles et contrôle les frisottis.',
                 'price' => 90.00,
             ],
         ];
 
         $this->seedProducts($hairStyling->id, $hairStylingProducts);
 
-        // ── Body Care Products ────────────────────────────────────
-        $bodyCare = Category::where('name', 'Body Care')->firstOrFail();
+        // ── Soins du Corps Products ───────────────────────────────
+        $bodyCare = Category::where('name', 'Soins du Corps')->firstOrFail();
 
         $bodyCareProducts = [
             [
-                'name' => '24 Hour Deodorant Body Wash',
-                'description' => 'Dual-action body wash with 24-hour deodorant protection and a fresh, clean scent.',
+                'name' => 'Gel Douche Déodorant 24H',
+                'description' => 'Gel douche double action avec protection déodorante 24 heures et un parfum frais et propre.',
                 'price' => 65.00,
             ],
         ];

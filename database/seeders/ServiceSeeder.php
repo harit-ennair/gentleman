@@ -23,7 +23,7 @@ class ServiceSeeder extends Seeder
             // ── Haircut Services ──────────────────────────────────────
             [
                 'name' => 'Coupe Normal',
-                'description' => 'Classic haircut with clippers and scissors, tailored to your preferred style.',
+                'description' => 'Coupe classique à la tondeuse et aux ciseaux, adaptée à votre style préféré.',
                 'price' => 70.00,
                 'duration' => 30,
                 'image_path' => null,
@@ -31,7 +31,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coupe Speciale',
-                'description' => 'Premium haircut with advanced techniques including fades, designs, or textured cuts.',
+                'description' => 'Coupe haut de gamme avec techniques avancées incluant dégradés, motifs ou coupes texturées.',
                 'price' => 100.00,
                 'duration' => 45,
                 'image_path' => null,
@@ -39,7 +39,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coupe Enfant',
-                'description' => 'Gentle and patient haircut service designed for children of all ages.',
+                'description' => 'Service de coupe doux et patient conçu pour les enfants de tous âges.',
                 'price' => 50.00,
                 'duration' => 20,
                 'image_path' => null,
@@ -49,7 +49,7 @@ class ServiceSeeder extends Seeder
             // ── Beard Services ────────────────────────────────────────
             [
                 'name' => 'Barbe Normal',
-                'description' => 'Traditional beard trim and shaping with scissors and a straight razor finish.',
+                'description' => 'Taille et traçage traditionnels de la barbe aux ciseaux avec finition au rasoir droit.',
                 'price' => 40.00,
                 'duration' => 20,
                 'image_path' => null,
@@ -57,7 +57,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Barbe Special',
-                'description' => 'Premium beard grooming with hot towel treatment, precision shaping, and beard oil application.',
+                'description' => 'Soin complet de la barbe avec serviette chaude, traçage de précision et application d\'huile à barbe.',
                 'price' => 70.00,
                 'duration' => 30,
                 'image_path' => null,
@@ -67,7 +67,7 @@ class ServiceSeeder extends Seeder
             // ── Styling Services ──────────────────────────────────────
             [
                 'name' => 'Brushing',
-                'description' => 'Professional blow-dry and styling to achieve a polished, voluminous look.',
+                'description' => 'Séchage et coiffage professionnels pour obtenir un rendu impeccable et volumineux.',
                 'price' => 30.00,
                 'duration' => 20,
                 'image_path' => null,
@@ -77,7 +77,7 @@ class ServiceSeeder extends Seeder
             // ── Coloration Services ───────────────────────────────────
             [
                 'name' => 'Coloration Silver',
-                'description' => 'Silver or platinum hair coloring treatment for a modern, sophisticated appearance.',
+                'description' => 'Coloration argentée ou platine pour un look moderne et sophistiqué.',
                 'price' => 300.00,
                 'duration' => 90,
                 'image_path' => null,
@@ -85,7 +85,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coloration Cheveux',
-                'description' => 'Full hair coloring service with professional-grade dye and post-color conditioning.',
+                'description' => 'Coloration complète des cheveux avec teinture professionnelle et soin fixateur de couleur.',
                 'price' => 100.00,
                 'duration' => 60,
                 'image_path' => null,
@@ -93,7 +93,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coloration Barbe',
-                'description' => 'Beard coloring to cover grey hairs or achieve a desired shade, with precision application.',
+                'description' => 'Coloration de la barbe pour couvrir les poils gris ou obtenir la teinte souhaitée avec une application précise.',
                 'price' => 70.00,
                 'duration' => 30,
                 'image_path' => null,
@@ -103,7 +103,7 @@ class ServiceSeeder extends Seeder
             // ── Nail Services ─────────────────────────────────────────
             [
                 'name' => 'Manucure',
-                'description' => 'Complete manicure including nail trimming, cuticle care, filing, and hand moisturizing.',
+                'description' => 'Manucure complète incluant coupe des ongles, soin des cuticules, limage et hydratation des mains.',
                 'price' => 150.00,
                 'duration' => 45,
                 'image_path' => null,
@@ -111,7 +111,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Pédicure Normal',
-                'description' => 'Standard pedicure with foot soak, nail care, exfoliation, and moisturizing treatment.',
+                'description' => 'Pédicure classique avec bain de pieds, soin des ongles, exfoliation et soin hydratant.',
                 'price' => 180.00,
                 'duration' => 50,
                 'image_path' => null,
@@ -119,7 +119,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Pédicure Médicale',
-                'description' => 'Medical-grade pedicure addressing ingrown nails, calluses, and foot health concerns.',
+                'description' => 'Pédicure médicale traitant les ongles incarnés, les callosités et les problèmes de santé des pieds.',
                 'price' => 200.00,
                 'duration' => 60,
                 'image_path' => null,
@@ -129,7 +129,7 @@ class ServiceSeeder extends Seeder
             // ── Hair Care & Treatment Services ────────────────────────
             [
                 'name' => 'Soins Cheveux',
-                'description' => 'Deep hair care treatment with nourishing oils and proteins for damaged or dry hair.',
+                'description' => 'Soin capillaire profond aux huiles nourrissantes et protéines pour cheveux abîmés ou secs.',
                 'price' => 450.00,
                 'duration' => 60,
                 'image_path' => null,
@@ -137,7 +137,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Soins Special',
-                'description' => 'Premium intensive hair restoration treatment using advanced keratin and collagen formulas.',
+                'description' => 'Soin rénovateur capillaire intensif haut de gamme utilisant des formules avancées de kératine et collagène.',
                 'price' => 650.00,
                 'duration' => 90,
                 'image_path' => null,
@@ -145,7 +145,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Shampoing + Brushing',
-                'description' => 'Professional shampoo wash followed by a blow-dry and light styling.',
+                'description' => 'Lavage shampoing professionnel suivi d\'un séchage brushing et d\'un coiffage léger.',
                 'price' => 50.00,
                 'duration' => 25,
                 'image_path' => null,
@@ -153,7 +153,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Soin Capillaire',
-                'description' => 'Scalp and hair treatment targeting hydration, dandruff control, and follicle health.',
+                'description' => 'Soin du cuir chevelu et des cheveux visant l\'hydratation, l\'anti-pelliculaire et la santé du follicule.',
                 'price' => 100.00,
                 'duration' => 40,
                 'image_path' => null,
@@ -161,7 +161,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Masque Capillaire',
-                'description' => 'Deep conditioning hair mask applied with steam for maximum penetration and repair.',
+                'description' => 'Masque capillaire nourrissant appliqué sous vapeur pour une pénétration et une réparation maximales.',
                 'price' => 150.00,
                 'duration' => 45,
                 'image_path' => null,
@@ -169,7 +169,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Protéine pour Cheveux',
-                'description' => 'Intensive protein treatment to rebuild hair structure, reduce breakage, and restore elasticity.',
+                'description' => 'Traitement intensif aux protéines pour reconstruire la fibre capillaire, réduire la casse et restaurer l\'élasticité.',
                 'price' => 600.00,
                 'duration' => 75,
                 'image_path' => null,
@@ -179,7 +179,7 @@ class ServiceSeeder extends Seeder
             // ── Facial & Skincare Services ────────────────────────────
             [
                 'name' => 'Masque Visage',
-                'description' => 'Detoxifying and hydrating facial mask treatment for cleaner, smoother skin.',
+                'description' => 'Masque facial détoxifiant et hydratant pour une peau plus propre et plus douce.',
                 'price' => 100.00,
                 'duration' => 30,
                 'image_path' => null,
@@ -187,7 +187,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Soin du Visage Normal',
-                'description' => 'Basic facial care including cleansing, toning, and moisturizing for everyday freshness.',
+                'description' => 'Soin du visage essentiel incluant nettoyage, tonification et hydratation pour une fraîcheur au quotidien.',
                 'price' => 100.00,
                 'duration' => 30,
                 'image_path' => null,
@@ -195,7 +195,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Soin du Visage Moyenne',
-                'description' => 'Intermediate facial treatment with deep cleansing, exfoliation, and serum application.',
+                'description' => 'Soin du visage intermédiaire avec nettoyage en profondeur, exfoliation et application de sérum.',
                 'price' => 250.00,
                 'duration' => 45,
                 'image_path' => null,
@@ -203,7 +203,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Soin du Visage Extra',
-                'description' => 'Premium facial experience with anti-aging serums, LED therapy, and lymphatic drainage massage.',
+                'description' => 'Expérience visage premium avec sérums anti-âge, thérapie LED et massage de drainage lymphatique.',
                 'price' => 400.00,
                 'duration' => 60,
                 'image_path' => null,
@@ -213,7 +213,7 @@ class ServiceSeeder extends Seeder
             // ── Hair Removal Services ─────────────────────────────────
             [
                 'name' => 'Épilation des Poils du Nez et des Oreilles',
-                'description' => 'Gentle wax removal of unwanted nose and ear hair for a clean, refined look.',
+                'description' => 'Épilation douce à la cire des poils indésirables du nez et des oreilles pour un aspect soigné et raffiné.',
                 'price' => 50.00,
                 'duration' => 15,
                 'image_path' => null,
@@ -221,7 +221,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Épilation Complète du Visage',
-                'description' => 'Full facial hair removal including cheeks, forehead, and upper lip using professional wax.',
+                'description' => 'Épilation complète du visage incluant joues, front et lèvre supérieure à la cire professionnelle.',
                 'price' => 80.00,
                 'duration' => 25,
                 'image_path' => null,
@@ -229,7 +229,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Facial (Nettoyage du Visage)',
-                'description' => 'Quick facial cleanse to remove impurities, blackheads, and excess oil.',
+                'description' => 'Nettoyage rapide du visage pour éliminer les impuretés, points noirs et excès de sébum.',
                 'price' => 30.00,
                 'duration' => 20,
                 'image_path' => null,
@@ -239,7 +239,7 @@ class ServiceSeeder extends Seeder
             // ── Combo Packs ───────────────────────────────────────────
             [
                 'name' => 'Pack Coupe + Barbe',
-                'description' => 'Combination package: precision haircut plus a professional beard trim and shaping.',
+                'description' => 'Formule combinée : coupe de cheveux de précision avec taille et traçage professionnels de la barbe.',
                 'price' => 100.00,
                 'duration' => 50,
                 'image_path' => null,
@@ -247,7 +247,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Pack Coupe + Barbe + Soins Visage',
-                'description' => 'Full grooming package with haircut, beard trim, and a rejuvenating facial treatment.',
+                'description' => 'Formule complète avec coupe de cheveux, taille de barbe et soin du visage revitalisant.',
                 'price' => 180.00,
                 'duration' => 75,
                 'image_path' => null,
@@ -255,7 +255,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Pack Complet',
-                'description' => 'The ultimate gentleman\'s package: haircut, beard grooming, facial treatment, hair care, and styling.',
+                'description' => 'Le pack ultime du gentleman : coupe, barbe, soin du visage, soin capillaire et coiffage.',
                 'price' => 600.00,
                 'duration' => 90,
                 'image_path' => null,
@@ -263,7 +263,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Pack 3-IN-1 450ml',
-                'description' => 'Take-home product pack: shampoo, conditioner, and styling product in 450ml sizes.',
+                'description' => 'Pack de produits à emporter : shampoing, après-shampoing et produit coiffant en format 450ml.',
                 'price' => 155.00,
                 'duration' => 15,
                 'image_path' => null,
@@ -271,7 +271,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coupe de Cheveux + Taille de Barbe + Soin du Visage',
-                'description' => 'Complete grooming trio: haircut with beard trimming and a professional facial treatment.',
+                'description' => 'Trio de soins complet : coupe de cheveux, taille de barbe et soin du visage professionnel.',
                 'price' => 300.00,
                 'duration' => 75,
                 'image_path' => null,
@@ -279,7 +279,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coupe de Cheveux + Taille de Barbe + Soin Capillaire',
-                'description' => 'Haircut and beard trim combined with a deep scalp and hair nourishing treatment.',
+                'description' => 'Coupe et taille de barbe combinées à un soin nourrissant profond du cuir chevelu et des cheveux.',
                 'price' => 200.00,
                 'duration' => 70,
                 'image_path' => null,
@@ -287,7 +287,7 @@ class ServiceSeeder extends Seeder
             ],
             [
                 'name' => 'Coupe de Cheveux + Taille de Barbe + Gommage du Visage',
-                'description' => 'Haircut and beard trim followed by an exfoliating facial scrub for smooth, refreshed skin.',
+                'description' => 'Coupe et taille de barbe suivies d\'un gommage exfoliant du visage pour une peau douce et rafraîchie.',
                 'price' => 200.00,
                 'duration' => 65,
                 'image_path' => null,
