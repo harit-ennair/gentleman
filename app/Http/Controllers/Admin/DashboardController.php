@@ -81,10 +81,14 @@ class DashboardController extends Controller
         $chartMonthLabels = [];
         $chartMonthData = [];
 
+        $isSqlite = config('database.default') === 'sqlite';
+        $daySql = $isSqlite ? "CAST(strftime('%d', created_at) AS INTEGER)" : 'DAY(created_at)';
+        $apptDaySql = $isSqlite ? "CAST(strftime('%d', appointments.appointment_at) AS INTEGER)" : 'DAY(appointments.appointment_at)';
+
         $salesByDay = Order::where('payment_status', PaymentStatus::Paid)
             ->whereYear('created_at', now()->year)
             ->whereMonth('created_at', now()->month)
-            ->selectRaw('DAY(created_at) as day, SUM(total) as total')
+            ->selectRaw("{$daySql} as day, SUM(total) as total")
             ->groupBy('day')
             ->pluck('total', 'day')
             ->toArray();
@@ -93,7 +97,7 @@ class DashboardController extends Controller
             ->where('appointments.status', AppointmentStatus::Completed)
             ->whereYear('appointments.appointment_at', now()->year)
             ->whereMonth('appointments.appointment_at', now()->month)
-            ->selectRaw('DAY(appointments.appointment_at) as day, SUM(services.price) as total')
+            ->selectRaw("{$apptDaySql} as day, SUM(services.price) as total")
             ->groupBy('day')
             ->pluck('total', 'day')
             ->toArray();
@@ -104,11 +108,14 @@ class DashboardController extends Controller
         }
 
         // --- C. Yearly Trend (12 Months of Current Year) ---
-        $chartYearLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        $chartYearLabels = ['Janv.', 'Fév.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+
+        $monthSql = $isSqlite ? "CAST(strftime('%m', created_at) AS INTEGER)" : 'MONTH(created_at)';
+        $apptMonthSql = $isSqlite ? "CAST(strftime('%m', appointments.appointment_at) AS INTEGER)" : 'MONTH(appointments.appointment_at)';
 
         $salesByMonth = Order::where('payment_status', PaymentStatus::Paid)
             ->whereYear('created_at', now()->year)
-            ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->selectRaw("{$monthSql} as month, SUM(total) as total")
             ->groupBy('month')
             ->pluck('total', 'month')
             ->toArray();
@@ -116,7 +123,7 @@ class DashboardController extends Controller
         $apptsByMonth = Appointment::join('services', 'appointments.service_id', '=', 'services.id')
             ->where('appointments.status', AppointmentStatus::Completed)
             ->whereYear('appointments.appointment_at', now()->year)
-            ->selectRaw('MONTH(appointments.appointment_at) as month, SUM(services.price) as total')
+            ->selectRaw("{$apptMonthSql} as month, SUM(services.price) as total")
             ->groupBy('month')
             ->pluck('total', 'month')
             ->toArray();
@@ -128,10 +135,10 @@ class DashboardController extends Controller
 
         // 4. Compute Appointment Status Distribution Data
         $appointmentStatusesChart = [
-            'Confirmed' => Appointment::where('status', AppointmentStatus::Confirmed)->count(),
-            'Pending' => Appointment::where('status', AppointmentStatus::Pending)->count(),
-            'Completed' => Appointment::where('status', AppointmentStatus::Completed)->count(),
-            'Cancelled' => Appointment::where('status', AppointmentStatus::Cancelled)->count(),
+            'Confirmé' => Appointment::where('status', AppointmentStatus::Confirmed)->count(),
+            'En attente' => Appointment::where('status', AppointmentStatus::Pending)->count(),
+            'Terminé' => Appointment::where('status', AppointmentStatus::Completed)->count(),
+            'Annulé' => Appointment::where('status', AppointmentStatus::Cancelled)->count(),
         ];
 
         if (request()->wantsJson()) {

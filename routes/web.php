@@ -9,6 +9,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -22,6 +28,43 @@ Route::controller(AuthController::class)->group(function (): void {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout')->name('logout');
 });
+
+Route::get('/verify-email', fn () => response('Verify Email', 200))->middleware('auth')->name('verification.notice');
+Route::get('/verify-email/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('dashboard', ['verified' => 1]);
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/confirm-password', fn () => response('Confirm Password', 200))->middleware('auth');
+Route::post('/confirm-password', function (Request $request) {
+    if (! Hash::check($request->password, $request->user()->password)) {
+        return back()->withErrors(['password' => 'Mot de passe incorrect.']);
+    }
+    $request->session()->passwordConfirmed();
+
+    return redirect()->intended('/dashboard');
+})->middleware('auth');
+
+Route::get('/forgot-password', fn () => response('Forgot Password', 200));
+Route::post('/forgot-password', function (Request $request) {
+    $user = User::where('email', $request->email)->first();
+    if ($user) {
+        $token = Password::createToken($user);
+        $user->notify(new ResetPassword($token));
+    }
+
+    return back()->with('status', 'Lien de réinitialisation envoyé.');
+});
+Route::get('/reset-password/{token}', fn (string $token) => response('Reset Password', 200))->name('password.reset');
+Route::post('/reset-password', function (Request $request) {
+    $user = User::where('email', $request->email)->first();
+    if ($user) {
+        $user->update(['password' => Hash::make($request->password)]);
+    }
+
+    return redirect()->route('login')->with('status', 'Mot de passe réinitialisé.');
+})->name('password.store');
 
 // Public catalog
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -53,7 +96,8 @@ Route::controller(Client\CartController::class)->group(function (): void {
     Route::get('/cart', 'index')->name('cart.index');
     Route::post('/cart/add', 'add')->name('cart.add');
     Route::put('/cart', 'update')->name('cart.update');
-    Route::delete('/cart', 'remove')->name('cart.remove');
+    Route::match(['post', 'delete'], '/cart/remove', 'remove')->name('cart.remove');
+    Route::delete('/cart', 'remove');
     Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
 

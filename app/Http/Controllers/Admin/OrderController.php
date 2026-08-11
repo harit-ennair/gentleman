@@ -60,11 +60,11 @@ class OrderController extends Controller
         if ($request->wantsJson()) {
             return response()->json([
                 'order' => $order,
-                'success' => 'Order status updated.',
+                'success' => 'Statut de la commande mis à jour.',
             ]);
         }
 
-        return back()->with('success', 'Order status updated.');
+        return back()->with('success', 'Statut de la commande mis à jour.');
     }
 
     public function cancel(Order $order): RedirectResponse|JsonResponse
@@ -76,11 +76,11 @@ class OrderController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'order' => $order,
-                'success' => 'Order cancelled.',
+                'success' => 'Commande annulée.',
             ]);
         }
 
-        return back()->with('success', 'Order cancelled.');
+        return back()->with('success', 'Commande annulée.');
     }
 
     private function authorizeAdmin(): void

@@ -13,6 +13,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -79,7 +80,7 @@ class ModelsAndMigrationsTest extends TestCase
         $this->assertTrue(Str::isUuid($service->id));
         $this->assertTrue(Str::isUuid($appointment->id));
         $this->assertEquals(AppointmentStatus::Confirmed, $appointment->status);
-        $this->assertInstanceOf(\Carbon\Carbon::class, $appointment->appointment_at);
+        $this->assertInstanceOf(Carbon::class, $appointment->appointment_at);
         $this->assertEquals($user->id, $appointment->user->id);
         $this->assertEquals($service->id, $appointment->service->id);
     }

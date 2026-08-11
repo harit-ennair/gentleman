@@ -44,6 +44,14 @@ if (dayModal) {
         document.body.classList.remove('overflow-hidden');
     };
 
+    const statusLabels = {
+        pending: 'En attente',
+        confirmed: 'Confirmé',
+        completed: 'Terminé',
+        cancelled: 'Annulé',
+        no_show: 'Non présenté',
+    };
+
     const createAppointmentCard = (item, pixelsPerMinute = PIXELS_PER_MINUTE) => {
         const durationMin = item.duration || 30;
         const height = calculateHeight(durationMin, pixelsPerMinute);
@@ -83,7 +91,7 @@ if (dayModal) {
 
             const badge = document.createElement('span');
             badge.className = 'ml-auto shrink-0 rounded-full border border-current/20 px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-wider';
-            badge.textContent = item.status.replace('_', ' ');
+            badge.textContent = statusLabels[item.status] ?? item.status;
 
             link.append(time, sep, name, svc, badge);
         } else {
@@ -118,13 +126,13 @@ if (dayModal) {
 
             const badge = document.createElement('span');
             badge.className = 'shrink-0 rounded-full border border-current/20 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider';
-            badge.textContent = item.status.replace('_', ' ');
+            badge.textContent = statusLabels[item.status] ?? item.status;
 
             nameRow.append(name, badge);
 
             const details = document.createElement('span');
             details.className = 'truncate text-[10px] opacity-70';
-            details.textContent = `${item.service} · ${item.phone ?? 'No phone'}`;
+            details.textContent = `${item.service} · ${item.phone ?? 'Sans téléphone'}`;
 
             content.append(nameRow, details);
             link.append(timeStrip, content);
@@ -199,9 +207,9 @@ if (dayModal) {
             dayModal.classList.remove('hidden');
             dayModal.classList.add('flex');
             document.body.classList.add('overflow-hidden');
-            modalTitle.textContent = 'Loading schedule...';
+            modalTitle.textContent = 'Chargement du planning...';
             modalCount.textContent = '';
-            modalContent.innerHTML = '<div class="p-10 text-center text-sm text-luxury-secondary">Loading appointments...</div>';
+            modalContent.innerHTML = '<div class="p-10 text-center text-sm text-luxury-secondary">Chargement des rendez-vous...</div>';
 
             try {
                 const response = await fetch(dayLink.dataset.dayUrl, {
@@ -209,15 +217,15 @@ if (dayModal) {
                 });
 
                 if (!response.ok) {
-                    throw new Error('Unable to load this day.');
+                    throw new Error('Impossible de charger cette journée.');
                 }
 
                 const schedule = await response.json();
                 modalTitle.textContent = schedule.date_label;
-                modalCount.textContent = `${schedule.appointments_count} appointment${schedule.appointments_count === 1 ? '' : 's'}`;
+                modalCount.textContent = `${schedule.appointments_count} rendez-vous`;
                 renderSchedule(schedule.appointments);
             } catch (error) {
-                modalTitle.textContent = 'Schedule unavailable';
+                modalTitle.textContent = 'Planning indisponible';
                 modalContent.textContent = error.message;
                 modalContent.className = 'grow overflow-y-auto p-10 text-center text-sm text-rose-300';
             }

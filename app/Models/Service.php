@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['name', 'description', 'price', 'duration', 'image_path', 'is_active'])]
 class Service extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * Get the appointments for this service.

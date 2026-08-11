@@ -27,7 +27,7 @@ class CategoryController extends Controller
         ]);
         Category::create($validated);
 
-        return back()->with('success', 'Category created.');
+        return back()->with('success', 'Catégorie créée.');
     }
 
     public function show(Category $category): View
@@ -46,16 +46,16 @@ class CategoryController extends Controller
         ]);
         $category->update($validated);
 
-        return back()->with('success', 'Category updated.');
+        return back()->with('success', 'Catégorie mise à jour.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $this->authorizeAdmin();
-        abort_if($category->products()->exists(), 422, 'A category containing products cannot be deleted.');
+        abort_if($category->products()->exists(), 422, 'Une catégorie contenant des produits ne peut pas être supprimée.');
         $category->delete();
 
-        return back()->with('success', 'Category deleted.');
+        return back()->with('success', 'Catégorie supprimée.');
     }
 
     public function products(Request $request, Category $category): View

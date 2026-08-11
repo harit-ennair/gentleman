@@ -1,6 +1,6 @@
 @extends('layouts.test')
 
-@section('title', 'Order ' . $order->order_number)
+@section('title', 'Commande ' . $order->order_number)
 
 @section('content')
     <div class="mx-auto max-w-4xl flex flex-col gap-8 animate-fade-up">
@@ -10,9 +10,9 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Orders
+                Retour aux commandes
             </a>
-            <span class="text-xs text-luxury-secondary/70">Placed on {{ $order->created_at->format('M d, Y \a\t H:i') }}</span>
+            <span class="text-xs text-luxury-secondary/70">Passée le {{ $order->created_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
         </div>
 
         <!-- Header Card -->
@@ -22,19 +22,19 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
                 <div class="flex flex-col gap-2">
                     <div class="flex items-center gap-3">
-                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Order Overview</span>
+                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Aperçu de la commande</span>
                         <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-0.5 text-[10px] font-bold text-emerald-300">
-                            {{ $order->status->value }}
+                            {{ $order->status->label() }}
                         </span>
                         <span class="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-0.5 text-[10px] font-bold text-luxury-secondary">
-                            Payment: {{ $order->payment_status->value }}
+                            Paiement : {{ $order->payment_status->label() }}
                         </span>
                     </div>
                     <h1 class="font-display text-2xl sm:text-3xl font-black text-white">{{ $order->order_number }}</h1>
                 </div>
 
                 <div class="flex flex-col sm:items-end gap-1">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Total Amount</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Montant total</span>
                     <span class="font-display text-3xl font-black text-luxury-gold">
                         {{ number_format($order->total, 2) }} <span class="text-xs font-bold text-white/70">DH</span>
                     </span>
@@ -51,8 +51,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="font-display text-base font-bold text-white">Purchased Products</h2>
-                    <p class="text-xs text-luxury-secondary/70">Items included in this order</p>
+                    <h2 class="font-display text-base font-bold text-white">Produits achetés</h2>
+                    <p class="text-xs text-luxury-secondary/70">Articles inclus dans cette commande</p>
                 </div>
             </div>
 
@@ -75,14 +75,14 @@
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
-                    View Printable Invoice
+                    Voir la facture imprimable
                 </a>
 
                 @if(in_array($order->status->value, ['pending', 'processing'], true))
                     <form method="POST" action="{{ route('orders.cancel', $order) }}">
                         @csrf
-                        <button type="submit" onclick="return confirm('Are you sure you want to cancel this order?')" class="inline-flex items-center gap-2 rounded-full border border-rose-500/40 bg-rose-500/10 px-6 py-3 font-display text-xs font-bold uppercase tracking-widest text-rose-400 transition hover:bg-rose-500 hover:text-white cursor-pointer">
-                            Cancel Order
+                        <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette commande ?')" class="inline-flex items-center gap-2 rounded-full border border-rose-500/40 bg-rose-500/10 px-6 py-3 font-display text-xs font-bold uppercase tracking-widest text-rose-400 transition hover:bg-rose-500 hover:text-white cursor-pointer">
+                            Annuler la commande
                         </button>
                     </form>
                 @endif

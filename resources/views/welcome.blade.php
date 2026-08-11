@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>GENTLEMAN | Luxury Barbershop & Grooming Parlor</title>
+    <title>GENTLEMAN | Coiffure & Salon de Soins de Luxe pour Hommes</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Experience premium grooming at Gentleman. Modern craftsmanship, luxury services, and classic styles designed for the contemporary man.">
-    <meta name="keywords" content="barber, luxury barber, grooming, haircut, beard trim, royal shave, gentleman">
+        content="Découvrez des soins d'exception chez Gentleman. Savoir-faire moderne, services haut de gamme et styles classiques conçus pour l'homme contemporain.">
+    <meta name="keywords" content="barbier, barbier de luxe, soins, coupe de cheveux, taille de barbe, rasage royal, gentleman">
 
     <!-- Styles / Scripts -->
     <script>
@@ -54,12 +54,12 @@
             <!-- Navigation Links -->
             <div
                 class="hidden lg:flex items-center gap-10 font-display text-xs uppercase tracking-widest text-luxury-secondary">
-                <a href="#about" class="hover:text-luxury-gold transition-colors duration-300">Who We Are</a>
+                <a href="#about" class="hover:text-luxury-gold transition-colors duration-300">Qui sommes-nous</a>
                 <a href="#services" class="hover:text-luxury-gold transition-colors duration-300">Services</a>
-                <a href="#why-choose" class="hover:text-luxury-gold transition-colors duration-300">Pillars</a>
-                <a href="#products" class="hover:text-luxury-gold transition-colors duration-300">Shop</a>
-                <a href="#gallery" class="hover:text-luxury-gold transition-colors duration-300">Gallery</a>
-                <a href="#testimonials" class="hover:text-luxury-gold transition-colors duration-300">Reviews</a>
+                <a href="#why-choose" class="hover:text-luxury-gold transition-colors duration-300">Nos piliers</a>
+                <a href="#products" class="hover:text-luxury-gold transition-colors duration-300">Boutique</a>
+                <a href="#gallery" class="hover:text-luxury-gold transition-colors duration-300">Galerie</a>
+                <a href="#testimonials" class="hover:text-luxury-gold transition-colors duration-300">Avis</a>
                 <a href="#contact" class="hover:text-luxury-gold transition-colors duration-300">Contact</a>
             </div>
 
@@ -81,7 +81,7 @@
                 }">
                     <button @click="toggleTheme()" type="button"
                         class="flex items-center justify-center w-9 h-9 rounded-full border border-luxury-border bg-luxury-surface/80 text-luxury-primary hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 shadow-sm cursor-pointer"
-                        :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                        :title="darkMode ? 'Passer en mode clair' : 'Passer en mode sombre'">
                         <template x-if="darkMode">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -101,7 +101,7 @@
 
                 <!-- Cart Status Indicator -->
                 <div class="relative cursor-pointer hover:text-luxury-gold transition-colors duration-300 mr-2"
-                    x-show="cartCount > 0" x-transition @click="alert('Proceeding to luxury cart...')">
+                    x-show="cartCount > 0" x-transition @click="alert('Redirection vers le panier...')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -119,7 +119,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        Dashboard
+                        Tableau de bord
                     </a>
                 @else
                     <a href="{{ route('login') }}"
@@ -127,7 +127,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                         </svg>
-                        Login
+                        Connexion
                     </a>
                 @endauth
 
@@ -166,24 +166,22 @@
             <div
                 class="inline-flex items-center gap-3 text-luxury-gold uppercase tracking-[0.3em] text-xs font-display mb-6 animate-fade-in">
                 <span class="h-px w-8 bg-luxury-gold"></span>
-                Est. 2026 • Barber & Grooming Parlor
+                Depuis 2026 • Coiffure & Salon de Soins
                 <span class="h-px w-8 bg-luxury-gold"></span>
             </div>
 
             <!-- Massive Header -->
             <h1
                 class="font-display font-black text-6xl md:text-8xl lg:text-[110px] leading-[0.9] uppercase tracking-tighter text-white max-w-5xl mb-8 animate-fade-up">
-                CRAFTING<br>
+                L'ART DU<br>
                 <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-luxury-primary via-luxury-gold to-luxury-primary">TIMELESS</span><br>
-                STYLE
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-luxury-primary via-luxury-gold to-luxury-primary">STYLE INTEMPOREL</span>
             </h1>
 
             <!-- Description -->
             <p class="text-luxury-secondary text-lg md:text-xl font-light max-w-2xl leading-relaxed mb-10 animate-fade-up"
                 style="animation-delay: 150ms">
-                Premium grooming experiences for the modern gentleman. We merge classical heritage with contemporary
-                style to forge unforgettable character.
+                Des expériences de soins haut de gamme pour l'homme moderne. Nous allions héritage classique et style contemporain pour forger un caractère inoubliable.
             </p>
 
             <!-- Dual CTAs -->
@@ -191,7 +189,7 @@
                 style="animation-delay: 300ms">
                 <a href="#services"
                     class="border border-luxury-border hover:border-luxury-gold px-8 py-4 rounded-full text-xs font-display font-bold uppercase tracking-widest text-luxury-primary transition-all duration-500 w-full sm:w-auto text-center backdrop-blur-sm">
-                    Explore Services
+                    Découvrir les services
                 </a>
             </div>
         </div>
@@ -199,8 +197,7 @@
         <!-- Scroll Indicator -->
         <a href="#about" class="absolute bottom-10 z-10 flex flex-col items-center gap-2 group animate-bounce">
             <span
-                class="text-[9px] uppercase tracking-[0.2em] font-display text-luxury-secondary group-hover:text-luxury-gold transition-colors duration-300">Scroll
-                Down</span>
+                class="text-[9px] uppercase tracking-[0.2em] font-display text-luxury-secondary group-hover:text-luxury-gold transition-colors duration-300">Défiler vers le bas</span>
             <svg class="h-4 w-4 text-luxury-secondary group-hover:text-luxury-gold transition-colors duration-300"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -215,33 +212,27 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 <!-- Left text: 5 Columns -->
                 <div class="lg:col-span-6 flex flex-col justify-center">
-                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">WHO WE
-                        ARE</span>
+                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">QUI SOMMES-NOUS</span>
                     <h2
                         class="font-display font-bold text-4xl md:text-5xl lg:text-6xl leading-tight uppercase tracking-tight text-white mb-8">
-                        THE ART OF<br>
-                        MODERN MASCULINITY
+                        L'ART DE LA<br>
+                        MASCULINITÉ MODERNE
                     </h2>
                     <p class="text-luxury-secondary text-base md:text-lg font-light leading-relaxed mb-6">
-                        Gentleman is more than a barbershop; it is an editorial sanctuary for the modern man. Built on
-                        the principles of sharp geometry, custom grooming, and unmatched precision, our master barbers
-                        cultivate a tailored signature for each client.
+                        Gentleman est plus qu'un salon de coiffure ; c'est un sanctuaire d'exception pour l'homme moderne. Fondé sur la précision, des soins sur-mesure et un savoir-faire inégalé, nos maîtres barbiers créent une signature personnalisée pour chaque client.
                     </p>
                     <p class="text-luxury-secondary/80 text-sm md:text-base font-light leading-relaxed mb-8">
-                        Every service begins with a personal styling audit. We select premium organic tonics, evaluate
-                        your structure, and sculpt matching outlines that frame your unique personality. Step into our
-                        world of sensory indulgence.
+                        Chaque prestation débute par une analyse personnalisée. Nous sélectionnons des soins biologiques haut de gamme et sculptons des contours qui mettent en valeur votre personnalité.
                     </p>
 
                     <!-- Quote -->
                     <div
                         class="border-l-2 border-luxury-gold pl-6 py-2 mb-8 bg-luxury-surface/30 pr-4 rounded-r-xl border-t border-b border-r border-luxury-border/10">
                         <p class="text-sm md:text-base font-serif italic text-luxury-primary leading-relaxed">
-                            "Style is the signature of your self-respect. Our goal is to make that signature sharp,
-                            elegant, and absolutely unmistakable."
+                            "Le style est la signature du respect de soi. Notre objectif est de rendre cette signature nette, élégante et incontournable."
                         </p>
                         <span class="block text-[10px] uppercase tracking-widest text-luxury-gold font-display mt-2">—
-                            Alexander Mercer, Lead Master Barber</span>
+                            Alexander Mercer, Maître Barbier Principal</span>
                     </div>
                 </div>
 
@@ -257,12 +248,11 @@
                         class="col-span-8 overflow-hidden rounded-2xl border border-luxury-border shadow-2xl relative group">
                         <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80"
                             class="w-full h-[400px] object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out transform hover:scale-105"
-                            alt="Styling in progress">
+                            alt="Coiffure en cours">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                             <span
-                                class="text-xs uppercase tracking-widest text-luxury-gold font-display font-semibold">Focused
-                                Craftsmanship</span>
+                                class="text-xs uppercase tracking-widest text-luxury-gold font-display font-semibold">Savoir-faire de précision</span>
                         </div>
                     </div>
 
@@ -271,12 +261,11 @@
                         class="col-span-4 self-end overflow-hidden rounded-xl border border-luxury-border shadow-2xl relative group mb-8">
                         <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80"
                             class="w-full h-[220px] object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out transform hover:scale-105"
-                            alt="Luxury chair details">
+                            alt="Détails de l'espace haut de gamme">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span
-                                class="text-[9px] uppercase tracking-widest text-luxury-gold font-display font-semibold">Premium
-                                Station</span>
+                                class="text-[9px] uppercase tracking-widest text-luxury-gold font-display font-semibold">Espace d'exception</span>
                         </div>
                     </div>
                 </div>
@@ -291,16 +280,15 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
                     <span
-                        class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">EXPERIENCES</span>
+                        class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">EXPÉRIENCES</span>
                     <h2
                         class="font-display font-bold text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-white">
-                        THE EXPERIENCES
+                        NOS EXPÉRIENCES
                     </h2>
                 </div>
                 <div class="max-w-md">
                     <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                        A carefully curated list of treatments designed to sculpt character, restore energy, and sharpen
-                        your appearance.
+                        Une sélection minutieuse de soins conçus pour sculpter votre style, restaurer votre énergie et sublimer votre allure.
                     </p>
                 </div>
             </div>
@@ -343,7 +331,7 @@
                             <!-- Category/Badge -->
                             <div
                                 class="absolute top-4 right-4 bg-luxury-bg/85 border border-luxury-gold/30 px-3 py-1 rounded-full text-[9px] uppercase tracking-widest text-luxury-gold font-display backdrop-blur-sm">
-                                Premium Service
+                                Service Premium
                             </div>
                         </div>
 
@@ -370,12 +358,12 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    {{ $service->duration }} Mins
+                                    {{ $service->duration }} min
                                 </span>
 
                                 <a href="{{ route('appointments.create', ['service_id' => $service->id]) }}"
                                     class="text-xs uppercase tracking-widest font-display text-white group-hover:text-luxury-gold transition-colors duration-300 font-bold flex items-center gap-1">
-                                    Book Now <span>→</span>
+                                    Réserver <span>→</span>
                                 </a>
                             </div>
                         </div>
@@ -391,16 +379,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                 <!-- Left sticky column: 4 Columns -->
                 <div class="lg:col-span-5 lg:sticky lg:top-32">
-                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">OUR
-                        MANIFESTO</span>
+                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">NOTRE MANIFESTE</span>
                     <h2
                         class="font-display font-bold text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-tight text-white mb-6">
-                        THE GENTLEMAN<br>
-                        STANDARD
+                        LE STANDARD<br>
+                        GENTLEMAN
                     </h2>
                     <p class="text-luxury-secondary text-base font-light leading-relaxed mb-8">
-                        We hold our services to an extreme standard of visual performance and customer care. Each detail
-                        is curated to build a flawless grooming environment.
+                        Nous exigeons l'excellence pour chacun de nos services et de nos soins clients. Chaque détail est pensé pour créer un environnement parfait.
                     </p>
 
                     <!-- Decorative graphics -->
@@ -412,7 +398,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-luxury-bg to-transparent"></div>
                         <div
                             class="absolute bottom-4 left-4 font-display text-[10px] tracking-widest text-luxury-gold uppercase font-bold">
-                            Signature Blades Only</div>
+                            Lames de précision uniquement</div>
                     </div>
                 </div>
 
@@ -424,10 +410,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">01</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Professional Barbers</h3>
+                                    Barbiers professionnels</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    Our master barbers are selected for their technical expertise, deep knowledge of
-                                    hair geometry, and commitment to the traditional craft of grooming.
+                                    Nos maîtres barbiers sont sélectionnés pour leur expertise technique et leur maîtrise des soins traditionnels.
                                 </p>
                             </div>
                         </div>
@@ -438,10 +423,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">02</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Premium Products</h3>
+                                    Produits de luxe</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    We exclusively formulate and curates organic oils, hair tonics, pomades, and facial
-                                    clays made with plant-based luxury ingredients.
+                                    Nous élaborons exclusivement des huiles biologiques, toniques et soins capillaires aux ingrédients naturels d'exception.
                                 </p>
                             </div>
                         </div>
@@ -452,10 +436,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">03</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Luxury Experience</h3>
+                                    Expérience haut de gamme</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    Enjoy premium single-origin coffee, aged single-malt whiskey, classical record
-                                    selections, and heated leather chairs during your treatments.
+                                    Dégustez un café d'exception ou un whisky ambré dans nos fauteuils en cuir chauffants pendant vos soins.
                                 </p>
                             </div>
                         </div>
@@ -466,10 +449,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">04</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Modern Equipment</h3>
+                                    Équipement moderne</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    High-performance tools, sanitized custom blades, Japanese hair wash basins, and
-                                    advanced facial steamers for premium comfort.
+                                    Outils de haute performance, bacs de lavage japonais et vapozones avancés pour un confort optimal.
                                 </p>
                             </div>
                         </div>
@@ -480,10 +462,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">05</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Clean Environment</h3>
+                                    Hygiène irréprochable</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    We follow surgical-grade sanitation protocols. Every razor, comb, and seat is
-                                    thoroughly sterilized between clients.
+                                    Nous appliquons des protocoles d'hygiène stricts. Chaque rasoir, peigne et fauteuil est stérilisé entre chaque client.
                                 </p>
                             </div>
                         </div>
@@ -494,10 +475,9 @@
                             <span class="font-display font-bold text-2xl text-luxury-gold">06</span>
                             <div>
                                 <h3 class="font-display font-bold text-xl uppercase tracking-tight text-white mb-3">
-                                    Personalized Service</h3>
+                                    Service personnalisé</h3>
                                 <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                                    Your grooming logs are archived. We track your hairline growth patterns, product
-                                    sensitivities, and preferred blade sizes across visits.
+                                    Votre historique de soins est archivé pour adapter chaque visite à vos préférences.
                                 </p>
                             </div>
                         </div>
@@ -513,17 +493,15 @@
             <!-- Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
-                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">CURATED
-                        SHOP</span>
+                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3">BOUTIQUE EXCLUSIVE</span>
                     <h2
                         class="font-display font-bold text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-white">
-                        THE COLLECTION
+                        LA COLLECTION
                     </h2>
                 </div>
                 <div class="max-w-md">
                     <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                        Take the Gentleman experience home. Our signature styling and beard grooming formulations are
-                        mixed by hand and packaged in dark glass.
+                        Emportez l'expérience Gentleman chez vous. Nos formules de coiffage et de soin de la barbe sont préparées avec soin.
                     </p>
                 </div>
             </div>
@@ -562,9 +540,9 @@
                             <div
                                 class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
                                 <button
-                                    @click="cartCount++; cartMessage = 'Added ' + '{{ $product->name }}' + ' to cart'; setTimeout(() => cartMessage = '', 3000)"
+                                    @click="cartCount++; cartMessage = 'Ajouté ' + '{{ $product->name }}' + ' au panier'; setTimeout(() => cartMessage = '', 3000)"
                                     class="bg-luxury-gold text-luxury-bg hover:bg-white hover:text-luxury-bg px-6 py-3 rounded-full text-xs font-display font-bold uppercase tracking-wider transition-all duration-300">
-                                    Quick Add • {{ number_format($product->price, 0) }} DH
+                                    Ajout rapide • {{ number_format($product->price, 0) }} DH
                                 </button>
                             </div>
 
@@ -589,9 +567,9 @@
                                     class="text-base font-display font-bold text-luxury-gold">{{ number_format($product->price, 0) }}
                                     DH</span>
                                 <button
-                                    @click="cartCount++; cartMessage = 'Added ' + '{{ $product->name }}' + ' to cart'; setTimeout(() => cartMessage = '', 3000)"
+                                    @click="cartCount++; cartMessage = 'Ajouté ' + '{{ $product->name }}' + ' au panier'; setTimeout(() => cartMessage = '', 3000)"
                                     class="text-xs uppercase tracking-widest font-display text-white hover:text-luxury-gold transition-colors duration-300 font-bold flex items-center gap-1">
-                                    Add to Cart <span>+</span>
+                                    Ajouter au panier <span>+</span>
                                 </button>
                             </div>
                         </div>
@@ -615,8 +593,7 @@
                 </div>
                 <div class="max-w-md">
                     <p class="text-luxury-secondary text-sm md:text-base font-light leading-relaxed">
-                        A visual record of our craftsmanship and editorial styling. Explore the sharp profiles forged
-                        within our studios.
+                        Un aperçu visuel de notre savoir-faire et de notre style. Découvrez les réalisations créées dans nos studios.
                     </p>
                 </div>
             </div>
@@ -625,12 +602,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @php
                     $galleryImages = [
-                        ['src' => 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80', 'title' => 'Signature Fade & Trim'],
-                        ['src' => 'https://images.unsplash.com/photo-1622287198514-5d10f64aaab7?auto=format&fit=crop&w=800&q=80', 'title' => 'Hot Towel Detailing'],
-                        ['src' => 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=800&q=80', 'title' => 'Luxury Grooming Kit'],
-                        ['src' => 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80', 'title' => 'Traditional Hot Lather'],
-                        ['src' => 'https://images.unsplash.com/photo-1512690196222-7c7c72491214?auto=format&fit=crop&w=800&q=80', 'title' => 'The Straight Razor Lineup'],
-                        ['src' => 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80', 'title' => 'The Gentleman Lounge']
+                        ['src' => 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80', 'title' => 'Dégradé & Taille de barbe'],
+                        ['src' => 'https://images.unsplash.com/photo-1622287198514-5d10f64aaab7?auto=format&fit=crop&w=800&q=80', 'title' => 'Soin Serviette Chaude'],
+                        ['src' => 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=800&q=80', 'title' => 'Coffret de Soins de Luxe'],
+                        ['src' => 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80', 'title' => 'Mousse Chaude Traditionnelle'],
+                        ['src' => 'https://images.unsplash.com/photo-1512690196222-7c7c72491214?auto=format&fit=crop&w=800&q=80', 'title' => 'Rasage au Coupe-Chou'],
+                        ['src' => 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80', 'title' => 'Le Salon Gentleman']
                     ];
                 @endphp
 
@@ -643,8 +620,7 @@
                         <div
                             class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 border border-luxury-gold/20 rounded-2xl">
                             <span
-                                class="text-luxury-gold font-display text-[10px] tracking-[0.2em] uppercase mb-1">Interactive
-                                View</span>
+                                class="text-luxury-gold font-display text-[10px] tracking-[0.2em] uppercase mb-1">Vue interactive</span>
                             <h4 class="font-display font-bold text-lg text-white uppercase tracking-tight">
                                 {{ $item['title'] }}</h4>
                         </div>
@@ -664,7 +640,7 @@
             </button>
             <img :src="activeGalleryImage"
                 class="max-w-full max-h-[90vh] object-contain rounded-2xl border border-luxury-border"
-                alt="Enlarged View">
+                alt="Vue agrandie">
         </div>
     </section>
 
@@ -676,11 +652,11 @@
                 <span
                     class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3 flex items-center justify-center gap-2">
                     <span class="h-px w-6 bg-luxury-gold"></span>
-                    TESTIMONIALS
+                    TÉMOIGNAGES
                     <span class="h-px w-6 bg-luxury-gold"></span>
                 </span>
                 <h2 class="font-display font-bold text-4xl md:text-5xl uppercase tracking-tighter text-white">
-                    WHAT THEY SAY
+                    CE QU'ILS DISENT
                 </h2>
             </div>
 
@@ -691,8 +667,7 @@
                     class="bg-luxury-bg border border-luxury-border/60 hover:border-luxury-gold/30 rounded-2xl p-8 transition-all duration-500 shadow-md relative">
                     <div class="text-luxury-gold flex gap-1 mb-6 text-sm">★★★★★</div>
                     <p class="text-luxury-secondary text-sm md:text-base font-light italic leading-relaxed mb-8">
-                        "The styling audit completely transformed my look. They analyzed my face shape and suggested a
-                        classic crop that suits me perfectly. The atmosphere is premium and relax."
+                        "L'analyse de style a totalement transformé mon allure. Ils ont étudié la forme de mon visage et m'ont conseillé une coupe classique parfaite. L'ambiance est luxueuse et relaxante."
                     </p>
                     <div class="flex items-center gap-4 pt-6 border-t border-luxury-border/40">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80"
@@ -711,8 +686,7 @@
                     class="bg-luxury-bg border border-luxury-border/60 hover:border-luxury-gold/30 rounded-2xl p-8 transition-all duration-500 shadow-md relative">
                     <div class="text-luxury-gold flex gap-1 mb-6 text-sm">★★★★★</div>
                     <p class="text-luxury-secondary text-sm md:text-base font-light italic leading-relaxed mb-8">
-                        "The Royal Shave is a legendary experience. Pre-shave essential oils, thick lather, hot towels,
-                        and the straight razor finish. An absolute luxury routine I do monthly."
+                        "Le Rasage Royal est une expérience légendaire. Huiles essentielles avant-rasage, mousse onctueuse, serviettes chaudes et finition au coupe-chou. Un vrai moment de luxe."
                     </p>
                     <div class="flex items-center gap-4 pt-6 border-t border-luxury-border/40">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&h=150&q=80"
@@ -720,8 +694,7 @@
                         <div>
                             <h4 class="font-display font-bold text-sm uppercase text-white tracking-tight">James
                                 Harrison</h4>
-                            <span class="text-[10px] uppercase tracking-widest text-luxury-secondary">Creative
-                                Director</span>
+                            <span class="text-[10px] uppercase tracking-widest text-luxury-secondary">Directeur Créatif</span>
                         </div>
                     </div>
                 </div>
@@ -731,8 +704,7 @@
                     class="bg-luxury-bg border border-luxury-border/60 hover:border-luxury-gold/30 rounded-2xl p-8 transition-all duration-500 shadow-md relative">
                     <div class="text-luxury-gold flex gap-1 mb-6 text-sm">★★★★★</div>
                     <p class="text-luxury-secondary text-sm md:text-base font-light italic leading-relaxed mb-8">
-                        "Unrivaled precision. My barber evaluated the growth direction of my hair and completed a sharp
-                        skin fade. Recommended for any gentleman seeking perfection."
+                        "Une précision inégalée. Mon barbier a étudié la pousse de mes cheveux pour un dégradé à blanc impeccable. À recommander à tout homme en quête de perfection."
                     </p>
                     <div class="flex items-center gap-4 pt-6 border-t border-luxury-border/40">
                         <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&h=150&q=80"
@@ -740,8 +712,7 @@
                         <div>
                             <h4 class="font-display font-bold text-sm uppercase text-white tracking-tight">Charles
                                 Kingsley</h4>
-                            <span class="text-[10px] uppercase tracking-widest text-luxury-secondary">Financial
-                                Analyst</span>
+                            <span class="text-[10px] uppercase tracking-widest text-luxury-secondary">Analyste Financier</span>
                         </div>
                     </div>
                 </div>
@@ -757,13 +728,12 @@
         </div>
 
         <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3 block">RESERVE A
-                CHAIR</span>
+            <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3 block">RÉSERVER UN FAUTEUIL</span>
             <h2 class="font-display font-bold text-4xl md:text-6xl uppercase tracking-tighter text-white mb-6">
-                READY FOR YOUR NEXT LOOK?
+                PRÊT POUR VOTRE PROCHAIN STYLE ?
             </h2>
             <p class="text-luxury-secondary text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto mb-10">
-                Experience premium grooming with our master barbers. Secure your preferred slot now.
+                Découvrez des soins d'exception avec nos maîtres barbiers. Réservez votre créneau dès maintenant.
             </p>
 
         </div>
@@ -776,27 +746,26 @@
                 <!-- Location Details: 5 Columns -->
                 <div class="lg:col-span-5 flex flex-col justify-between">
                     <div>
-                        <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3 block">FIND
-                            US</span>
+                        <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-3 block">NOUS TROUVER</span>
                         <h2
                             class="font-display font-bold text-3xl md:text-4xl uppercase tracking-tight text-white mb-8">
-                            THE STUDIO
+                            LE STUDIO
                         </h2>
 
                         <!-- Contact Info -->
                         <div class="space-y-6 text-luxury-secondary font-light text-sm md:text-base">
                             <p class="flex items-start gap-4">
                                 <span
-                                    class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">ADDR:</span>
+                                    class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">ADR :</span>
                                 <a href="https://www.google.com/maps/place/Gentleman+Barber+Studio/@33.5153736,-7.813704,17z/data=!3m1!4b1!4m6!3m5!1s0xda881b612a44599:0x125e64b61e2929f4!8m2!3d33.5153736!4d-7.813704!16s%2Fg%2F11njx9xc5t"
                                     target="_blank" rel="noopener noreferrer"
                                     class="hover:text-luxury-gold transition-colors duration-300">
-                                    Gentleman Barber Studio,<br>Casablanca, Morocco
+                                    Gentleman Barber Studio,<br>Casablanca, Maroc
                                 </a>
                             </p>
                             <p class="flex items-start gap-4">
                                 <span
-                                    class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">TELE:</span>
+                                    class="text-luxury-gold font-bold font-display uppercase tracking-widest text-xs pt-1">TÉL :</span>
                                 <a href="tel:+212664019364"
                                     class="hover:text-luxury-gold transition-colors duration-300">+212 (0)
                                     664-019364</a>
@@ -806,13 +775,11 @@
 
                     <!-- Hours -->
                     <div class="mt-12 pt-8 border-t border-luxury-border/60">
-                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-white mb-4">Working
-                            Hours</h3>
+                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-white mb-4">Horaires d'ouverture</h3>
                         <div class="space-y-2 text-xs md:text-sm text-luxury-secondary font-light">
-                            <div class="flex justify-between"><span>Mon — Sun</span><span
-                                    class="text-white font-medium">9:00 AM — 9:00 PM</span></div>
-                            <div class="text-[11px] text-luxury-gold/90 font-medium tracking-wide uppercase pt-1">Open 7
-                                Days a Week</div>
+                            <div class="flex justify-between"><span>Lun — Dim</span><span
+                                    class="text-white font-medium">9:00 — 21:00</span></div>
+                            <div class="text-[11px] text-luxury-gold/90 font-medium tracking-wide uppercase pt-1">Ouvert 7j/7</div>
                         </div>
                     </div>
                 </div>
@@ -834,7 +801,7 @@
                             <a href="https://www.google.com/maps/place/Gentleman+Barber+Studio/@33.5153736,-7.813704,17z/data=!3m1!4b1!4m6!3m5!1s0xda881b612a44599:0x125e64b61e2929f4!8m2!3d33.5153736!4d-7.813704!16s%2Fg%2F11njx9xc5t"
                                 target="_blank" rel="noopener noreferrer"
                                 class="inline-flex items-center gap-2 bg-luxury-bg/90 hover:bg-luxury-gold backdrop-blur-md border border-luxury-gold/50 text-luxury-gold hover:text-luxury-bg font-display text-[11px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full transition-all duration-300 shadow-lg">
-                                <span class="text-xs">📍</span> Open in Google Maps
+                                <span class="text-xs">📍</span> Ouvrir dans Google Maps
                             </a>
                         </div>
                     </div>
@@ -842,8 +809,7 @@
                     <!-- Social Handles -->
                     <div
                         class="flex flex-wrap gap-4 items-center justify-between py-4 border-t border-b border-luxury-border/60">
-                        <span class="font-display text-xs uppercase tracking-widest text-luxury-secondary">Connect with
-                            us:</span>
+                        <span class="font-display text-xs uppercase tracking-widest text-luxury-secondary">Rejoignez-nous :</span>
                         <div class="flex gap-6 font-display text-xs uppercase tracking-widest text-white">
                             <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Instagram</a>
                             <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Threads</a>
@@ -868,15 +834,14 @@
                     GENTLEMAN
                 </a>
                 <span class="hidden md:inline h-4 w-px bg-luxury-border"></span>
-                <span class="text-xs text-luxury-secondary/80 font-light">© 2026 Gentleman Inc. All rights
-                    reserved.</span>
+                <span class="text-xs text-luxury-secondary/80 font-light">© 2026 Gentleman Inc. Tous droits réservés.</span>
             </div>
 
             <!-- Right Links -->
             <div class="flex gap-8 text-xs text-luxury-secondary font-display uppercase tracking-widest">
-                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Privacy Policy</a>
-                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Terms of Service</a>
-                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Careers</a>
+                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Politique de confidentialité</a>
+                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Conditions d'utilisation</a>
+                <a href="#" class="hover:text-luxury-gold transition-colors duration-300">Carrières</a>
             </div>
         </div>
     </footer>

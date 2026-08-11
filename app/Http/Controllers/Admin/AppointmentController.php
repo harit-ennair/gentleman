@@ -97,7 +97,7 @@ class AppointmentController extends Controller
 
         return response()->json([
             'date' => $selectedDate->toDateString(),
-            'date_label' => $selectedDate->format('l, F j, Y'),
+            'date_label' => $selectedDate->locale('fr')->isoFormat('dddd D MMMM YYYY'),
             'appointments_count' => $appointments->count(),
             'appointments' => $appointments,
         ]);
@@ -112,11 +112,11 @@ class AppointmentController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'appointment' => $appointment,
-                'success' => 'Appointment confirmed.',
+                'success' => 'Rendez-vous confirmé.',
             ]);
         }
 
-        return back()->with('success', 'Appointment confirmed.');
+        return back()->with('success', 'Rendez-vous confirmé.');
     }
 
     public function complete(Appointment $appointment): RedirectResponse|JsonResponse
@@ -128,11 +128,11 @@ class AppointmentController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'appointment' => $appointment,
-                'success' => 'Appointment completed.',
+                'success' => 'Rendez-vous terminé.',
             ]);
         }
 
-        return back()->with('success', 'Appointment completed.');
+        return back()->with('success', 'Rendez-vous terminé.');
     }
 
     public function cancel(Appointment $appointment): RedirectResponse|JsonResponse
@@ -144,11 +144,11 @@ class AppointmentController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'appointment' => $appointment,
-                'success' => 'Appointment cancelled.',
+                'success' => 'Rendez-vous annulé.',
             ]);
         }
 
-        return back()->with('success', 'Appointment cancelled.');
+        return back()->with('success', 'Rendez-vous annulé.');
     }
 
     private function authorizeAdmin(): void

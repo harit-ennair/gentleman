@@ -1,44 +1,44 @@
 @extends('layouts.test')
 
-@section('title', 'Appointment Details (Admin)')
+@section('title', 'Détails du rendez-vous (Admin)')
 
 @section('content')
     @php
         $status = $appointment->status->value ?? (string) $appointment->status;
         $statusConfig = [
             'pending' => [
-                'label' => 'Pending',
+                'label' => 'En attente',
                 'badge' => 'border-amber-400/30 bg-amber-400/10 text-amber-300 ring-amber-400/20',
                 'dot' => 'bg-amber-400',
-                'payment' => 'Pay on Arrival',
+                'payment' => 'Paiement sur place',
                 'payment_badge' => 'border-amber-400/20 bg-amber-400/10 text-amber-300',
             ],
             'confirmed' => [
-                'label' => 'Confirmed',
+                'label' => 'Confirmé',
                 'badge' => 'border-emerald-400/30 bg-emerald-400/10 text-emerald-300 ring-emerald-400/20',
                 'dot' => 'bg-emerald-400',
-                'payment' => 'Confirmed - Pay on Arrival',
+                'payment' => 'Confirmé - Paiement sur place',
                 'payment_badge' => 'border-emerald-400/20 bg-emerald-400/10 text-emerald-300',
             ],
             'completed' => [
-                'label' => 'Completed',
+                'label' => 'Terminé',
                 'badge' => 'border-sky-400/30 bg-sky-400/10 text-sky-300 ring-sky-400/20',
                 'dot' => 'bg-sky-400',
-                'payment' => 'Paid in Full',
+                'payment' => 'Payé intégralement',
                 'payment_badge' => 'border-sky-400/20 bg-sky-400/10 text-sky-300',
             ],
             'cancelled' => [
-                'label' => 'Cancelled',
+                'label' => 'Annulé',
                 'badge' => 'border-rose-400/30 bg-rose-400/10 text-rose-300 ring-rose-400/20',
                 'dot' => 'bg-rose-400',
-                'payment' => 'Cancelled',
+                'payment' => 'Annulé',
                 'payment_badge' => 'border-rose-400/20 bg-rose-400/10 text-rose-300',
             ],
             'no_show' => [
-                'label' => 'No Show',
+                'label' => 'Non présenté',
                 'badge' => 'border-zinc-500/30 bg-zinc-500/10 text-zinc-300 ring-zinc-500/20',
                 'dot' => 'bg-zinc-400',
-                'payment' => 'Unpaid',
+                'payment' => 'Non payé',
                 'payment_badge' => 'border-zinc-500/20 bg-zinc-500/10 text-zinc-400',
             ],
         ];
@@ -65,11 +65,11 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Admin Calendar
+                Retour au calendrier admin
             </a>
 
             <div class="flex items-center gap-2">
-                <span class="text-xs text-luxury-secondary/70">Booked on {{ $appointment->created_at->format('M d, Y') }}</span>
+                <span class="text-xs text-luxury-secondary/70">Réservé le {{ $appointment->created_at->locale('fr')->isoFormat('D MMM YYYY') }}</span>
             </div>
         </div>
 
@@ -80,7 +80,7 @@
             <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between relative z-10">
                 <div class="flex flex-col gap-2">
                     <div class="flex items-center gap-3">
-                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Admin • Appointment Details</span>
+                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Admin • Détails du rendez-vous</span>
                         <span class="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wide shadow-sm {{ $currentConfig['badge'] }}">
                             <span class="size-1.5 rounded-full {{ $currentConfig['dot'] }}"></span>
                             {{ $currentConfig['label'] }}
@@ -98,7 +98,7 @@
 
                 <!-- Price Tag display -->
                 <div class="flex sm:flex-col items-baseline sm:items-end justify-between border-t border-white/10 pt-4 sm:border-0 sm:pt-0">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Total Price</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Prix total</span>
                     <span class="font-display text-3xl font-black text-luxury-gold sm:text-4xl">
                         {{ number_format($appointment->service->price, 2) }} <span class="text-xs font-bold text-white/70">DH</span>
                     </span>
@@ -117,8 +117,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="font-display text-base font-bold text-white">Customer Information</h2>
-                        <p class="text-xs text-luxury-secondary/70">Client contact details</p>
+                        <h2 class="font-display text-base font-bold text-white">Informations du client</h2>
+                        <p class="text-xs text-luxury-secondary/70">Coordonnées du client</p>
                     </div>
                 </div>
 
@@ -134,18 +134,18 @@
 
                 <div class="space-y-3 pt-2">
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Full Name</span>
+                        <span class="text-luxury-secondary">Nom complet</span>
                         <span class="font-medium text-white">{{ $user->full_name }}</span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Email Address</span>
+                        <span class="text-luxury-secondary">Adresse e-mail</span>
                         <span class="font-medium text-white truncate max-w-[200px]">{{ $user->email }}</span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Phone Number</span>
-                        <span class="font-medium text-white">{{ $user->phone ?? 'Not provided' }}</span>
+                        <span class="text-luxury-secondary">Numéro de téléphone</span>
+                        <span class="font-medium text-white">{{ $user->phone ?? 'Non fourni' }}</span>
                     </div>
                 </div>
             </div>
@@ -159,8 +159,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="font-display text-base font-bold text-white">Appointment Information</h2>
-                        <p class="text-xs text-luxury-secondary/70">Booking schedule & service info</p>
+                        <h2 class="font-display text-base font-bold text-white">Informations du rendez-vous</h2>
+                        <p class="text-xs text-luxury-secondary/70">Planning de réservation & détails du service</p>
                     </div>
                 </div>
 
@@ -171,33 +171,33 @@
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Barber</span>
-                        <span class="font-medium text-luxury-gold">Gentleman Master Barber</span>
+                        <span class="text-luxury-secondary">Coiffeur</span>
+                        <span class="font-medium text-luxury-gold">Master Coiffeur Gentleman</span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
                         <span class="text-luxury-secondary">Date</span>
-                        <span class="font-medium text-white">{{ $appointment->appointment_at->format('l, F j, Y') }}</span>
+                        <span class="font-medium text-white capitalize">{{ $appointment->appointment_at->locale('fr')->isoFormat('dddd D MMMM YYYY') }}</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2 text-xs">
                         <div class="flex flex-col gap-1 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                            <span class="text-[10px] uppercase tracking-wider text-luxury-secondary">Start Time</span>
+                            <span class="text-[10px] uppercase tracking-wider text-luxury-secondary">Heure de début</span>
                             <span class="font-display font-bold text-white">{{ $startTime->format('H:i') }}</span>
                         </div>
                         <div class="flex flex-col gap-1 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-                            <span class="text-[10px] uppercase tracking-wider text-luxury-secondary">End Time</span>
+                            <span class="text-[10px] uppercase tracking-wider text-luxury-secondary">Heure de fin</span>
                             <span class="font-display font-bold text-white">{{ $endTime->format('H:i') }}</span>
                         </div>
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Duration</span>
+                        <span class="text-luxury-secondary">Durée</span>
                         <span class="font-medium text-white">{{ $duration }} minutes</span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-xs">
-                        <span class="text-luxury-secondary">Payment Status</span>
+                        <span class="text-luxury-secondary">Statut du paiement</span>
                         <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-bold {{ $currentConfig['payment_badge'] }}">
                             {{ $currentConfig['payment'] }}
                         </span>
@@ -215,8 +215,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="font-display text-base font-bold text-white">Appointment Timeline</h2>
-                    <p class="text-xs text-luxury-secondary/70">Lifecycle status tracking</p>
+                    <h2 class="font-display text-base font-bold text-white">Chronologie du rendez-vous</h2>
+                    <p class="text-xs text-luxury-secondary/70">Suivi du statut du rendez-vous</p>
                 </div>
             </div>
 
@@ -232,9 +232,9 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <span class="font-display text-sm font-bold text-white">Appointment Created</span>
-                                <span class="text-xs text-luxury-secondary">{{ $appointment->created_at->format('M d, Y \a\t H:i') }}</span>
-                                <p class="text-xs text-luxury-secondary/70 mt-1">Booking submitted and registered in system.</p>
+                                <span class="font-display text-sm font-bold text-white">Rendez-vous créé</span>
+                                <span class="text-xs text-luxury-secondary">{{ $appointment->created_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
+                                <p class="text-xs text-luxury-secondary/70 mt-1">Réservation enregistrée dans le système.</p>
                             </div>
                         </div>
 
@@ -246,9 +246,9 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <span class="font-display text-sm font-bold text-rose-400">Cancelled</span>
-                                <span class="text-xs text-luxury-secondary">{{ $appointment->updated_at->format('M d, Y \a\t H:i') }}</span>
-                                <p class="text-xs text-rose-400/80 mt-1">This appointment has been cancelled.</p>
+                                <span class="font-display text-sm font-bold text-rose-400">Annulé</span>
+                                <span class="text-xs text-luxury-secondary">{{ $appointment->updated_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
+                                <p class="text-xs text-rose-400/80 mt-1">Ce rendez-vous a été annulé.</p>
                             </div>
                         </div>
                     </div>
@@ -263,11 +263,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                     </svg>
                                 </div>
-                                <span class="font-display text-sm font-bold text-white">Appointment Created</span>
+                                <span class="font-display text-sm font-bold text-white">Rendez-vous créé</span>
                             </div>
                             <div class="pl-13 flex flex-col gap-0.5">
-                                <span class="text-xs text-luxury-secondary">{{ $appointment->created_at->format('M d, Y \a\t H:i') }}</span>
-                                <span class="text-[11px] text-emerald-400 font-medium mt-1">Completed</span>
+                                <span class="text-xs text-luxury-secondary">{{ $appointment->created_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
+                                <span class="text-[11px] text-emerald-400 font-medium mt-1">Terminé</span>
                             </div>
                         </div>
 
@@ -294,15 +294,15 @@
                                     @endif
                                 </div>
                                 <span class="font-display text-sm font-bold {{ $isConfirmed ? 'text-white' : ($isCurrentConfirmed ? 'text-amber-300' : 'text-white/40') }}">
-                                    Confirmed
+                                    Confirmé
                                 </span>
                             </div>
                             <div class="pl-13 flex flex-col gap-0.5">
                                 <span class="text-xs text-luxury-secondary">
-                                    {{ $isConfirmed ? $appointment->updated_at->format('M d, Y \a\t H:i') : ($isCurrentConfirmed ? 'Awaiting Barber Confirmation' : 'Scheduled') }}
+                                    {{ $isConfirmed ? $appointment->updated_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') : ($isCurrentConfirmed ? 'En attente de confirmation' : 'Programmé') }}
                                 </span>
                                 <span class="text-[11px] font-medium mt-1 {{ $isConfirmed ? 'text-emerald-400' : ($isCurrentConfirmed ? 'text-amber-400' : 'text-white/40') }}">
-                                    {{ $isConfirmed ? 'Completed' : ($isCurrentConfirmed ? 'In Progress' : 'Pending') }}
+                                    {{ $isConfirmed ? 'Terminé' : ($isCurrentConfirmed ? 'En cours' : 'En attente') }}
                                 </span>
                             </div>
                         </div>
@@ -325,15 +325,15 @@
                                     @endif
                                 </div>
                                 <span class="font-display text-sm font-bold {{ $isCompleted ? 'text-sky-300' : 'text-white/40' }}">
-                                    Completed
+                                    Terminé
                                 </span>
                             </div>
                             <div class="pl-13 flex flex-col gap-0.5">
                                 <span class="text-xs text-luxury-secondary">
-                                    {{ $isCompleted ? $appointment->updated_at->format('M d, Y \a\t H:i') : 'Service Execution' }}
+                                    {{ $isCompleted ? $appointment->updated_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') : 'Réalisation du service' }}
                                 </span>
                                 <span class="text-[11px] font-medium mt-1 {{ $isCompleted ? 'text-sky-400' : 'text-white/40' }}">
-                                    {{ $isCompleted ? 'Finished' : 'Upcoming' }}
+                                    {{ $isCompleted ? 'Finalisé' : 'À venir' }}
                                 </span>
                             </div>
                         </div>
@@ -352,7 +352,7 @@
                 </div>
                 <div>
                     <h2 class="font-display text-base font-bold text-white">Notes</h2>
-                    <p class="text-xs text-luxury-secondary/70">Special requests or additional info</p>
+                    <p class="text-xs text-luxury-secondary/70">Demandes particulières ou informations complémentaires</p>
                 </div>
             </div>
 
@@ -365,7 +365,7 @@
                     <svg class="size-4 shrink-0 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <span>No notes available.</span>
+                    <span>Aucune note disponible.</span>
                 </div>
             @endif
         </div>
@@ -373,8 +373,8 @@
         <!-- Actions Section -->
         <div class="rounded-3xl border border-white/10 bg-[#111113] p-6 sm:p-8 shadow-xl flex flex-col gap-5">
             <div class="flex flex-col gap-1">
-                <h2 class="font-display text-base font-bold text-white">Admin Actions</h2>
-                <p class="text-xs text-luxury-secondary/70">Manage status or cancel this booking</p>
+                <h2 class="font-display text-base font-bold text-white">Actions d'administration</h2>
+                <p class="text-xs text-luxury-secondary/70">Gérer le statut ou annuler cette réservation</p>
             </div>
 
             <div class="flex flex-wrap items-center gap-4 pt-2">
@@ -385,7 +385,7 @@
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            Confirm Appointment
+                            Confirmer le rendez-vous
                         </button>
                     </form>
                 @endif
@@ -397,7 +397,7 @@
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            Mark Completed
+                            Marquer comme terminé
                         </button>
                     </form>
                 @endif
@@ -405,11 +405,11 @@
                 @if (in_array($status, ['pending', 'confirmed'], true))
                     <form method="POST" action="{{ route('admin.appointments.cancel', $appointment) }}">
                         @csrf
-                        <button type="submit" onclick="return confirm('Are you sure you want to cancel this appointment?')" class="inline-flex items-center justify-center gap-2 rounded-full border border-rose-500/40 bg-rose-500/10 px-6 py-3 font-display text-xs font-bold uppercase tracking-widest text-rose-400 transition-all duration-300 hover:bg-rose-500 hover:text-white cursor-pointer">
+                        <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir annuler ce rendez-vous ?')" class="inline-flex items-center justify-center gap-2 rounded-full border border-rose-500/40 bg-rose-500/10 px-6 py-3 font-display text-xs font-bold uppercase tracking-widest text-rose-400 transition-all duration-300 hover:bg-rose-500 hover:text-white cursor-pointer">
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
-                            Cancel Appointment
+                            Annuler le rendez-vous
                         </button>
                     </form>
                 @endif

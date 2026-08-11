@@ -10,7 +10,7 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Services Menu
+                Retour à la carte des services
             </a>
         </div>
 
@@ -26,13 +26,13 @@
                         </svg>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Grooming Treatment</span>
+                        <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Soin & Traitement</span>
                         <h1 class="font-display text-2xl sm:text-3xl font-black text-white">{{ $service->name }}</h1>
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:items-end gap-1">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Service Price</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Tarif du service</span>
                     <span class="font-display text-3xl font-black text-luxury-gold">
                         {{ number_format($service->price, 2) }} <span class="text-xs font-bold text-white/70">DH</span>
                     </span>
@@ -45,14 +45,14 @@
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        Duration: {{ $service->duration }} minutes
+                        Durée : {{ $service->duration }} minutes
                     </span>
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <h2 class="font-display text-sm font-bold uppercase tracking-wider text-white">Treatment Description</h2>
+                    <h2 class="font-display text-sm font-bold uppercase tracking-wider text-white">Description du soin</h2>
                     <p class="text-sm text-luxury-secondary leading-relaxed font-light">
-                        {{ $service->description ?? 'Experience precision styling tailored specifically to your facial features and personal aesthetic. Executed with premium grooming tools and luxury products.' }}
+                        {{ $service->description ?? 'Profitez d\'un style sur mesure adapté à la morphologie de votre visage et à vos préférences. Réalisé avec des outils de précision et des produits haut de gamme.' }}
                     </p>
                 </div>
             </div>
@@ -60,11 +60,11 @@
             <div class="border-t border-white/10 pt-6 relative z-10 flex justify-end">
                 @auth
                     <a href="{{ route('appointments.create', ['service_id' => $service->id]) }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
-                        Book This Service &rarr;
+                        Réserver ce service &rarr;
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
-                        Login to Book Service
+                        Se connecter pour réserver
                     </a>
                 @endauth
             </div>

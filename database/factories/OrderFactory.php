@@ -21,9 +21,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         $date = fake()->dateTimeThisYear();
+
         return [
             'user_id' => User::factory(),
-            'order_number' => 'ORD-' . $date->format('Ymd') . '-' . fake()->unique()->numberBetween(1000, 9999),
+            'order_number' => 'ORD-'.$date->format('Ymd').'-'.fake()->unique()->numberBetween(1000, 9999),
             'total' => fake()->randomFloat(2, 10, 500),
             'status' => OrderStatus::Pending,
             'payment_status' => PaymentStatus::Pending,

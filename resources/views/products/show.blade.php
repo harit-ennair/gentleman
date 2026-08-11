@@ -36,7 +36,7 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Shop
+                Retour à la boutique
             </a>
         </div>
 
@@ -55,11 +55,11 @@
                 <div class="flex flex-col gap-2 border-b border-white/10 pb-6">
                     <div class="flex items-center justify-between">
                         <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">
-                            {{ $product->category->name ?? 'Grooming Essential' }}
+                            {{ $product->category->name ?? 'Essentiel de Soin' }}
                         </span>
                         <span class="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold {{ $product->stock_quantity > 0 ? 'text-emerald-400' : 'text-rose-400' }}">
                             <span class="size-2 rounded-full {{ $product->stock_quantity > 0 ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
-                            {{ $product->stock_quantity > 0 ? $product->stock_quantity . ' in stock' : 'Out of stock' }}
+                            {{ $product->stock_quantity > 0 ? $product->stock_quantity . ' en stock' : 'Rupture de stock' }}
                         </span>
                     </div>
 
@@ -71,9 +71,9 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <h2 class="font-display text-xs font-bold uppercase tracking-wider text-white">Product Overview</h2>
+                    <h2 class="font-display text-xs font-bold uppercase tracking-wider text-white">Aperçu du produit</h2>
                     <p class="text-xs sm:text-sm text-luxury-secondary leading-relaxed font-light">
-                        {{ $product->description ?? 'Barbershop grade formulation designed for high performance styling, long-lasting hold, and premium skin and hair nourishment.' }}
+                        {{ $product->description ?? 'Formule de qualité professionnelle conçue pour un coiffage haute performance, une tenue longue durée et le soin des cheveux et de la peau.' }}
                     </p>
                 </div>
 
@@ -83,7 +83,7 @@
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         
                         <div class="flex items-center gap-3">
-                            <span class="text-xs text-luxury-secondary uppercase tracking-wider font-bold">Quantity:</span>
+                            <span class="text-xs text-luxury-secondary uppercase tracking-wider font-bold">Quantité :</span>
                             <!-- Custom Stepper -->
                             <div class="flex items-center rounded-xl border border-white/10 bg-[#161618] p-1 shadow-inner">
                                 <button type="button" onclick="const input = this.parentNode.querySelector('input'); if(parseInt(input.value) > 1) input.stepDown();" 
@@ -104,7 +104,7 @@
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z"/>
                             </svg>
-                            Add to Shopping Cart
+                            Ajouter au panier
                         </button>
                     </form>
                 </div>

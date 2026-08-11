@@ -1,13 +1,13 @@
 @extends('layouts.test')
 
-@section('title', 'Admin Orders Directory')
+@section('title', 'Répertoire des commandes admin')
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Admin Management</span>
-            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">All Shop Orders</h1>
-            <p class="text-sm text-luxury-secondary max-w-xl">Overview, search, and status management for customer product purchases.</p>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Gestion Administration</span>
+            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Toutes les commandes boutique</h1>
+            <p class="text-sm text-luxury-secondary max-w-xl">Aperçu, recherche et gestion des statuts des achats de produits clients.</p>
         </header>
 
         <!-- Search & Filter Controls Bar -->
@@ -22,7 +22,7 @@
                 <input type="text"
                        name="search"
                        value="{{ request('search') }}"
-                       placeholder="Search order # or client name..."
+                       placeholder="Rechercher n° commande ou nom client..."
                        class="w-full bg-luxury-bg/60 border border-luxury-border text-white text-xs rounded-2xl pl-10 pr-4 py-3 placeholder-luxury-secondary/50 focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
             </div>
 
@@ -30,12 +30,12 @@
             <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-end">
                 <!-- Order Status Filter -->
                 <div class="flex items-center gap-2">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary hidden sm:inline">Status:</label>
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary hidden sm:inline">Statut :</label>
                     <select name="status" onchange="this.form.submit()" class="bg-luxury-bg/60 border border-luxury-border text-white text-xs font-bold rounded-2xl px-3.5 py-3 focus:outline-none focus:border-luxury-gold cursor-pointer transition-all duration-300">
-                        <option value="">All Order Statuses</option>
+                        <option value="">Tous les statuts de commande</option>
                         @foreach(App\Enums\OrderStatus::cases() as $statusCase)
                             <option value="{{ $statusCase->value }}" {{ request('status') === $statusCase->value ? 'selected' : '' }}>
-                                {{ str($statusCase->value)->replace('_', ' ')->title() }}
+                                {{ $statusCase->label() }}
                             </option>
                         @endforeach
                     </select>
@@ -43,12 +43,12 @@
 
                 <!-- Payment Status Filter -->
                 <div class="flex items-center gap-2">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary hidden sm:inline">Payment:</label>
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary hidden sm:inline">Paiement :</label>
                     <select name="payment_status" onchange="this.form.submit()" class="bg-luxury-bg/60 border border-luxury-border text-white text-xs font-bold rounded-2xl px-3.5 py-3 focus:outline-none focus:border-luxury-gold cursor-pointer transition-all duration-300">
-                        <option value="">All Payment Statuses</option>
+                        <option value="">Tous les statuts de paiement</option>
                         @foreach(App\Enums\PaymentStatus::cases() as $paymentCase)
                             <option value="{{ $paymentCase->value }}" {{ request('payment_status') === $paymentCase->value ? 'selected' : '' }}>
-                                {{ str($paymentCase->value)->replace('_', ' ')->title() }}
+                                {{ $paymentCase->label() }}
                             </option>
                         @endforeach
                     </select>
@@ -59,7 +59,7 @@
                     <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                    Search
+                    Rechercher
                 </button>
 
                 @if(request()->anyFilled(['search', 'status', 'payment_status']))
@@ -68,7 +68,7 @@
                         <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
-                        Clear Filters
+                        Effacer les filtres
                     </a>
                 @endif
             </div>
@@ -81,11 +81,11 @@
                     <div class="grid size-12 place-items-center rounded-2xl bg-luxury-gold/10 text-luxury-gold text-xl">
                         🔍
                     </div>
-                    <h3 class="font-display font-bold text-white text-base">No Orders Found</h3>
-                    <p class="text-xs text-luxury-secondary max-w-sm">No shop orders matching your search or filter criteria were found in the system.</p>
+                    <h3 class="font-display font-bold text-white text-base">Aucune commande trouvée</h3>
+                    <p class="text-xs text-luxury-secondary max-w-sm">Aucune commande correspondant à vos critères n'a été trouvée dans le système.</p>
                     @if(request()->anyFilled(['search', 'status', 'payment_status']))
                         <a href="{{ route('admin.orders.index') }}" class="mt-2 text-xs font-bold text-luxury-gold hover:underline">
-                            Reset Search & Filters
+                            Réinitialiser la recherche et les filtres
                         </a>
                     @endif
                 </div>
@@ -117,13 +117,13 @@
                                     <div class="flex flex-wrap items-center gap-2">
                                         <h2 class="font-display text-base font-bold text-white group-hover:text-luxury-gold transition-colors">{{ $order->order_number }}</h2>
                                         <span class="rounded-full border px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider {{ $statusStyle }}">
-                                            {{ str($order->status->value)->replace('_', ' ') }}
+                                            {{ $order->status->label() }}
                                         </span>
                                         <span class="rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider {{ $paymentStyle }}">
-                                            {{ $order->payment_status->value }}
+                                            {{ $order->payment_status->label() }}
                                         </span>
                                     </div>
-                                    <span class="text-xs text-luxury-secondary">Client: <strong class="text-white">{{ $order->user->full_name }}</strong> ({{ $order->user->email }}) · {{ $order->created_at->format('M d, Y \a\t H:i') }}</span>
+                                    <span class="text-xs text-luxury-secondary">Client : <strong class="text-white">{{ $order->user->full_name }}</strong> ({{ $order->user->email }}) · {{ $order->created_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
                                 </div>
                             </div>
 
@@ -132,7 +132,7 @@
                                     {{ number_format($order->total, 2) }} DH
                                 </span>
                                 <span class="text-xs font-display font-bold uppercase tracking-wider text-white group-hover:text-luxury-gold flex items-center gap-1">
-                                    Manage &rarr;
+                                    Gérer &rarr;
                                 </span>
                             </div>
                         </a>

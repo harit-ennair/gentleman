@@ -1,13 +1,13 @@
 @extends('layouts.test')
 
-@section('title', 'My Orders')
+@section('title', 'Mes Commandes')
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Purchase History</span>
-            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">My Orders</h1>
-            <p class="text-sm text-luxury-secondary max-w-xl">Track product orders, view invoices, and manage past purchases.</p>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Historique des achats</span>
+            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Mes Commandes</h1>
+            <p class="text-sm text-luxury-secondary max-w-xl">Suivez vos commandes de produits, consultez les factures et gérez vos achats.</p>
         </header>
 
         <div class="rounded-3xl border border-white/10 bg-[#111113] overflow-hidden shadow-2xl">
@@ -18,10 +18,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z"/>
                         </svg>
                     </div>
-                    <h2 class="font-display text-xl font-bold text-white">No orders found</h2>
-                    <p class="text-xs text-luxury-secondary max-w-sm">You haven't placed any grooming product orders yet.</p>
+                    <h2 class="font-display text-xl font-bold text-white">Aucune commande trouvée</h2>
+                    <p class="text-xs text-luxury-secondary max-w-sm">Vous n'avez encore passé aucune commande de produit.</p>
                     <a href="{{ route('products.index') }}" class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-md">
-                        Shop Products &rarr;
+                        Acheter des produits &rarr;
                     </a>
                 </div>
             @else
@@ -36,10 +36,10 @@
                                     <div class="flex items-center gap-3">
                                         <h2 class="font-display text-base font-bold text-white group-hover:text-luxury-gold transition-colors">{{ $order->order_number }}</h2>
                                         <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                                            {{ $order->status->value }}
+                                            {{ $order->status->label() }}
                                         </span>
                                     </div>
-                                    <span class="text-xs text-luxury-secondary">Placed on {{ $order->created_at->format('M d, Y \a\t H:i') }}</span>
+                                    <span class="text-xs text-luxury-secondary">Passée le {{ $order->created_at->locale('fr')->isoFormat('D MMM YYYY [à] HH:mm') }}</span>
                                 </div>
                             </div>
 
@@ -48,7 +48,7 @@
                                     {{ number_format($order->total, 2) }} DH
                                 </span>
                                 <span class="text-xs font-display font-bold uppercase tracking-wider text-white group-hover:text-luxury-gold flex items-center gap-1">
-                                    Details
+                                    Détails
                                     <svg class="size-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['order_number', 'total', 'status', 'payment_status', 'order_date', 'user_id', 'notes'])]
 class Order extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * Get the user who placed the order.

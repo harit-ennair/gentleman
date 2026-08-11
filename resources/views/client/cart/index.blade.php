@@ -1,14 +1,14 @@
 @extends('layouts.test')
 
-@section('title', 'Shopping Cart')
+@section('title', 'Panier d\'achats')
 
 @section('content')
     <div class="mx-auto max-w-4xl flex flex-col gap-8 animate-fade-up">
         <!-- Header -->
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Your Order Selection</span>
-            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Shopping Cart</h1>
-            <p class="text-sm text-luxury-secondary max-w-xl">Review selected grooming products before completing checkout.</p>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Votre sélection d'articles</span>
+            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Panier d'achats</h1>
+            <p class="text-sm text-luxury-secondary max-w-xl">Vérifiez les produits sélectionnés avant d'effectuer la commande.</p>
         </header>
 
         @if(empty($items) || count($items) === 0)
@@ -19,11 +19,11 @@
                     </svg>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <h2 class="font-display text-xl font-bold text-white">Your cart is empty</h2>
-                    <p class="text-xs text-luxury-secondary">Looks like you haven't added any products to your cart yet.</p>
+                    <h2 class="font-display text-xl font-bold text-white">Votre panier est vide</h2>
+                    <p class="text-xs text-luxury-secondary">Vous n'avez encore ajouté aucun produit à votre panier.</p>
                 </div>
                 <a href="{{ route('products.index') }}" class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-md">
-                    Explore Products &rarr;
+                    Explorer les produits &rarr;
                 </a>
             </div>
         @else
@@ -32,12 +32,12 @@
                 <div class="lg:col-span-7 flex flex-col gap-4">
                     <div class="rounded-3xl border border-white/10 bg-[#111113] p-6 shadow-xl flex flex-col gap-4">
                         <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                            <h2 class="font-display text-base font-bold text-white">Cart Items ({{ count($items) }})</h2>
+                            <h2 class="font-display text-base font-bold text-white">Articles du panier ({{ count($items) }})</h2>
                             <form method="POST" action="{{ route('cart.clear') }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Clear all items from your cart?')" class="text-xs font-bold text-rose-400 hover:text-rose-300 uppercase tracking-wider cursor-pointer">
-                                    Clear Cart
+                                <button type="submit" onclick="return confirm('Vider tous les articles de votre panier ?')" class="text-xs font-bold text-rose-400 hover:text-rose-300 uppercase tracking-wider cursor-pointer">
+                                    Vider le panier
                                 </button>
                             </form>
                         </div>
@@ -54,7 +54,7 @@
                                                 {{ $item['product']->name }}
                                             </a>
                                             <span class="text-xs text-luxury-gold font-bold">
-                                                {{ number_format($item['product']->price, 2) }} DH <span class="text-[10px] text-luxury-secondary font-normal">each</span>
+                                                {{ number_format($item['product']->price, 2) }} DH <span class="text-[10px] text-luxury-secondary font-normal">l'unité</span>
                                             </span>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                             </div>
 
                                             <button type="submit" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold text-luxury-secondary uppercase tracking-wider hover:text-white hover:border-luxury-gold/50 cursor-pointer">
-                                                Update
+                                                Mettre à jour
                                             </button>
                                         </form>
 
@@ -111,24 +111,24 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="font-display text-base font-bold text-white">Order Summary</h2>
-                                <p class="text-xs text-luxury-secondary/70">Payment & checkout details</p>
+                                <h2 class="font-display text-base font-bold text-white">Récapitulatif de la commande</h2>
+                                <p class="text-xs text-luxury-secondary/70">Détails du paiement et de la commande</p>
                             </div>
                         </div>
 
                         <div class="space-y-3">
                             <div class="flex items-center justify-between text-xs">
-                                <span class="text-luxury-secondary">Subtotal</span>
+                                <span class="text-luxury-secondary">Sous-total</span>
                                 <span class="font-medium text-white">{{ number_format($total, 2) }} DH</span>
                             </div>
 
                             <div class="flex items-center justify-between text-xs">
-                                <span class="text-luxury-secondary">Shipping / Handling</span>
-                                <span class="font-bold text-emerald-400">FREE</span>
+                                <span class="text-luxury-secondary">Livraison</span>
+                                <span class="font-bold text-emerald-400">GRATUIT</span>
                             </div>
 
                             <div class="border-t border-white/10 pt-3 flex items-center justify-between">
-                                <span class="font-display text-sm font-bold text-white">Total Amount</span>
+                                <span class="font-display text-sm font-bold text-white">Montant total</span>
                                 <span class="font-display text-2xl font-black text-luxury-gold">{{ number_format($total, 2) }} DH</span>
                             </div>
                         </div>
@@ -136,13 +136,13 @@
                         <form method="POST" action="{{ route('orders.store') }}" class="flex flex-col gap-4">
                             @csrf
                             <div class="flex flex-col gap-1.5">
-                                <label for="notes" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Delivery Notes / Special Instructions</label>
-                                <textarea id="notes" name="notes" rows="2" placeholder="e.g., Leave package at reception..."
+                                <label for="notes" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Instructions de livraison / Remarques</label>
+                                <textarea id="notes" name="notes" rows="2" placeholder="ex. Laisser le colis à la réception..."
                                           class="rounded-xl border border-white/10 bg-[#161618] p-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300"></textarea>
                             </div>
 
                             <button type="submit" class="w-full rounded-full bg-luxury-gold py-3.5 px-6 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-lg text-center">
-                                Proceed to Checkout &rarr;
+                                Passer la commande &rarr;
                             </button>
                         </form>
                     </div>

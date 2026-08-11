@@ -1,13 +1,13 @@
 @extends('layouts.test')
 
-@section('title', 'Product Categories')
+@section('title', 'Catégories de Produits')
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Catalog Collections</span>
-            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Categories</h1>
-            <p class="text-sm text-luxury-secondary max-w-xl">Explore grooming products organized by category.</p>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Collections du Catalogue</span>
+            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Catégories</h1>
+            <p class="text-sm text-luxury-secondary max-w-xl">Découvrez nos produits de soins classés par catégorie.</p>
         </header>
 
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -20,19 +20,19 @@
                             </svg>
                         </div>
                         <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-luxury-gold">
-                            {{ $category->products_count }} products
+                            {{ $category->products_count }} produit(s)
                         </span>
                     </div>
 
                     <div>
                         <h2 class="font-display text-xl font-bold text-white group-hover:text-luxury-gold transition-colors">{{ $category->name }}</h2>
                         <p class="mt-1 text-xs text-luxury-secondary line-clamp-2 leading-relaxed font-light">
-                            {{ $category->description ?? 'Explore premium products in this collection.' }}
+                            {{ $category->description ?? 'Découvrez des produits d\'exception dans cette collection.' }}
                         </p>
                     </div>
 
                     <div class="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold uppercase tracking-wider text-luxury-gold">
-                        <span>Browse Collection</span>
+                        <span>Parcourir la collection</span>
                         <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                     </div>
                 </a>

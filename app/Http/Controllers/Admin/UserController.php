@@ -52,7 +52,7 @@ class UserController extends Controller
         ]);
         $user->update($validated);
 
-        return back()->with('success', 'Customer information updated.');
+        return back()->with('success', 'Informations du client mises à jour.');
     }
 
     public function toggleStatus(User $user): RedirectResponse|JsonResponse
@@ -62,10 +62,10 @@ class UserController extends Controller
         if ($user->is(auth()->user())) {
             if (request()->wantsJson()) {
                 return response()->json([
-                    'message' => 'You cannot deactivate your own account.',
+                    'message' => 'Vous ne pouvez pas désactiver votre propre compte.',
                 ], 422);
             }
-            abort(422, 'You cannot deactivate your own account.');
+            abort(422, 'Vous ne pouvez pas désactiver votre propre compte.');
         }
 
         $user->update(['is_active' => ! $user->is_active]);
@@ -73,11 +73,11 @@ class UserController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'user' => $user,
-                'success' => 'Customer status updated.',
+                'success' => 'Statut du client mis à jour.',
             ]);
         }
 
-        return back()->with('success', 'Customer status updated.');
+        return back()->with('success', 'Statut du client mis à jour.');
     }
 
     private function authorizeAdmin(): void

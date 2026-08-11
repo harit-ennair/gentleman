@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['name', 'description', 'price', 'stock_quantity', 'image_path', 'is_active', 'category_id'])]
 class Product extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * Get the category that owns the product.

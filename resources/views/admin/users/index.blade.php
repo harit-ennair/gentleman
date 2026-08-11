@@ -1,15 +1,15 @@
 @extends('layouts.test')
 
-@section('title', 'Customers Directory')
+@section('title', 'Répertoire des clients')
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
         <!-- Header -->
         <header class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div class="flex flex-col gap-2">
-                <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Admin Directory</span>
-                <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Customers</h1>
-                <p class="text-sm text-luxury-secondary max-w-xl">Manage client profiles, contact information, and account status.</p>
+                <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Répertoire Admin</span>
+                <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Clients</h1>
+                <p class="text-sm text-luxury-secondary max-w-xl">Gérez les profils clients, leurs coordonnées et le statut de leurs comptes.</p>
             </div>
 
             <!-- Search Bar Form -->
@@ -20,18 +20,18 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search customers..." 
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher des clients..." 
                            class="w-full rounded-full border border-white/10 bg-[#161618] pl-10 pr-4 py-2.5 text-xs text-white placeholder-luxury-secondary/60 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                 </div>
 
                 <div class="flex items-center gap-2 w-full sm:w-auto">
                     <button type="submit" class="w-full sm:w-auto rounded-full bg-luxury-gold px-5 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-md">
-                        Search
+                        Rechercher
                     </button>
 
                     @if(request('search'))
                         <a href="{{ route('admin.users.index') }}" class="rounded-full border border-white/10 bg-white/5 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:text-white">
-                            Clear
+                            Effacer
                         </a>
                     @endif
                 </div>
@@ -42,7 +42,7 @@
         <div class="grid gap-4 sm:grid-cols-3">
             <div class="rounded-2xl border border-white/10 bg-[#111113] p-5 shadow-xl">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Total Customers</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Total des clients</span>
                     <div class="grid size-8 place-items-center rounded-xl bg-luxury-gold/10 text-luxury-gold">
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -54,7 +54,7 @@
 
             <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.06] p-5 shadow-xl">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-300">Active Accounts</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-300">Comptes actifs</span>
                     <div class="grid size-8 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400">
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -66,7 +66,7 @@
 
             <div class="rounded-2xl border border-rose-500/20 bg-rose-500/[0.06] p-5 shadow-xl">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-rose-300">Deactivated</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-rose-300">Désactivés</span>
                     <div class="grid size-8 place-items-center rounded-xl bg-rose-500/10 text-rose-400">
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
@@ -81,11 +81,11 @@
         <div class="rounded-3xl border border-white/10 bg-[#111113] overflow-hidden shadow-2xl shadow-black/30">
             <div class="flex items-center justify-between border-b border-white/10 px-6 py-5">
                 <div>
-                    <h2 class="font-display text-lg font-bold text-white">Client Accounts</h2>
-                    <p class="text-xs text-luxury-secondary/70">Showing registered customers</p>
+                    <h2 class="font-display text-lg font-bold text-white">Comptes clients</h2>
+                    <p class="text-xs text-luxury-secondary/70">Affichage des clients enregistrés</p>
                 </div>
                 @if(request('search'))
-                    <span class="text-xs text-luxury-gold">Filtered by: "{{ request('search') }}"</span>
+                    <span class="text-xs text-luxury-gold">Filtré par : "{{ request('search') }}"</span>
                 @endif
             </div>
 
@@ -96,10 +96,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                         </svg>
                     </div>
-                    <h3 class="font-display text-base font-bold text-white mb-1">No customers found</h3>
-                    <p class="text-xs text-luxury-secondary max-w-sm mb-4">No registered clients matched your search filter criteria.</p>
+                    <h3 class="font-display text-base font-bold text-white mb-1">Aucun client trouvé</h3>
+                    <p class="text-xs text-luxury-secondary max-w-sm mb-4">Aucun client enregistré ne correspond à vos critères de recherche.</p>
                     @if(request('search'))
-                        <a href="{{ route('admin.users.index') }}" class="rounded-full bg-luxury-gold px-5 py-2 text-xs font-bold text-black uppercase tracking-wider">Reset search</a>
+                        <a href="{{ route('admin.users.index') }}" class="rounded-full bg-luxury-gold px-5 py-2 text-xs font-bold text-black uppercase tracking-wider">Réinitialiser la recherche</a>
                     @endif
                 </div>
             @else
@@ -123,7 +123,7 @@
                                         </h3>
                                         <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10px] font-bold {{ $user->is_active ? 'border-emerald-400/30 bg-emerald-400/10 text-emerald-300' : 'border-rose-400/30 bg-rose-400/10 text-rose-300' }}">
                                             <span class="size-1.5 rounded-full {{ $user->is_active ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
-                                            {{ $user->is_active ? 'Active' : 'Inactive' }}
+                                            {{ $user->is_active ? 'Actif' : 'Inactif' }}
                                         </span>
                                     </div>
                                     <p class="text-xs text-luxury-secondary truncate">{{ $user->email }}</p>
@@ -132,11 +132,11 @@
 
                             <div class="flex items-center justify-between sm:justify-end gap-6 text-xs text-luxury-secondary">
                                 <div class="flex flex-col sm:items-end">
-                                    <span class="text-[10px] uppercase tracking-wider text-luxury-secondary/60">Phone</span>
-                                    <span class="font-medium text-white/90">{{ $user->phone ?? 'Not provided' }}</span>
+                                    <span class="text-[10px] uppercase tracking-wider text-luxury-secondary/60">Téléphone</span>
+                                    <span class="font-medium text-white/90">{{ $user->phone ?? 'Non fourni' }}</span>
                                 </div>
                                 <div class="flex items-center gap-2 text-luxury-gold font-display text-xs font-bold uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
-                                    Manage
+                                    Gérer
                                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>

@@ -10,7 +10,7 @@
                     <span
                         class="text-luxury-gold uppercase tracking-[0.2em] text-[10px] font-display block mb-1">Navigation</span>
                     <h3 class="font-display font-black text-lg uppercase tracking-tight text-white flex items-center gap-2">
-                        <span class="text-luxury-gold">◆</span> Admin Menu
+                        <span class="text-luxury-gold">◆</span> Menu Administration
                     </h3>
                 </div>
 
@@ -20,14 +20,14 @@
                     <button @click="activeTab = 'overview'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'overview' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                        <span class="text-sm"></span> Overview
+                        <span class="text-sm"></span> Aperçu
                     </button>
 
                     <!-- Categories Tab Link -->
                     <button @click="activeTab = 'categories'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'categories' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                        <span class="text-sm"></span> Categories
+                        <span class="text-sm"></span> Catégories
                     </button>
 
                     <!-- Services Tab Link -->
@@ -41,7 +41,7 @@
                     <button @click="activeTab = 'products'"
                         class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-xs font-display font-bold uppercase tracking-wider text-left transition-all duration-300 cursor-pointer"
                         :class="activeTab === 'products' ? 'bg-luxury-bg border-luxury-gold text-luxury-gold shadow-lg shadow-luxury-gold/5' : 'bg-transparent border-transparent text-luxury-secondary hover:text-white hover:bg-luxury-bg/30'">
-                        <span class="text-sm"></span> Products
+                        <span class="text-sm"></span> Produits
                     </button>
                 </nav>
 
@@ -51,20 +51,19 @@
                 <!-- External Pages Links -->
                 <div class="space-y-3">
                     <span
-                        class="text-luxury-secondary/50 uppercase tracking-[0.2em] text-[9px] font-display block px-1">Manage
-                        Resources</span>
+                        class="text-luxury-secondary/50 uppercase tracking-[0.2em] text-[9px] font-display block px-1">Gérer les ressources</span>
                     <div class="flex flex-col gap-1">
                         <a href="{{ route('admin.users.index') }}"
                             class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                            <span class="text-sm"></span> Users
+                            <span class="text-sm"></span> Utilisateurs
                         </a>
                         <a href="{{ route('admin.appointments.index') }}"
                             class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                            <span class="text-sm"></span> Appointments
+                            <span class="text-sm"></span> Rendez-vous
                         </a>
                         <a href="{{ route('admin.orders.index') }}"
                             class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-display font-semibold uppercase tracking-wider text-luxury-secondary hover:text-luxury-gold hover:bg-luxury-bg/30 transition-all duration-300">
-                            <span class="text-sm"></span> Orders
+                            <span class="text-sm"></span> Commandes
                         </a>
                     </div>
                 </div>
@@ -76,20 +75,18 @@
             <!-- Page Title Banner (Dynamic title based on tab) -->
             <div class="border-b border-luxury-border/60 pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
-                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-2 block">Control
-                        Panel</span>
+                    <span class="text-luxury-gold uppercase tracking-[0.2em] text-xs font-display mb-2 block">Panneau de contrôle</span>
                     <h1 class="font-display font-black text-4xl md:text-5xl uppercase tracking-tighter text-white">
-                        <span x-show="activeTab === 'overview'">Dashboard Overview</span>
-                        <span x-show="activeTab === 'categories'" style="display: none;">Categories Manager</span>
-                        <span x-show="activeTab === 'services'" style="display: none;">Services Manager</span>
-                        <span x-show="activeTab === 'products'" style="display: none;">Products Manager</span>
+                        <span x-show="activeTab === 'overview'">Aperçu du tableau de bord</span>
+                        <span x-show="activeTab === 'categories'" style="display: none;">Gestion des catégories</span>
+                        <span x-show="activeTab === 'services'" style="display: none;">Gestion des services</span>
+                        <span x-show="activeTab === 'products'" style="display: none;">Gestion des produits</span>
                     </h1>
                 </div>
                 <!-- Quick Actions -->
                 <div class="flex items-center gap-2 text-xs">
                     <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-luxury-secondary font-display uppercase tracking-widest text-[10px]">Admin
-                        Active</span>
+                    <span class="text-luxury-secondary font-display uppercase tracking-widest text-[10px]">Admin Actif</span>
                 </div>
             </div>
 
@@ -100,10 +97,10 @@
                 <div class="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                     @foreach([
                             'Clients' => ['value' => $clientsCount],
-                            'Appointments' => ['value' => $appointmentsCount],
-                            'Orders' => ['value' => $ordersCount],
-                            'Today Revenue' => ['value' => number_format($todayRevenue, 0) . ' DH'],
-                            'Month Revenue' => ['value' => number_format($monthlyRevenue, 0) . ' DH']
+                            'Rendez-vous' => ['value' => $appointmentsCount],
+                            'Commandes' => ['value' => $ordersCount],
+                            'CA Aujourd\'hui' => ['value' => number_format($todayRevenue, 0) . ' DH'],
+                            'CA du Mois' => ['value' => number_format($monthlyRevenue, 0) . ' DH']
                         ] as $label => $data)
                         <div
                             class="group bg-luxury-surface border border-luxury-border/60 hover:border-luxury-gold/40 rounded-2xl p-5 transition-all duration-500 shadow-xl flex flex-col justify-between">
@@ -131,8 +128,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Revenue & Sales Growth</h3>
-                                    <p id="revenueChartSubtitle" class="text-xs text-luxury-secondary">Monthly sales performance (DH) for {{ now()->year }}</p>
+                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Croissance des ventes & Chiffre d'affaires</h3>
+                                    <p id="revenueChartSubtitle" class="text-xs text-luxury-secondary">Performance des ventes mensuelles (DH) pour {{ now()->year }}</p>
                                 </div>
                             </div>
 
@@ -141,17 +138,17 @@
                                 <button type="button" @click="timeframe = 'week'; updateRevenueChart('week')"
                                         :class="timeframe === 'week' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
                                         class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                    Week
+                                    Semaine
                                 </button>
                                 <button type="button" @click="timeframe = 'month'; updateRevenueChart('month')"
                                         :class="timeframe === 'month' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
                                         class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                    Month
+                                    Mois
                                 </button>
                                 <button type="button" @click="timeframe = 'year'; updateRevenueChart('year')"
                                         :class="timeframe === 'year' ? 'bg-luxury-gold text-black shadow-md font-bold' : 'text-luxury-secondary hover:text-white'"
                                         class="rounded-xl px-3.5 py-1.5 text-[11px] font-display uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                    Year
+                                    Année
                                 </button>
                             </div>
                         </div>
@@ -172,8 +169,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Appointments</h3>
-                                    <p class="text-xs text-luxury-secondary">Status distribution</p>
+                                    <h3 class="font-display font-bold text-base uppercase tracking-tight text-white">Rendez-vous</h3>
+                                    <p class="text-xs text-luxury-secondary">Répartition par statut</p>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +188,7 @@
                         class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
                         <h3
                             class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
-                            <span class="text-luxury-gold">◆</span> Recent Appointments
+                            <span class="text-luxury-gold">◆</span> Rendez-vous récents
                         </h3>
                         <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
                             @forelse($latestAppointments as $appointment)
@@ -200,18 +197,18 @@
                                     <div>
                                         <p class="font-semibold text-white">{{ $appointment->user->full_name }}</p>
                                         <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $appointment->service->name }} •
-                                            {{ $appointment->appointment_at->format('M d, H:i') }}</p>
+                                            {{ $appointment->appointment_at->locale('fr')->isoFormat('D MMM, HH:mm') }}</p>
                                     </div>
                                     <span class="px-2 py-0.5 rounded text-[8px] font-display font-bold uppercase 
                                             @if($appointment->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
                                             @elseif($appointment->status->value === 'confirmed') bg-green-950/40 text-green-400 border border-green-800/30
                                             @elseif($appointment->status->value === 'completed') bg-blue-950/40 text-blue-400 border border-blue-800/30
                                             @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
-                                        {{ $appointment->status->value }}
+                                        {{ $appointment->status->label() }}
                                     </span>
                                 </div>
                             @empty
-                                <p class="text-luxury-secondary text-xs italic text-center py-8">No appointments found.</p>
+                                <p class="text-luxury-secondary text-xs italic text-center py-8">Aucun rendez-vous trouvé.</p>
                             @endforelse
                         </div>
                     </div>
@@ -221,7 +218,7 @@
                         class="bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[380px]">
                         <h3
                             class="font-display font-bold text-base uppercase tracking-tight text-white mb-4 flex items-center gap-2 pb-2 border-b border-luxury-border/40">
-                            <span class="text-luxury-gold">◆</span> Recent Orders
+                            <span class="text-luxury-gold">◆</span> Commandes récentes
                         </h3>
                         <div class="overflow-y-auto grow custom-scrollbar space-y-3 pr-1">
                             @forelse($latestOrders as $order)
@@ -230,7 +227,7 @@
                                     <div>
                                         <p class="font-semibold text-white">{{ $order->order_number }}</p>
                                         <p class="text-luxury-secondary text-[10px] mt-0.5">{{ $order->user->full_name }} •
-                                            {{ $order->order_date->format('M d') }}</p>
+                                            {{ $order->order_date->locale('fr')->isoFormat('D MMM') }}</p>
                                     </div>
                                     <div class="text-right">
                                         <p class="font-bold text-luxury-gold">{{ number_format($order->total, 2) }} DH</p>
@@ -238,12 +235,12 @@
                                                 @if($order->status->value === 'pending') bg-yellow-950/40 text-yellow-400 border border-yellow-800/30
                                                 @elseif($order->status->value === 'completed' || $order->status->value === 'delivered') bg-green-950/40 text-green-400 border border-green-800/30
                                                 @else bg-red-950/40 text-red-400 border border-red-900/30 @endif">
-                                            {{ $order->status->value }}
+                                            {{ $order->status->label() }}
                                         </span>
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-luxury-secondary text-xs italic text-center py-8">No orders found.</p>
+                                <p class="text-luxury-secondary text-xs italic text-center py-8">Aucune commande trouvée.</p>
                             @endforelse
                         </div>
                     </div>
@@ -254,7 +251,7 @@
                     <div class="bg-red-950/10 border border-red-900/30 rounded-2xl p-6 shadow-xl">
                         <h3
                             class="font-display font-bold text-base uppercase tracking-tight text-red-400 mb-4 flex items-center gap-2 pb-2 border-b border-red-900/20">
-                            <span>⚠</span> Low Stock Alert
+                            <span>⚠</span> Alerte stock faible
                         </h3>
                         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                             @foreach($lowStockProducts as $product)
@@ -266,7 +263,7 @@
                                     </div>
                                     <span
                                         class="bg-red-950 text-red-400 px-2.5 py-1 rounded-lg text-[10px] font-bold font-display border border-red-900/40">
-                                        {{ $product->stock_quantity }} Left
+                                        {{ $product->stock_quantity }} restant(s)
                                     </span>
                                 </div>
                             @endforeach
@@ -284,19 +281,19 @@
                         @csrf
                         <h2
                             class="font-display font-bold text-lg uppercase tracking-tight text-white flex items-center gap-2 pb-3 border-b border-luxury-border/40">
-                            <span class="text-luxury-gold">◆</span> Add Category
+                            <span class="text-luxury-gold">◆</span> Ajouter une catégorie
                         </h2>
                         <div class="space-y-3">
                             <input
                                 class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40"
-                                name="name" placeholder="Category Name" required>
+                                name="name" placeholder="Nom de la catégorie" required>
                             <textarea
                                 class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold/60 focus:ring-1 focus:ring-luxury-gold/60 outline-none text-sm transition-all duration-300 placeholder-luxury-secondary/40 h-32 resize-none"
-                                name="description" placeholder="Category Description" required></textarea>
+                                name="description" placeholder="Description de la catégorie" required></textarea>
                         </div>
                         <button
                             class="w-full bg-luxury-gold hover:bg-white text-luxury-bg hover:text-luxury-bg py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer">
-                            Save Category
+                            Enregistrer la catégorie
                         </button>
                     </form>
                 </div>
@@ -306,7 +303,7 @@
                     class="lg:col-span-8 bg-luxury-surface border border-luxury-border/60 rounded-2xl p-6 shadow-xl flex flex-col h-[550px]">
                     <h2
                         class="font-display font-bold text-lg uppercase tracking-tight text-white mb-6 flex items-center gap-2 pb-3 border-b border-luxury-border/40">
-                        <span class="text-luxury-gold">◆</span> Manage Categories
+                        <span class="text-luxury-gold">◆</span> Gérer les catégories
                     </h2>
                     <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
                         @forelse($categories as $category)
@@ -318,7 +315,7 @@
                                     @method('PUT')
                                     <input
                                         class="w-full bg-luxury-bg border border-luxury-border text-white px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300"
-                                        name="name" value="{{ $category->name }}" placeholder="Name">
+                                        name="name" value="{{ $category->name }}" placeholder="Nom">
                                     <textarea
                                         class="w-full bg-luxury-bg border border-luxury-border text-luxury-secondary px-3 py-2 rounded-lg focus:border-luxury-gold/60 outline-none text-xs transition-all duration-300 h-16 resize-none"
                                         name="description" placeholder="Description">{{ $category->description }}</textarea>
@@ -326,22 +323,22 @@
                                 <div class="flex justify-between items-center pt-2 border-t border-luxury-border/40">
                                     <button type="submit" form="update-category-{{ $category->id }}"
                                         class="bg-luxury-gold/10 hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                        Update
+                                        Mettre à jour
                                     </button>
                                     <form method="POST" action="{{ route('admin.categories.destroy', $category) }}"
                                         class="inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
                                         @csrf
                                         @method('DELETE')
                                         <button
                                             class="bg-red-950/20 hover:bg-red-900 border border-red-900/40 text-red-400 hover:text-white px-3.5 py-1.5 rounded-lg text-[10px] font-display font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer">
-                                            Delete
+                                            Supprimer
                                         </button>
                                     </form>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-luxury-secondary text-xs italic text-center py-8">No categories registered.</p>
+                            <p class="text-luxury-secondary text-xs italic text-center py-8">Aucune catégorie enregistrée.</p>
                         @endforelse
                     </div>
                 </div>
@@ -364,33 +361,30 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="font-display text-base font-bold text-white">Add New Service</h2>
-                                <p class="text-xs text-luxury-secondary">Expand your barbershop menu</p>
+                                <h2 class="font-display text-base font-bold text-white">Ajouter un service</h2>
+                                <p class="text-xs text-luxury-secondary">Enrichissez la carte de votre salon</p>
                             </div>
                         </div>
 
                         <div class="space-y-4">
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service
-                                    Title</label>
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Titre du service</label>
                                 <input
                                     class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40"
-                                    name="name" placeholder="e.g. Executive Haircut & Beard Styling" required>
+                                    name="name" placeholder="ex. Coupe Prestige & Taille de Barbe" required>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="flex flex-col gap-1.5">
                                     <label
-                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
-                                        (DH)</label>
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Prix (DH)</label>
                                     <input type="number" step="0.01"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="price" placeholder="30.00" required>
                                 </div>
                                 <div class="flex flex-col gap-1.5">
                                     <label
-                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Duration
-                                        (Min)</label>
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Durée (Min)</label>
                                     <input type="number"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="duration" placeholder="45" required>
@@ -403,13 +397,12 @@
                                 <textarea
                                     class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed"
                                     name="description"
-                                    placeholder="Provide a compelling description of the service procedures and benefits..."
+                                    placeholder="Description détaillée du soin et de ses bienfaits..."
                                     required></textarea>
                             </div>
 
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Service
-                                    Image / Cover</label>
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Image du service</label>
                                 <div
                                     class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
                                     <input type="file" name="image" id="new-service-image"
@@ -420,8 +413,8 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        <span class="text-xs font-bold text-white">Click or upload service photo</span>
-                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
+                                        <span class="text-xs font-bold text-white">Cliquez ou importez une photo du service</span>
+                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP jusqu'à 2 Mo</span>
                                     </div>
                                 </div>
                             </div>
@@ -429,7 +422,7 @@
 
                         <button type="submit"
                             class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
-                            + Save Service
+                            + Enregistrer le service
                         </button>
                     </form>
                 </div>
@@ -446,8 +439,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="font-display text-base font-bold text-white">Manage Active Menu Services</h2>
-                                <p class="text-xs text-luxury-secondary">Update titles, prices, durations & photos</p>
+                                <h2 class="font-display text-base font-bold text-white">Gérer les services au menu</h2>
+                                <p class="text-xs text-luxury-secondary">Mettre à jour les titres, prix, durées et photos</p>
                             </div>
                         </div>
                         <span
@@ -497,7 +490,7 @@
                                         <!-- Status Badge Overlay -->
                                         <span
                                             class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $service->is_active ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
-                                            {{ $service->is_active ? 'Active' : 'Inactive' }}
+                                            {{ $service->is_active ? 'Actif' : 'Inactif' }}
                                         </span>
 
                                         <!-- Change Photo File Input Overlay -->
@@ -508,7 +501,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                                             </svg>
-                                            Change Photo
+                                            Changer la photo
                                             <input type="file" name="image" class="hidden"
                                                 onchange="document.getElementById('update-service-{{ $service->id }}').submit()">
                                         </label>
@@ -519,24 +512,21 @@
                                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div class="grow">
                                                 <label
-                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Service
-                                                    Title</label>
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Titre du service</label>
                                                 <input type="text" name="name" value="{{ $service->name }}" required
                                                     class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                                             </div>
                                             <div class="flex items-center gap-2 shrink-0">
                                                 <div class="w-24">
                                                     <label
-                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
-                                                        (DH)</label>
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Prix (DH)</label>
                                                     <input type="number" step="0.01" name="price" value="{{ $service->price }}"
                                                         required
                                                         class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                                                 </div>
                                                 <div class="w-24">
                                                     <label
-                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Duration
-                                                        (Min)</label>
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Durée (Min)</label>
                                                     <input type="number" name="duration" value="{{ $service->duration }}"
                                                         required
                                                         class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
@@ -561,7 +551,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M5 13l4 4L19 7" />
                                                     </svg>
-                                                    Save Changes
+                                                    Enregistrer les modifications
                                                 </button>
                                                 <a href="{{ route('admin.services.appointments', $service) }}"
                                                     class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
@@ -569,7 +559,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                     </svg>
-                                                    Bookings ({{ $service->appointments()->count() }})
+                                                    Réservations ({{ $service->appointments()->count() }})
                                                 </a>
                                             </div>
 
@@ -578,7 +568,7 @@
                                                 @csrf
                                                 <button type="submit"
                                                     class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $service->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
-                                                    {{ $service->is_active ? 'Disable Service' : 'Activate Service' }}
+                                                    {{ $service->is_active ? 'Désactiver le service' : 'Activer le service' }}
                                                 </button>
                                             </form>
                                         </div>
@@ -587,7 +577,7 @@
                             </div>
                         @empty
                             <div class="py-12 text-center flex flex-col items-center gap-2">
-                                <span class="text-xs text-luxury-secondary italic">No services registered yet.</span>
+                                <span class="text-xs text-luxury-secondary italic">Aucun service enregistré pour le moment.</span>
                             </div>
                         @endforelse
                     </div>
@@ -611,19 +601,18 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="font-display text-base font-bold text-white">Add New Product</h2>
-                                <p class="text-xs text-luxury-secondary">Expand your shop inventory</p>
+                                <h2 class="font-display text-base font-bold text-white">Ajouter un produit</h2>
+                                <p class="text-xs text-luxury-secondary">Agrandissez votre inventaire boutique</p>
                             </div>
                         </div>
 
                         <div class="space-y-4">
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
-                                    Category</label>
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Catégorie du produit</label>
                                 <select
                                     class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 font-body"
                                     name="category_id" required>
-                                    <option value="" disabled selected>Select Category</option>
+                                    <option value="" disabled selected>Sélectionner une catégorie</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}" class="bg-luxury-surface text-white">
                                             {{ $category->name }}</option>
@@ -632,26 +621,23 @@
                             </div>
 
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
-                                    Title</label>
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Titre du produit</label>
                                 <input
                                     class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs font-medium transition-all duration-300 placeholder-luxury-secondary/40"
-                                    name="name" placeholder="e.g. Matte Clay Styling Pomade" required>
+                                    name="name" placeholder="ex. Pommade Coiffante Effet Mat" required>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="flex flex-col gap-1.5">
                                     <label
-                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Price
-                                        (DH)</label>
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Prix (DH)</label>
                                     <input type="number" step="0.01"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-luxury-gold font-bold px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="price" placeholder="28.00" required>
                                 </div>
                                 <div class="flex flex-col gap-1.5">
                                     <label
-                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Stock
-                                        Quantity</label>
+                                        class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Quantité en stock</label>
                                     <input type="number"
                                         class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40"
                                         name="stock_quantity" placeholder="50" required>
@@ -664,13 +650,12 @@
                                 <textarea
                                     class="w-full bg-luxury-bg/50 border border-luxury-border text-white px-4 py-3 rounded-xl focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold outline-none text-xs transition-all duration-300 placeholder-luxury-secondary/40 h-24 resize-none leading-relaxed"
                                     name="description"
-                                    placeholder="Detailed product features, ingredients, and usage guidelines..."
+                                    placeholder="Description détaillée du produit, ingrédients et conseils d'utilisation..."
                                     required></textarea>
                             </div>
 
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Product
-                                    Image</label>
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Image du produit</label>
                                 <div
                                     class="relative flex items-center justify-center rounded-xl border border-dashed border-luxury-border bg-luxury-bg/30 p-4 transition hover:border-luxury-gold/50">
                                     <input type="file" name="image" id="new-product-image"
@@ -681,8 +666,8 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        <span class="text-xs font-bold text-white">Click or upload product photo</span>
-                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP up to 2MB</span>
+                                        <span class="text-xs font-bold text-white">Cliquez ou importez une photo du produit</span>
+                                        <span class="text-[10px] text-luxury-secondary">PNG, JPG, WEBP jusqu'à 2 Mo</span>
                                     </div>
                                 </div>
                             </div>
@@ -690,7 +675,7 @@
 
                         <button type="submit"
                             class="w-full bg-luxury-gold hover:bg-white text-black py-3.5 rounded-xl text-xs font-display font-bold uppercase tracking-widest transition-all duration-300 shadow-md cursor-pointer text-center">
-                            + Save Product
+                            + Enregistrer le produit
                         </button>
                     </form>
                 </div>
@@ -707,14 +692,13 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="font-display text-base font-bold text-white">Manage Store Inventory Products</h2>
-                                <p class="text-xs text-luxury-secondary">Update titles, prices, stock quantities & product
-                                    photos</p>
+                                <h2 class="font-display text-base font-bold text-white">Gérer l'inventaire des produits</h2>
+                                <p class="text-xs text-luxury-secondary">Mettre à jour titres, prix, stocks et photos</p>
                             </div>
                         </div>
                         <span
                             class="rounded-full border border-luxury-border bg-luxury-bg/50 px-3 py-1 text-xs font-bold text-luxury-gold">
-                            {{ $products->count() }} Products
+                            {{ $products->count() }} Produits
                         </span>
                     </div>
 
@@ -751,7 +735,7 @@
                                         <!-- Stock Status Badge Overlay -->
                                         <span
                                             class="absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider shadow-md backdrop-blur-md {{ $product->stock_quantity > 0 ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-rose-500/30 bg-rose-500/20 text-rose-300' }}">
-                                            {{ $product->stock_quantity > 0 ? 'In Stock (' . $product->stock_quantity . ')' : 'Out of Stock' }}
+                                            {{ $product->stock_quantity > 0 ? 'En stock (' . $product->stock_quantity . ')' : 'Rupture de stock' }}
                                         </span>
 
                                         <!-- Change Photo File Input Overlay -->
@@ -762,7 +746,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                                             </svg>
-                                            Change Photo
+                                            Changer la photo
                                             <input type="file" name="image" class="hidden"
                                                 onchange="document.getElementById('update-product-{{ $product->id }}').submit()">
                                         </label>
@@ -773,16 +757,14 @@
                                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div class="grow">
                                                 <label
-                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Product
-                                                    Title</label>
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Titre du produit</label>
                                                 <input type="text" name="name" value="{{ $product->name }}" required
                                                     class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                                             </div>
                                             <div class="flex items-center gap-2 shrink-0">
                                                 <div class="w-24">
                                                     <label
-                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Price
-                                                        (DH)</label>
+                                                        class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Prix (DH)</label>
                                                     <input type="number" step="0.01" name="price" value="{{ $product->price }}"
                                                         required
                                                         class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3 py-2 text-xs font-bold text-luxury-gold placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
@@ -800,7 +782,7 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                                             <div class="sm:col-span-5">
                                                 <label
-                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Category</label>
+                                                    class="text-[9px] font-bold uppercase tracking-wider text-luxury-secondary block mb-1">Catégorie</label>
                                                 <select name="category_id"
                                                     class="w-full rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 text-xs font-bold text-white focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                                                     @foreach($categories as $category)
@@ -828,7 +810,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M5 13l4 4L19 7" />
                                                     </svg>
-                                                    Save Changes
+                                                    Enregistrer les modifications
                                                 </button>
                                                 <a href="{{ route('products.show', $product) }}" target="_blank"
                                                     class="inline-flex items-center gap-1.5 rounded-xl border border-luxury-border bg-luxury-surface px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-primary transition-all duration-300 hover:border-luxury-gold hover:text-luxury-gold">
@@ -836,7 +818,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                     </svg>
-                                                    View Product Page
+                                                    Voir la page du produit
                                                 </a>
                                             </div>
 
@@ -845,7 +827,7 @@
                                                 @csrf
                                                 <button type="submit"
                                                     class="inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 font-display text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer {{ $product->is_active ? 'border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500 hover:text-black' }}">
-                                                    {{ $product->is_active ? 'Disable Product' : 'Activate Product' }}
+                                                    {{ $product->is_active ? 'Désactiver le produit' : 'Activer le produit' }}
                                                 </button>
                                             </form>
                                         </div>
@@ -854,7 +836,7 @@
                             </div>
                         @empty
                             <div class="py-12 text-center flex flex-col items-center gap-2">
-                                <span class="text-xs text-luxury-secondary italic">No products registered yet.</span>
+                                <span class="text-xs text-luxury-secondary italic">Aucun produit enregistré pour le moment.</span>
                             </div>
                         @endforelse
                     </div>

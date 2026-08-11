@@ -55,7 +55,7 @@ class SimplePlatformViewsTest extends TestCase
         $this->actingAs($client)
             ->get(route('appointments.index', ['month' => '2026-09']))
             ->assertOk()
-            ->assertSee('September 2026')
+            ->assertSee('septembre 2026')
             ->assertSee('14:30')
             ->assertDontSee('15:30');
     }
@@ -91,7 +91,7 @@ class SimplePlatformViewsTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.appointments.index', ['month' => '2026-09', 'status' => 'confirmed']))
             ->assertOk()
-            ->assertSee('September 2026')
+            ->assertSee('septembre 2026')
             ->assertSee('CalendarClient')
             ->assertSee('11:00')
             ->assertDontSee('Pending Only Service');
@@ -122,8 +122,8 @@ class SimplePlatformViewsTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.appointments.index', ['month' => '2026-09', 'date' => '2026-09-18']))
             ->assertOk()
-            ->assertSee('Friday, September 18, 2026')
-            ->assertSee('2 appointments')
+            ->assertSee('vendredi 18 septembre 2026')
+            ->assertSee('2 rendez-vous')
             ->assertSee('09:00')
             ->assertSee('09:30')
             ->assertSee('17:00')

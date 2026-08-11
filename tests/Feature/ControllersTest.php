@@ -156,7 +156,7 @@ class ControllersTest extends TestCase
         // Check slots are updated (10:00 should not be available)
         $response = $this->actingAs($user)
             ->getJson(route('appointments.available-slots', ['date' => '2026-08-05']));
-        $this->assertNotContains('10:00', $response->json('available_slots'));
+        $this->assertFalse(in_array('10:00', $response->json('available_slots'), true));
 
         // Client cancel appointment
         $appointment = Appointment::find($appointmentId);
@@ -229,7 +229,7 @@ class ControllersTest extends TestCase
             ]);
 
         $response->assertStatus(200)
-            ->assertJsonPath('cart.' . $product->id, 2);
+            ->assertJsonPath('cart.'.$product->id, 2);
 
         // View Cart
         $response = $this->getJson(route('cart.index'));
@@ -343,7 +343,7 @@ class ControllersTest extends TestCase
             ->postJson(route('admin.users.toggle-status', $admin));
 
         $response->assertStatus(422)
-            ->assertJsonPath('message', 'You cannot deactivate your own account.');
+            ->assertJsonPath('message', 'Vous ne pouvez pas désactiver votre propre compte.');
 
         $this->assertTrue($admin->fresh()->is_active);
     }

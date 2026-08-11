@@ -1,19 +1,19 @@
 @extends('layouts.test')
 
-@section('title', 'Book Appointment')
+@section('title', 'Prendre rendez-vous')
 
 @section('content')
     <div x-data="bookingWizard({{ Js::from($preselectedService ? ['id' => $preselectedService->id, 'name' => $preselectedService->name, 'description' => $preselectedService->description, 'price' => (float) $preselectedService->price, 'duration' => $preselectedService->duration] : null) }})" class="flex flex-col gap-8 animate-fade-up">
         {{-- ── Header ── --}}
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">New booking</span>
-            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Book an appointment</h1>
-            <p class="max-w-xl text-sm leading-6 text-luxury-secondary">Choose a service, pick a date, and select an available time.</p>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Nouvelle réservation</span>
+            <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Prendre un rendez-vous</h1>
+            <p class="max-w-xl text-sm leading-6 text-luxury-secondary">Choisissez un service, sélectionnez une date et choisissez un horaire disponible.</p>
         </header>
 
         {{-- ── Progress Steps ── --}}
         <div class="flex items-center gap-3">
-            <template x-for="(label, i) in ['Service', 'Date', 'Time']" :key="i">
+            <template x-for="(label, i) in ['Service', 'Date', 'Heure']" :key="i">
                 <div class="flex items-center gap-3">
                     <button type="button"
                         @click="i < step && goToStep(i)"
@@ -66,8 +66,8 @@
             <div class="overflow-hidden rounded-3xl border border-white/10 bg-[#111113] shadow-2xl shadow-black/30">
                 <div class="flex items-center justify-between border-b border-white/10 px-5 py-4 sm:px-7">
                     <div>
-                        <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Pick a date</p>
-                        <h2 class="mt-1 font-display text-xl font-bold text-white" x-text="calendarTitle"></h2>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Choisissez une date</p>
+                        <h2 class="mt-1 font-display text-xl font-bold text-white capitalize" x-text="calendarTitle"></h2>
                     </div>
                     <div class="flex items-center gap-2">
                         <button type="button" @click="prevMonth()" aria-label="Previous month" class="inline-flex size-10 items-center justify-center rounded-full border border-white/10 text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
@@ -75,7 +75,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                             </svg>
                         </button>
-                        <button type="button" @click="goToToday()" class="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50 cursor-pointer">Today</button>
+                        <button type="button" @click="goToToday()" class="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-luxury-gold/50 cursor-pointer">Aujourd'hui</button>
                         <button type="button" @click="nextMonth()" aria-label="Next month" class="inline-flex size-10 items-center justify-center rounded-full border border-white/10 text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
                             <svg class="size-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="grid grid-cols-7 border-b border-white/10 bg-white/[0.02]">
-                    <template x-for="d in ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']" :key="d">
+                    <template x-for="d in ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim']" :key="d">
                         <div class="px-3 py-3 text-center font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary" x-text="d"></div>
                     </template>
                 </div>
@@ -114,7 +114,7 @@
             {{-- Selected service summary --}}
             <div class="flex flex-col gap-5">
                 <div class="rounded-3xl border border-white/10 bg-[#111113] p-5">
-                    <p class="font-display text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Selected service</p>
+                    <p class="font-display text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Service sélectionné</p>
                     <h3 class="mt-2 font-display text-lg font-bold text-white" x-text="selectedService?.name"></h3>
                     <p class="mt-1 text-xs text-luxury-secondary" x-text="selectedService?.description"></p>
                     <div class="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-4">
@@ -124,7 +124,7 @@
                 </div>
 
                 <button type="button" @click="step = 0" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
-                    &larr; Change service
+                    &larr; Changer de service
                 </button>
             </div>
         </section>
@@ -136,20 +136,20 @@
             {{-- Slot grid --}}
             <div class="overflow-hidden rounded-3xl border border-white/10 bg-[#111113] shadow-2xl shadow-black/30">
                 <div class="border-b border-white/10 px-5 py-4 sm:px-7">
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Available times</p>
-                    <h2 class="mt-1 font-display text-xl font-bold text-white" x-text="selectedDateLabel"></h2>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-secondary">Horaires disponibles</p>
+                    <h2 class="mt-1 font-display text-xl font-bold text-white capitalize" x-text="selectedDateLabel"></h2>
                 </div>
 
                 <div class="p-5 sm:p-7">
                     {{-- Loading state --}}
                     <div x-show="slotsLoading" class="py-12 text-center text-sm text-luxury-secondary">
-                        Loading available times...
+                        Chargement des créneaux disponibles...
                     </div>
 
                     {{-- No slots --}}
                     <div x-show="!slotsLoading && slots.length === 0" class="rounded-2xl border border-dashed border-white/10 px-4 py-12 text-center">
-                        <p class="text-sm font-medium text-white">No available slots</p>
-                        <p class="mt-1 text-xs text-luxury-secondary">This day has no open time slots. Try another date.</p>
+                        <p class="text-sm font-medium text-white">Aucun créneau disponible</p>
+                        <p class="mt-1 text-xs text-luxury-secondary">Cette journée ne dispose d'aucun créneau libre. Essayez une autre date.</p>
                     </div>
 
                     {{-- Slot buttons --}}
@@ -174,7 +174,7 @@
             {{-- Confirmation panel --}}
             <div class="flex flex-col gap-5">
                 <div class="rounded-3xl border border-white/10 bg-[#111113] p-5" :class="selectedSlot ? 'border-luxury-gold/30' : ''">
-                    <p class="font-display text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Booking summary</p>
+                    <p class="font-display text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Récapitulatif de la réservation</p>
 
                     <div class="mt-4 flex flex-col gap-3">
                         <div class="flex items-center justify-between">
@@ -183,14 +183,14 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-luxury-secondary">Date</span>
-                            <span class="text-sm font-semibold text-white" x-text="selectedDateLabel"></span>
+                            <span class="text-sm font-semibold text-white capitalize" x-text="selectedDateLabel"></span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-xs text-luxury-secondary">Time</span>
+                            <span class="text-xs text-luxury-secondary">Heure</span>
                             <span class="text-sm font-semibold" :class="selectedSlot ? 'text-luxury-gold' : 'text-zinc-500'" x-text="selectedSlot || '—'"></span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-xs text-luxury-secondary">Duration</span>
+                            <span class="text-xs text-luxury-secondary">Durée</span>
                             <span class="text-sm font-semibold text-white"><span x-text="selectedService?.duration"></span> min</span>
                         </div>
                         <div class="border-t border-white/[0.06] pt-3 flex items-center justify-between">
@@ -201,8 +201,8 @@
 
                     {{-- Notes --}}
                     <div class="mt-4">
-                        <label for="booking-notes" class="block text-[10px] font-bold uppercase tracking-widest text-luxury-secondary mb-2">Notes (optional)</label>
-                        <textarea id="booking-notes" x-model="notes" rows="2" placeholder="Any special requests..." class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold"></textarea>
+                        <label for="booking-notes" class="block text-[10px] font-bold uppercase tracking-widest text-luxury-secondary mb-2">Remarques (optionnel)</label>
+                        <textarea id="booking-notes" x-model="notes" rows="2" placeholder="Toute demande particulière..." class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold"></textarea>
                     </div>
 
                     {{-- Submit --}}
@@ -217,13 +217,13 @@
                                 ? 'bg-luxury-gold text-luxury-bg hover:bg-white cursor-pointer'
                                 : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'"
                             class="w-full rounded-full px-5 py-3.5 font-display text-xs font-bold uppercase tracking-widest transition">
-                            Confirm booking
+                            Confirmer la réservation
                         </button>
                     </form>
                 </div>
 
                 <button type="button" @click="step = 1; selectedSlot = null" class="flex items-center gap-2 self-start rounded-full border border-white/10 px-4 py-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-luxury-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold cursor-pointer">
-                    &larr; Change date
+                    &larr; Changer de date
                 </button>
             </div>
         </section>
@@ -250,7 +250,7 @@
                 calendarMonth: today.getMonth(), // 0-indexed
 
                 get calendarTitle() {
-                    return new Date(this.calendarYear, this.calendarMonth).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                    return new Date(this.calendarYear, this.calendarMonth).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 },
 
                 get calendarDays() {
@@ -304,7 +304,7 @@
                 get selectedDateLabel() {
                     if (!this.selectedDate) return '—';
                     const dt = new Date(this.selectedDate + 'T12:00:00');
-                    return dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+                    return dt.toLocaleDateString('fr-FR', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
                 },
 
                 get appointmentDateTime() {

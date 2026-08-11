@@ -63,7 +63,7 @@ class AuthController extends Controller
             Auth::logout();
 
             throw ValidationException::withMessages([
-                'email' => 'This account is inactive.',
+                'email' => 'Ce compte est inactif.',
             ]);
         }
 

@@ -9,7 +9,7 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Categories
+                Retour aux catégories
             </a>
         </div>
 
@@ -23,18 +23,18 @@
                     </svg>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Catalog Collection</span>
+                    <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Collection du Catalogue</span>
                     <h1 class="font-display text-3xl font-black text-white">{{ $category->name }}</h1>
                 </div>
             </div>
 
             <p class="text-sm text-luxury-secondary leading-relaxed font-light">
-                {{ $category->description ?? 'Explore our premium range of products in this collection.' }}
+                {{ $category->description ?? 'Découvrez notre gamme de produits d\'exception dans cette collection.' }}
             </p>
 
             <div class="border-t border-white/10 pt-6 flex justify-end">
                 <a href="{{ route('categories.products', $category) }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-luxury-gold px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-white shadow-lg">
-                    View Category Products &rarr;
+                    Voir les produits de la catégorie &rarr;
                 </a>
             </div>
         </div>

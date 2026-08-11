@@ -1,6 +1,6 @@
 @extends('layouts.test')
 
-@section('title', 'My Profile')
+@section('title', 'Mon Profil')
 
 @section('content')
     @php
@@ -20,9 +20,9 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Dashboard
+                Retour au tableau de bord
             </a>
-            <span class="text-xs text-luxury-secondary/70">Member since {{ $user->created_at->format('M Y') }}</span>
+            <span class="text-xs text-luxury-secondary/70 capitalize">Membre depuis {{ $user->created_at->locale('fr')->isoFormat('MMM YYYY') }}</span>
         </div>
 
         <!-- Header Card -->
@@ -36,15 +36,15 @@
                     </div>
                     <div class="flex flex-col gap-1.5">
                         <div class="flex items-center gap-3">
-                            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Personal Profile</span>
+                            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Profil personnel</span>
                             <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-0.5 text-[10px] font-bold text-emerald-300">
                                 <span class="size-1.5 rounded-full bg-emerald-400"></span>
-                                Active Account
+                                Compte actif
                             </span>
                         </div>
                         <h1 class="font-display text-2xl font-black text-white sm:text-3xl">{{ $user->full_name }}</h1>
                         <p class="text-xs text-luxury-secondary flex items-center gap-2 font-mono">
-                            <span>Email: {{ $user->email }}</span>
+                            <span>E-mail : {{ $user->email }}</span>
                         </p>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="font-display text-base font-bold text-white">Edit Profile Details</h2>
-                    <p class="text-xs text-luxury-secondary/70">Update your account information and password</p>
+                    <h2 class="font-display text-base font-bold text-white">Modifier le profil</h2>
+                    <p class="text-xs text-luxury-secondary/70">Mettez à jour vos informations de compte et votre mot de passe</p>
                 </div>
             </div>
 
@@ -81,12 +81,12 @@
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
-                        Personal Details
+                        Informations personnelles
                     </h3>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
-                            <label for="first_name" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">First Name</label>
+                            <label for="first_name" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Prénom</label>
                             <input type="text" id="first_name" name="first_name" value="{{ old('first_name', $user->first_name) }}" required
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('first_name')
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="last_name" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Last Name</label>
+                            <label for="last_name" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Nom</label>
                             <input type="text" id="last_name" name="last_name" value="{{ old('last_name', $user->last_name) }}" required
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('last_name')
@@ -106,7 +106,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
-                            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Email Address</label>
+                            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Adresse e-mail</label>
                             <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('email')
@@ -115,8 +115,8 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="phone" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Phone Number</label>
-                            <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="e.g. +1 (555) 000-0000"
+                            <label for="phone" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Numéro de téléphone</label>
+                            <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="ex. +212 600 000 000"
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('phone')
                                 <p class="text-xs text-rose-400 mt-1">{{ $message }}</p>
@@ -134,13 +134,13 @@
                             <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
-                            Update Password <span class="text-[10px] text-luxury-secondary font-normal lowercase">(optional)</span>
+                            Modifier le mot de passe <span class="text-[10px] text-luxury-secondary font-normal lowercase">(optionnel)</span>
                         </h3>
-                        <p class="text-[11px] text-luxury-secondary/70 mt-0.5">Leave blank if you do not want to change your password</p>
+                        <p class="text-[11px] text-luxury-secondary/70 mt-0.5">Laissez vide si vous ne souhaitez pas modifier votre mot de passe</p>
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <label for="current_password" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Current Password</label>
+                        <label for="current_password" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Mot de passe actuel</label>
                         <input type="password" id="current_password" name="current_password" autocomplete="current-password"
                                class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                         @error('current_password')
@@ -150,7 +150,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
-                            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">New Password</label>
+                            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Nouveau mot de passe</label>
                             <input type="password" id="password" name="password" autocomplete="new-password"
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('password')
@@ -159,7 +159,7 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="password_confirmation" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Confirm Password</label>
+                            <label for="password_confirmation" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Confirmer le mot de passe</label>
                             <input type="password" id="password_confirmation" name="password_confirmation" autocomplete="new-password"
                                    class="rounded-xl border border-white/10 bg-[#161618] px-4 py-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
                             @error('password_confirmation')
@@ -171,7 +171,7 @@
 
                 <div class="flex justify-end pt-3">
                     <button type="submit" class="rounded-full bg-luxury-gold py-3 px-8 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-md">
-                        Update Profile
+                        Mettre à jour le profil
                     </button>
                 </div>
             </form>

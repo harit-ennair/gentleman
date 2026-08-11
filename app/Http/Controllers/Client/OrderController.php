@@ -7,9 +7,11 @@ use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -24,13 +26,24 @@ class OrderController extends Controller
         return view('client.orders.index', compact('orders'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse|JsonResponse
     {
         $validated = $request->validate([
             'notes' => ['nullable', 'string', 'max:1000'],
+            'items' => ['nullable', 'array'],
+            'items.*.product_id' => ['required_with:items', Rule::exists(Product::class, 'id')->where('is_active', true)],
+            'items.*.quantity' => ['required_with:items', 'integer', 'min:1'],
         ]);
+
         $cart = $request->session()->get('cart', []);
-        abort_if($cart === [], 422, 'Your cart is empty.');
+        if ($request->filled('items')) {
+            $cart = [];
+            foreach ($request->input('items') as $item) {
+                $cart[$item['product_id']] = (int) $item['quantity'];
+            }
+        }
+
+        abort_if($cart === [], 422, 'Votre panier est vide.');
 
         $order = DB::transaction(function () use ($request, $validated, $cart): Order {
             $products = Product::whereIn('id', array_keys($cart))->lockForUpdate()->get()->keyBy('id');
@@ -66,7 +79,14 @@ class OrderController extends Controller
 
         $request->session()->forget('cart');
 
-        return redirect()->route('orders.show', $order)->with('success', 'Order created.');
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'Commande créée avec succès.',
+                'order' => $order->load('orderItems'),
+            ], 201);
+        }
+
+        return redirect()->route('orders.show', $order)->with('success', 'Commande créée avec succès.');
     }
 
     public function show(Request $request, Order $order): View
@@ -77,7 +97,7 @@ class OrderController extends Controller
         return view('client.orders.show', compact('order'));
     }
 
-    public function cancel(Request $request, Order $order): RedirectResponse
+    public function cancel(Request $request, Order $order): RedirectResponse|JsonResponse
     {
         $this->authorizeOwner($request, $order);
         abort_unless($order->status === OrderStatus::Pending, 422);
@@ -90,7 +110,14 @@ class OrderController extends Controller
             $order->update(['status' => OrderStatus::Cancelled]);
         });
 
-        return back()->with('success', 'Order cancelled.');
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'Commande annulée.',
+                'order' => $order->fresh(),
+            ]);
+        }
+
+        return back()->with('success', 'Commande annulée.');
     }
 
     public function invoice(Request $request, Order $order): View

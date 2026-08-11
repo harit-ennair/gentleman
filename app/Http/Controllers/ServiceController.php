@@ -28,7 +28,7 @@ class ServiceController extends Controller
         unset($validated['image']);
         Service::create($validated);
 
-        return back()->with('success', 'Service created.');
+        return back()->with('success', 'Service créé.');
     }
 
     public function show(Service $service): View
@@ -51,7 +51,7 @@ class ServiceController extends Controller
         unset($validated['image']);
         $service->update($validated);
 
-        return back()->with('success', 'Service updated.');
+        return back()->with('success', 'Service mis à jour.');
     }
 
     public function toggleStatus(Service $service): RedirectResponse
@@ -59,7 +59,7 @@ class ServiceController extends Controller
         $this->authorizeAdmin();
         $service->update(['is_active' => ! $service->is_active]);
 
-        return back()->with('success', 'Service status updated.');
+        return back()->with('success', 'Statut du service mis à jour.');
     }
 
     public function appointments(Service $service): View

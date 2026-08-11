@@ -18,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasUuids, HasFactory, Notifiable;
+    use HasFactory, HasUuids, Notifiable;
 
     /**
      * Get the fullname of the user.

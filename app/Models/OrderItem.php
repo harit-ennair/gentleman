@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['quantity', 'unit_price', 'order_id', 'product_id'])]
 class OrderItem extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * Get the order that contains this item.

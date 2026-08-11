@@ -1,45 +1,45 @@
 @extends('layouts.test')
 
-@section('title', 'Grooming Shop')
+@section('title', 'Boutique Soins')
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
         <!-- Header -->
         <header class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div class="flex flex-col gap-2">
-                <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Gentleman Collection</span>
-                <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Grooming Products</h1>
-                <p class="text-sm text-luxury-secondary max-w-xl">Curated hair clays, pomades, beard oils, and luxury barbershop essentials.</p>
+                <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Collection Gentleman</span>
+                <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">Produits de Soins</h1>
+                <p class="text-sm text-luxury-secondary max-w-xl">Argiles coiffantes, pommades, huiles à barbe et essentiels de soins masculins d'exception.</p>
             </div>
         </header>
 
         <!-- Filter Form Bar -->
         <form action="{{ route('products.index') }}" method="GET" class="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-[#111113] p-4 shadow-xl">
             <div class="relative grow min-w-[200px]">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." 
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher des produits..." 
                        class="w-full rounded-full border border-white/10 bg-[#161618] px-4 py-2.5 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
             </div>
 
             <select name="category_id" class="rounded-full border border-white/10 bg-[#161618] px-4 py-2.5 text-xs text-white focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
-                <option value="">All categories</option>
+                <option value="">Toutes les catégories</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>{{ $category->name }}</option>
                 @endforeach
             </select>
 
-            <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min price" 
+            <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Prix min" 
                    class="w-28 rounded-full border border-white/10 bg-[#161618] px-4 py-2.5 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
 
-            <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max price" 
+            <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Prix max" 
                    class="w-28 rounded-full border border-white/10 bg-[#161618] px-4 py-2.5 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300">
 
             <button type="submit" class="rounded-full bg-luxury-gold px-6 py-2.5 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-md">
-                Filter
+                Filtrer
             </button>
 
             @if(request('search') || request('category_id') || request('min_price') || request('max_price'))
                 <a href="{{ route('products.index') }}" class="rounded-full border border-white/10 bg-white/5 px-4 py-2.5 font-display text-xs font-bold uppercase tracking-widest text-luxury-secondary transition hover:text-white">
-                    Reset
+                    Réinitialiser
                 </a>
             @endif
         </form>
@@ -81,11 +81,11 @@
                                  class="h-full w-full object-cover rounded-xl filter brightness-95 group-hover:scale-105 group-hover:brightness-110 transition-all duration-700">
                             
                             <span class="absolute top-3 left-3 rounded-full border border-luxury-gold/30 bg-luxury-bg/85 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-luxury-gold shadow-md">
-                                {{ $product->category->name ?? 'Grooming' }}
+                                {{ $product->category->name ?? 'Soin' }}
                             </span>
 
                             <span class="absolute top-3 right-3 rounded-full border border-white/10 bg-luxury-bg/85 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-medium {{ $product->stock_quantity > 0 ? 'text-emerald-400' : 'text-rose-400' }}">
-                                {{ $product->stock_quantity > 0 ? 'In Stock (' . $product->stock_quantity . ')' : 'Out of Stock' }}
+                                {{ $product->stock_quantity > 0 ? 'En stock (' . $product->stock_quantity . ')' : 'Rupture de stock' }}
                             </span>
                         </div>
 
@@ -94,7 +94,7 @@
                                 <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
                             </h2>
                             <p class="text-xs text-luxury-secondary line-clamp-2 leading-relaxed font-light">
-                                {{ $product->description ?? 'Barbershop grade formulation designed for high performance styling and skin nourishment.' }}
+                                {{ $product->description ?? 'Formule de qualité professionnelle conçue pour un coiffage haute performance et le soin de la peau.' }}
                             </p>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z"/>
                                 </svg>
-                                Add to Cart
+                                Ajouter au panier
                             </button>
                         </form>
                     </div>

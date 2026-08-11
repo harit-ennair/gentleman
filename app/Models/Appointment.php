@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['appointment_at', 'status', 'notes', 'user_id', 'service_id'])]
 class Appointment extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * Get the user who booked this appointment.

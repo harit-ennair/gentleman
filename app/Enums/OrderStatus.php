@@ -9,4 +9,15 @@ enum OrderStatus: string
     case Completed = 'completed';
     case Cancelled = 'cancelled';
     case Refunded = 'refunded';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::Pending => 'En attente',
+            self::Processing => 'En traitement',
+            self::Completed => 'Terminé',
+            self::Cancelled => 'Annulé',
+            self::Refunded => 'Remboursé',
+        };
+    }
 }

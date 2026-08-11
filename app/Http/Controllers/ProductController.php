@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Role;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,7 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         $products = Product::with('category')
             ->where('is_active', true)
@@ -31,6 +32,13 @@ class ProductController extends Controller
             ->withQueryString();
         $categories = Category::orderBy('name')->get();
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'products' => $products->items(),
+                'pagination' => $products,
+            ]);
+        }
+
         return view('products.index', compact('products', 'categories'));
     }
 
@@ -44,7 +52,7 @@ class ProductController extends Controller
         unset($validated['image']);
         Product::create($validated);
 
-        return back()->with('success', 'Product created.');
+        return back()->with('success', 'Produit créé.');
     }
 
     public function show(Product $product): View
@@ -68,7 +76,7 @@ class ProductController extends Controller
         unset($validated['image']);
         $product->update($validated);
 
-        return back()->with('success', 'Product updated.');
+        return back()->with('success', 'Produit mis à jour.');
     }
 
     public function toggleStatus(Product $product): RedirectResponse
@@ -76,7 +84,7 @@ class ProductController extends Controller
         $this->authorizeAdmin();
         $product->update(['is_active' => ! $product->is_active]);
 
-        return back()->with('success', 'Product status updated.');
+        return back()->with('success', 'Statut du produit mis à jour.');
     }
 
     private function validateProduct(Request $request): array

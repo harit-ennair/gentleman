@@ -1,6 +1,6 @@
 @extends('layouts.test')
 
-@section('title', 'Invoice ' . $order->order_number)
+@section('title', 'Facture ' . $order->order_number)
 
 @section('content')
     <div class="mx-auto max-w-3xl flex flex-col gap-8 animate-fade-up">
@@ -9,10 +9,10 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Order
+                Retour à la commande
             </a>
             <button onclick="window.print()" class="inline-flex items-center gap-2 rounded-full bg-luxury-gold px-5 py-2 font-display text-xs font-bold uppercase tracking-widest text-black hover:bg-white cursor-pointer shadow-md">
-                🖨 Print Invoice
+                🖨 Imprimer la facture
             </button>
         </div>
 
@@ -22,30 +22,30 @@
                     <span class="font-display font-black text-xl tracking-tighter text-white flex items-center gap-2">
                         <span class="text-luxury-gold">◆</span> GENTLEMAN
                     </span>
-                    <span class="text-xs text-luxury-secondary">Official Purchase Receipt</span>
+                    <span class="text-xs text-luxury-secondary">Reçu d'achat officiel</span>
                 </div>
                 <div class="flex flex-col sm:items-end text-xs">
-                    <span class="font-display font-bold text-white">Invoice #{{ $order->order_number }}</span>
-                    <span class="text-luxury-secondary">{{ $order->created_at->format('F j, Y') }}</span>
+                    <span class="font-display font-bold text-white">Facture n° {{ $order->order_number }}</span>
+                    <span class="text-luxury-secondary capitalize">{{ $order->created_at->locale('fr')->isoFormat('D MMMM YYYY') }}</span>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-6 text-xs border-b border-white/10 pb-6">
                 <div class="flex flex-col gap-1">
-                    <span class="text-[10px] uppercase font-bold text-luxury-gold tracking-widest">Billed To</span>
+                    <span class="text-[10px] uppercase font-bold text-luxury-gold tracking-widest">Facturé à</span>
                     <span class="font-bold text-white text-sm">{{ $order->user->full_name }}</span>
                     <span class="text-luxury-secondary">{{ $order->user->email }}</span>
                     <span class="text-luxury-secondary">{{ $order->user->phone ?? '' }}</span>
                 </div>
                 <div class="flex flex-col gap-1 sm:items-end">
-                    <span class="text-[10px] uppercase font-bold text-luxury-gold tracking-widest">Payment Status</span>
-                    <span class="font-bold text-emerald-400 text-sm uppercase">{{ $order->payment_status->value }}</span>
-                    <span class="text-luxury-secondary">Order Status: {{ $order->status->value }}</span>
+                    <span class="text-[10px] uppercase font-bold text-luxury-gold tracking-widest">Statut du paiement</span>
+                    <span class="font-bold text-emerald-400 text-sm uppercase">{{ $order->payment_status->label() }}</span>
+                    <span class="text-luxury-secondary">Statut de la commande : {{ $order->status->label() }}</span>
                 </div>
             </div>
 
             <div class="space-y-4">
-                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-white">Items Summary</h2>
+                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-white">Récapitulatif des articles</h2>
                 <div class="divide-y divide-white/[0.06] text-xs">
                     @foreach($order->orderItems as $item)
                         <div class="flex items-center justify-between py-3">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="border-t border-white/10 pt-6 flex justify-between items-baseline">
-                <span class="font-display text-base font-bold text-white">Total Amount Paid</span>
+                <span class="font-display text-base font-bold text-white">Montant total réglé</span>
                 <span class="font-display text-3xl font-black text-luxury-gold">{{ number_format($order->total, 2) }} DH</span>
             </div>
         </div>

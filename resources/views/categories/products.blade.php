@@ -1,6 +1,6 @@
 @extends('layouts.test')
 
-@section('title', $category->name . ' Products')
+@section('title', 'Produits ' . $category->name)
 
 @section('content')
     <div class="flex flex-col gap-8 animate-fade-up">
@@ -9,14 +9,14 @@
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to Categories
+                Retour aux catégories
             </a>
         </div>
 
         <header class="flex flex-col gap-2">
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Category Collection</span>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.28em] text-luxury-gold">Collection de la catégorie</span>
             <h1 class="font-display text-3xl font-black tracking-tight text-white sm:text-4xl">{{ $category->name }}</h1>
-            <p class="text-sm text-luxury-secondary max-w-xl">Browsing products in {{ $category->name }}.</p>
+            <p class="text-sm text-luxury-secondary max-w-xl">Navigation dans la catégorie {{ $category->name }}.</p>
         </header>
 
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -56,7 +56,7 @@
                         <div>
                             <h2 class="font-display text-xl font-bold text-white group-hover:text-luxury-gold transition-colors">{{ $product->name }}</h2>
                             <p class="mt-1 text-xs text-luxury-secondary line-clamp-2 leading-relaxed font-light">
-                                {{ $product->description ?? 'Barbershop grade formulation designed for high performance styling.' }}
+                                {{ $product->description ?? 'Formule de qualité professionnelle conçue pour un coiffage haute performance.' }}
                             </p>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                             {{ number_format($product->price, 2) }} <span class="text-xs font-bold text-white/70">DH</span>
                         </span>
                         <span class="text-xs font-display font-bold uppercase text-white group-hover:text-luxury-gold transition-colors">
-                            Details &rarr;
+                            Détails &rarr;
                         </span>
                     </div>
                 </a>
