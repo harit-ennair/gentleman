@@ -70,7 +70,7 @@
             </div>
 
             @auth
-                <span class="text-luxury-primary font-light lowercase text-xs">{{ auth()->user()->email }}</span>
+                <span class="text-luxury-primary font-light lowercase text-xs">{{ auth()->user()->last_name }}</span>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button class="bg-red-950/30 border border-red-900/40 hover:bg-red-900 hover:text-white text-red-400 px-4 py-2 rounded-full text-[10px] font-display font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer">
