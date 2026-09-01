@@ -17,21 +17,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Seed Test User (Customer)
-        if (! User::where('email', 'test@example.com')->exists()) {
+        if (! User::where('email', 'test@gmail.com')->exists()) {
             User::factory()->create([
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => 'test@example.com',
+                'email' => 'test@gmail.com',
                 'role' => Role::Customer,
             ]);
         }
 
         // Seed Admin User
-        if (! User::where('email', 'admin@gentleman.com')->exists()) {
+        if (! User::where('email', 'admin@gmail.com')->exists()) {
             User::factory()->create([
                 'first_name' => 'Alexander',
                 'last_name' => 'Mercer',
-                'email' => 'admin@gentleman.com',
+                'email' => 'admin@gmail.com',
                 'role' => Role::Admin,
             ]);
         }

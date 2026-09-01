@@ -10,7 +10,12 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $services = Service::where('is_active', true)->orderBy('name')->get();
+        $services = Service::where('is_active', true)
+            ->withCount('appointments')
+            ->orderByDesc('appointments_count')
+            ->orderBy('name')
+            ->limit(6)
+            ->get();
         $latestProducts = Product::with('category')->where('is_active', true)->latest()->limit(4)->get();
 
         return view('welcome', compact('services', 'latestProducts'));
