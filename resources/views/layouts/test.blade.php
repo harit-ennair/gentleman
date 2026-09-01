@@ -33,7 +33,9 @@
             <a href="{{ route('cart.index') }}" class="hover:text-luxury-gold transition-colors duration-300">Panier</a>
             <a href="{{ route('appointments.index') }}" class="hover:text-luxury-gold transition-colors duration-300">Rendez-vous</a>
             <a href="{{ route('orders.index') }}" class="hover:text-luxury-gold transition-colors duration-300">Commandes</a>
-            <a href="{{ route('admin.dashboard') }}" class="hover:text-luxury-gold transition-colors duration-300 font-semibold">Administration</a>
+            @if(auth()->user()?->isAdmin())
+                <a href="{{ route('admin.dashboard') }}" class="hover:text-luxury-gold transition-colors duration-300 font-semibold">Administration</a>
+            @endif
         </div>
 
         <!-- Auth & Theme Actions -->

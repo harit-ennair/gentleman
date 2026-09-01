@@ -133,18 +133,27 @@
                             </div>
                         </div>
 
-                        <form method="POST" action="{{ route('orders.store') }}" class="flex flex-col gap-4">
-                            @csrf
-                            <div class="flex flex-col gap-1.5">
-                                <label for="notes" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Instructions de livraison / Remarques</label>
-                                <textarea id="notes" name="notes" rows="2" placeholder="ex. Laisser le colis à la réception..."
-                                          class="rounded-xl border border-white/10 bg-[#161618] p-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300"></textarea>
-                            </div>
+                        @auth
+                            <form method="POST" action="{{ route('orders.store') }}" class="flex flex-col gap-4">
+                                @csrf
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="notes" class="text-[10px] font-bold uppercase tracking-wider text-luxury-secondary">Instructions de livraison / Remarques</label>
+                                    <textarea id="notes" name="notes" rows="2" placeholder="ex. Laisser le colis à la réception..."
+                                              class="rounded-xl border border-white/10 bg-[#161618] p-3 text-xs text-white placeholder-luxury-secondary/50 focus:border-luxury-gold focus:outline-none focus:ring-1 focus:ring-luxury-gold transition-all duration-300"></textarea>
+                                </div>
 
-                            <button type="submit" class="w-full rounded-full bg-luxury-gold py-3.5 px-6 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-lg text-center">
-                                Passer la commande &rarr;
-                            </button>
-                        </form>
+                                <button type="submit" class="w-full rounded-full bg-luxury-gold py-3.5 px-6 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-lg text-center">
+                                    Passer la commande &rarr;
+                                </button>
+                            </form>
+                        @else
+                            <div class="flex flex-col gap-3 rounded-2xl border border-luxury-gold/30 bg-luxury-gold/5 p-4 text-center">
+                                <p class="text-xs text-luxury-secondary">Vous devez être connecté pour passer votre commande.</p>
+                                <a href="{{ route('login') }}" class="w-full rounded-full bg-luxury-gold py-3 px-6 font-display text-xs font-bold uppercase tracking-widest text-black transition hover:bg-white cursor-pointer shadow-lg text-center">
+                                    Se connecter pour commander &rarr;
+                                </a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
             </div>

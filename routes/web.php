@@ -76,13 +76,15 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services.ind
 Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
 // Client profile
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth')->group(function (): void {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 // Client appointments
-Route::controller(Client\AppointmentController::class)->group(function (): void {
+Route::controller(Client\AppointmentController::class)->middleware('auth')->group(function (): void {
     Route::get('/appointments/create', 'create')->name('appointments.create');
     Route::get('/appointments/available-slots', 'availableSlots')->name('appointments.available-slots');
     Route::get('/appointments', 'index')->name('appointments.index');
@@ -102,7 +104,7 @@ Route::controller(Client\CartController::class)->group(function (): void {
 });
 
 // Client orders
-Route::controller(Client\OrderController::class)->group(function (): void {
+Route::controller(Client\OrderController::class)->middleware('auth')->group(function (): void {
     Route::get('/orders', 'index')->name('orders.index');
     Route::post('/orders', 'store')->name('orders.store');
     Route::get('/orders/{order}', 'show')->name('orders.show');

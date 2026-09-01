@@ -29,6 +29,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Determine whether the user is an administrator.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === Role::Admin;
+    }
+
+    /**
      * Get the appointments booked by the user.
      *
      * @return HasMany<Appointment, $this>
