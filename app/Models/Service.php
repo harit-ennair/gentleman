@@ -14,6 +14,13 @@ class Service extends Model
     use HasFactory, HasUuids;
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var list<string>
+     */
+    protected $appends = ['image_url'];
+
+    /**
      * Get the appointments for this service.
      *
      * @return HasMany<Appointment, $this>
@@ -21,6 +28,26 @@ class Service extends Model
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * Get the resolved public URL for the service image.
+     */
+    public function getImageUrlAttribute(): string
+    {
+        if (! empty($this->image_path)) {
+            if (str_starts_with($this->image_path, 'http://') || str_starts_with($this->image_path, 'https://')) {
+                return $this->image_path;
+            }
+
+            if (str_starts_with($this->image_path, 'images/') || str_starts_with($this->image_path, '/images/')) {
+                return asset(ltrim($this->image_path, '/'));
+            }
+
+            return asset('storage/'.ltrim($this->image_path, '/'));
+        }
+
+        return 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80';
     }
 
     /**

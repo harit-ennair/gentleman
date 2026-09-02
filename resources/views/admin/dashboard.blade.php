@@ -451,28 +451,6 @@
 
                     <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
                         @forelse($services as $service)
-                            @php
-                                $srvImg = null;
-                                if ($service->image_path) {
-                                    if (str_starts_with($service->image_path, 'http://') || str_starts_with($service->image_path, 'https://')) {
-                                        $srvImg = $service->image_path;
-                                    } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path)) {
-                                        $srvImg = asset('storage/' . $service->image_path);
-                                    }
-                                }
-                                if (!$srvImg) {
-                                    $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                    $lowerName = strtolower($service->name);
-                                    if (str_contains($lowerName, 'haircut') || str_contains($lowerName, 'hair')) {
-                                        $srvImg = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains($lowerName, 'beard') || str_contains($lowerName, 'trim')) {
-                                        $srvImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains($lowerName, 'shave') || str_contains($lowerName, 'facial')) {
-                                        $srvImg = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
-                                    }
-                                }
-                            @endphp
-
                             <div
                                 class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
                                 <form id="update-service-{{ $service->id }}" method="POST"
@@ -484,7 +462,7 @@
                                     <!-- Service Image Preview & Change Overlay -->
                                     <div
                                         class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
-                                        <img src="{{ $srvImg }}" alt="{{ $service->name }}"
+                                        <img src="{{ $service->image_url }}" alt="{{ $service->name }}"
                                             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
 
                                         <!-- Status Badge Overlay -->
@@ -704,20 +682,6 @@
 
                     <div class="overflow-y-auto grow pr-1 space-y-4 custom-scrollbar">
                         @forelse($products as $product)
-                            @php
-                                $imgUrl = null;
-                                if ($product->image_path) {
-                                    if (str_starts_with($product->image_path, 'http://') || str_starts_with($product->image_path, 'https://')) {
-                                        $imgUrl = $product->image_path;
-                                    } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path)) {
-                                        $imgUrl = asset('storage/' . $product->image_path);
-                                    }
-                                }
-                                if (!$imgUrl) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80';
-                                }
-                            @endphp
-
                             <div
                                 class="group relative rounded-2xl border border-luxury-border/60 bg-luxury-bg/40 p-4 sm:p-5 shadow-lg transition-all duration-300 hover:border-luxury-gold/40">
                                 <form id="update-product-{{ $product->id }}" method="POST"
@@ -729,7 +693,7 @@
                                     <!-- Product Image Preview & Change Overlay -->
                                     <div
                                         class="relative size-28 sm:size-32 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-luxury-border/60 group-hover:border-luxury-gold/40 transition-colors">
-                                        <img src="{{ $imgUrl }}" alt="{{ $product->name }}"
+                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
 
                                         <!-- Stock Status Badge Overlay -->

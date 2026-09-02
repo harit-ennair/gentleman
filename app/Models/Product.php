@@ -14,6 +14,13 @@ class Product extends Model
     use HasFactory, HasUuids;
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var list<string>
+     */
+    protected $appends = ['image_url'];
+
+    /**
      * Get the category that owns the product.
      *
      * @return BelongsTo<Category, $this>
@@ -21,6 +28,26 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the resolved public URL for the product image.
+     */
+    public function getImageUrlAttribute(): string
+    {
+        if (! empty($this->image_path)) {
+            if (str_starts_with($this->image_path, 'http://') || str_starts_with($this->image_path, 'https://')) {
+                return $this->image_path;
+            }
+
+            if (str_starts_with($this->image_path, 'images/') || str_starts_with($this->image_path, '/images/')) {
+                return asset(ltrim($this->image_path, '/'));
+            }
+
+            return asset('storage/'.ltrim($this->image_path, '/'));
+        }
+
+        return 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=800&q=80';
     }
 
     /**

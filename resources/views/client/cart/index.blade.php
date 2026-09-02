@@ -46,8 +46,8 @@
                             @foreach($items as $item)
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4">
                                     <div class="flex items-center gap-3">
-                                        <div class="grid size-12 shrink-0 place-items-center rounded-2xl bg-luxury-gold/10 text-luxury-gold font-display font-bold">
-                                            📦
+                                        <div class="size-12 shrink-0 overflow-hidden rounded-xl bg-black/40 border border-white/10 flex items-center justify-center">
+                                            <img src="{{ $item['product']->image_url }}" alt="{{ $item['product']->name }}" class="h-full w-full object-cover">
                                         </div>
                                         <div class="flex flex-col gap-0.5 min-w-0">
                                             <a href="{{ route('products.show', $item['product']) }}" class="font-display text-sm font-bold text-white hover:text-luxury-gold transition-colors truncate">

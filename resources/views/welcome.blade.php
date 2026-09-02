@@ -301,27 +301,8 @@
                         class="group bg-luxury-bg border border-luxury-border/60 rounded-2xl overflow-hidden hover:border-luxury-gold/50 transition-all duration-500 flex flex-col h-full shadow-lg">
                         <!-- Image container -->
                         <div class="relative h-64 overflow-hidden bg-black/40">
-                            <!-- Image from database or Fallbacks based on service name -->
-                            @php
-                                $imgUrl = ($service->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path))
-                                    ? asset('storage/' . $service->image_path)
-                                    : null;
-                                if (!$imgUrl) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                    if (str_contains(strtolower($service->name), 'haircut')) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($service->name), 'beard')) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($service->name), 'shave')) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($service->name), 'color')) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1605497746444-17dbd873c988?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($service->name), 'beard') && str_contains(strtolower($service->name), 'hair')) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80';
-                                    }
-                                }
-                            @endphp
-                            <img src="{{ $imgUrl }}"
+                            <!-- Image from database or Model default -->
+                            <img src="{{ $service->image_url }}"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
                                 alt="{{ $service->name }}">
                             <div
@@ -514,25 +495,8 @@
                         class="group bg-luxury-bg border border-luxury-border/60 hover:border-luxury-gold/50 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col h-full shadow-lg">
                         <!-- Image Container -->
                         <div class="relative h-64 overflow-hidden bg-black/30 flex items-center justify-center p-6">
-                            <!-- Specific Fallback Images -->
-                            @php
-                                $imgProd = ($product->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path))
-                                    ? asset('storage/' . $product->image_path)
-                                    : null;
-                                if (!$imgProd) {
-                                    $imgProd = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
-                                    if (str_contains(strtolower($product->name), 'pomade')) {
-                                        $imgProd = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($product->name), 'oil')) {
-                                        $imgProd = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($product->name), 'clay')) {
-                                        $imgProd = 'https://images.unsplash.com/photo-1617897902633-82a170b6d214?auto=format&fit=crop&w=600&q=80';
-                                    } elseif (str_contains(strtolower($product->name), 'cream')) {
-                                        $imgProd = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=600&q=80';
-                                    }
-                                }
-                            @endphp
-                            <img src="{{ $imgProd }}"
+                            <!-- Product Image from Database or Model Default -->
+                            <img src="{{ $product->image_url }}"
                                 class="max-h-56 max-w-full object-contain filter grayscale brightness-95 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                                 alt="{{ $product->name }}">
 

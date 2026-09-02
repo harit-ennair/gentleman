@@ -47,37 +47,11 @@
         <!-- Product Cards Grid -->
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach($products as $product)
-                @php
-                    $imgUrl = null;
-                    if ($product->image_path) {
-                        if (str_starts_with($product->image_path, 'http://') || str_starts_with($product->image_path, 'https://')) {
-                            $imgUrl = $product->image_path;
-                        } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($product->image_path) && !str_contains($product->image_path, 'gY5v50uRlhlhVVojoVnuufR3AYfpkR9b8mQm7WZ1')) {
-                            $imgUrl = asset('storage/' . $product->image_path);
-                        }
-                    }
-
-                    if (!$imgUrl) {
-                        $name = strtolower($product->name);
-                        if (str_contains($name, 'pomade')) {
-                            $imgUrl = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80';
-                        } elseif (str_contains($name, 'oil')) {
-                            $imgUrl = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
-                        } elseif (str_contains($name, 'clay')) {
-                            $imgUrl = 'https://images.unsplash.com/photo-1617897902633-82a170b6d214?auto=format&fit=crop&w=600&q=80';
-                        } elseif (str_contains($name, 'cream') || str_contains($name, 'shave')) {
-                            $imgUrl = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=600&q=80';
-                        } else {
-                            $imgUrl = 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80';
-                        }
-                    }
-                @endphp
-
                 <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#111113] p-5 shadow-xl transition-all duration-500 hover:border-luxury-gold/40 hover:bg-white/[0.02]">
                     <div class="flex flex-col gap-4">
                         <!-- Product Image Container -->
                         <div class="relative h-56 w-full overflow-hidden rounded-2xl bg-black/40 flex items-center justify-center p-2">
-                            <img src="{{ $imgUrl }}" alt="{{ $product->name }}" 
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" 
                                  class="h-full w-full object-cover rounded-xl filter brightness-95 group-hover:scale-105 group-hover:brightness-110 transition-all duration-700">
                             
                             <span class="absolute top-3 left-3 rounded-full border border-luxury-gold/30 bg-luxury-bg/85 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-luxury-gold shadow-md">

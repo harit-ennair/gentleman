@@ -27,32 +27,8 @@
                 <div class="group bg-luxury-bg border border-luxury-border/60 rounded-2xl overflow-hidden hover:border-luxury-gold/50 transition-all duration-500 flex flex-col h-full shadow-lg">
                     <!-- Image container -->
                     <div class="relative h-64 overflow-hidden bg-black/40">
-                        @php
-                            $imgUrl = ($service->image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($service->image_path))
-                                ? asset('storage/' . $service->image_path)
-                                : null;
-                            if (!$imgUrl) {
-                                $nameLower = strtolower($service->name);
-                                $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                if (str_contains($nameLower, 'coupe') || str_contains($nameLower, 'haircut') || str_contains($nameLower, 'cheveux') || str_contains($nameLower, 'brushing')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'barbe') || str_contains($nameLower, 'beard')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'shave') || str_contains($nameLower, 'rasage')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1517832606589-7a598bb03b15?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'color') || str_contains($nameLower, 'teinture')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1605497746444-17dbd873c988?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'visage') || str_contains($nameLower, 'facial') || str_contains($nameLower, 'soin') || str_contains($nameLower, 'masque') || str_contains($nameLower, 'gommage')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'manucure') || str_contains($nameLower, 'pédicure') || str_contains($nameLower, 'pedicure')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80';
-                                } elseif (str_contains($nameLower, 'pack') || str_contains($nameLower, 'complet') || str_contains($nameLower, 'combo')) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80';
-                                }
-                            }
-                        @endphp
                         <a href="{{ route('services.show', $service) }}" class="block w-full h-full">
-                            <img src="{{ $imgUrl }}"
+                            <img src="{{ $service->image_url }}"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
                                 alt="{{ $service->name }}">
                         </a>

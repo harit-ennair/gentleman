@@ -140,4 +140,35 @@ class ModelsAndMigrationsTest extends TestCase
         $this->expectException(QueryException::class);
         $service->delete();
     }
+
+    /**
+     * Test Product and Service image_url accessor.
+     */
+    public function test_product_and_service_image_url_accessor(): void
+    {
+        $productWithUrl = Product::factory()->create([
+            'image_path' => 'https://example.com/product.jpg',
+        ]);
+        $this->assertEquals('https://example.com/product.jpg', $productWithUrl->image_url);
+
+        $productWithStorage = Product::factory()->create([
+            'image_path' => 'products/sample.png',
+        ]);
+        $this->assertStringContainsString('storage/products/sample.png', $productWithStorage->image_url);
+
+        $productWithNull = Product::factory()->create([
+            'image_path' => null,
+        ]);
+        $this->assertNotEmpty($productWithNull->image_url);
+
+        $serviceWithUrl = Service::factory()->create([
+            'image_path' => 'https://example.com/service.jpg',
+        ]);
+        $this->assertEquals('https://example.com/service.jpg', $serviceWithUrl->image_url);
+
+        $serviceWithNull = Service::factory()->create([
+            'image_path' => null,
+        ]);
+        $this->assertNotEmpty($serviceWithNull->image_url);
+    }
 }
